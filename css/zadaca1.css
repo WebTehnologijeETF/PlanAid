@@ -62,6 +62,8 @@ div.reklame {
 .reklame-body {
 	margin-left: 15%;
 	width: 70%;
+	color: rgb(64,128,128);
+	font-size: 20px;
 }
 
 table, th, td {
