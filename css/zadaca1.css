@@ -6,7 +6,7 @@ body {
 }
 .logo-image {
 	width: 250px;
-	height: 150px;
+	height: 180px;
 	padding-top: 15px;
 	padding-left: 20%;
 }
@@ -48,12 +48,20 @@ div.glavni {
 	color: rgb(64,128,128);
 	font-size: 20px;
 	padding-bottom: 20px;
+	float: left;
 }
 
 div.reklame {
 	color: rgb(64,128,128);
-	padding-left: 84%;
+	width: 20%;
+	height: 50%;
+	float: left;
+	text-align: center;
+}
 
+.reklame-body {
+	margin-left: 15%;
+	width: 70%;
 }
 
 table, th, td {
@@ -116,4 +124,10 @@ textarea.poruka {
 input {
 	font-family: 'Ubuntu';
 	font-size: 16px;
+}
+
+mark {
+	background-color: rgb(255,216,79);
+	color: rgb(64,128,128);
+	font-style: italic;
 }
