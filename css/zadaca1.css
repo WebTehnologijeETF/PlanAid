@@ -103,16 +103,45 @@ li.linkovi {
 iframe.frejm {
 	width: 100%;
 	height: 320px;
-	border: 2px solid black;
+	border: 3px solid black;
 	border-color: rgb(181,230,29);
 }
 
-p.frejm {
+div.frejm {
 	color: rgb(64,128,128);
+	height: 200px;
+	width: 55%;
+	padding-right: 5%;
+	text-align: justify;
 }
 
 a.frejm {
 	text-decoration: underline;
+}
+
+hr {
+	height: 2px;
+	background-color: rgb(64,128,128);
+}
+
+div.frejm-image {
+	width: 40%;
+	float: right;
+}
+
+table.frejm-image, td.frejm-image {
+	border: 5px solid black;
+	border-color: rgb(255,216,79);
+	background-color: black;
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+
+img.frejm-image {
+	height: 200px;
+	width: 100%;
 }
 
 textarea.poruka {
