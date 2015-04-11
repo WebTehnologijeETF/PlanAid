@@ -146,7 +146,7 @@ img.frejm-image {
 
 textarea.poruka {
 	width: 50%;
-	display: block;
+	display: inline;
 	resize: none;
 	font-size: 16px;
 	font-family: 'Ubuntu';
@@ -161,4 +161,116 @@ mark {
 	background-color: rgb(255,216,79);
 	color: rgb(64,128,128);
 	font-style: italic;
+}
+
+img.uzvicnik_ime {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: visible;
+}
+
+img.uzvicnik_ime_invisible {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: hidden; 
+}
+
+img.uzvicnik_prezime {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: visible;
+}
+
+img.uzvicnik_prezime_invisible {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: hidden; 
+}
+
+img.uzvicnik_email {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: visible;
+}
+
+img.uzvicnik_email_invisible {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: hidden; 
+}
+
+img.uzvicnik_poruka {
+	height: 25px;
+	width: 30px;
+	margin-bottom: 120px;
+	margin-left: 5px;
+	visibility: visible;
+}
+
+img.uzvicnik_poruka_invisible {
+	height: 25px;
+	width: 30px;
+	margin-bottom: 120px;
+	margin-left: 5px;
+	visibility: hidden; 
+}
+
+img.uzvicnik_korisnicko_ime {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: visible;
+}
+
+img.uzvicnik_korisnicko_ime_invisible {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: hidden; 
+}
+
+img.uzvicnik_sifra {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: visible;
+}
+
+img.uzvicnik_sifra_invisible {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: hidden; 
+}
+
+img.uzvicnik_sifra_ponovo {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: visible;
+}
+
+img.uzvicnik_sifra_ponovo_invisible {
+	height: 25px;
+	width: 30px;
+	margin-bottom: -7px;
+	margin-left: 5px;
+	visibility: hidden; 
 }

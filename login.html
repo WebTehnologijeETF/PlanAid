@@ -24,34 +24,26 @@
 	
 	<div class="glavni">
 		<form>
-			Ovdje možete postaviti pitanje vlasniku stranice<br><br>
 			<div>
-				Ime:<br>
-				<input type="text" name="ime" id="ime" onblur="ValidirajIme()"><img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_ime_invisible">
-			</div><br>
-			<div>
-				Prezime:<br>
-				<input type="text" name="prezime" id="prezime" onblur="ValidirajPrezime()"><img src="photos/exclamation_point.png" id="uzvicnik_prezime" class="uzvicnik_prezime_invisible">
+				Korisničko ime:<br>
+				<input type="text" name="korisnicko_ime" id="korisnicko_ime" onblur="ValidirajKorisnickoIme()"><img src="photos/exclamation_point.png" id="uzvicnik_korisnicko_ime" class="uzvicnik_korisnicko_ime_invisible">
 			</div><br>
 			<div>
 				E-mail:<br>
   				<input type="email" name="email" id="email" onblur="ValidirajEmail()"><img src="photos/exclamation_point.png" id="uzvicnik_email" class="uzvicnik_email_invisible">
   			</div><br>
   			<div>
-  				URL (ovo je <mark>opcionalno</mark>):<br>
-  				<input type="url" name="url" id="url">
-  			</div><br>
-  			<div>
-			Poruka:<br>
-				<textarea class="poruka" name="poruka" rows="8" cols="1" id="poruka" onblur="ValidirajPoruku()"></textarea>
-				<img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible">
-			</div>
-			<br>
-			<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajKontakt()">
+				Unesite šifru:<br>
+				<input type="text" name="sifra" id="sifra" onblur="ValidirajSifru()"><img src="photos/exclamation_point.png" id="uzvicnik_sifra" class="uzvicnik_sifra_invisible">
+			</div><br>
+			<div>
+				Ponovite šifru:<br>
+				<input type="text" name="sifra_ponovo" id="sifra_ponovo" onblur="ValidirajSifruPonovo()"><img src="photos/exclamation_point.png" id="uzvicnik_sifra_ponovo" class="uzvicnik_sifra_ponovo_invisible">
+			</div><br>
+			<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()">
 		</form>
 	</div>
 	<script src="javascript/validacija.js"></script>
 </body>
 
 </html>
-
