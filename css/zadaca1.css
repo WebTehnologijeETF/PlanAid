@@ -102,7 +102,7 @@ li.linkovi {
 
 iframe.frejm {
 	width: 100%;
-	height: 320px;
+	height: 450px;
 	border: 3px solid black;
 	border-color: rgb(181,230,29);
 }
@@ -163,7 +163,7 @@ mark {
 	font-style: italic;
 }
 
-img.uzvicnik_ime {
+img.uzvicnik {
 	height: 25px;
 	width: 30px;
 	margin-bottom: -7px;
@@ -171,39 +171,7 @@ img.uzvicnik_ime {
 	visibility: visible;
 }
 
-img.uzvicnik_ime_invisible {
-	height: 25px;
-	width: 30px;
-	margin-bottom: -7px;
-	margin-left: 5px;
-	visibility: hidden; 
-}
-
-img.uzvicnik_prezime {
-	height: 25px;
-	width: 30px;
-	margin-bottom: -7px;
-	margin-left: 5px;
-	visibility: visible;
-}
-
-img.uzvicnik_prezime_invisible {
-	height: 25px;
-	width: 30px;
-	margin-bottom: -7px;
-	margin-left: 5px;
-	visibility: hidden; 
-}
-
-img.uzvicnik_email {
-	height: 25px;
-	width: 30px;
-	margin-bottom: -7px;
-	margin-left: 5px;
-	visibility: visible;
-}
-
-img.uzvicnik_email_invisible {
+img.uzvicnik_invisible {
 	height: 25px;
 	width: 30px;
 	margin-bottom: -7px;
@@ -227,50 +195,26 @@ img.uzvicnik_poruka_invisible {
 	visibility: hidden; 
 }
 
-img.uzvicnik_korisnicko_ime {
-	height: 25px;
-	width: 30px;
+span.tekst {
 	margin-bottom: -7px;
 	margin-left: 5px;
 	visibility: visible;
 }
 
-img.uzvicnik_korisnicko_ime_invisible {
-	height: 25px;
-	width: 30px;
+span.tekst_invisible {
 	margin-bottom: -7px;
 	margin-left: 5px;
-	visibility: hidden; 
+	visibility: hidden;
 }
 
-img.uzvicnik_sifra {
-	height: 25px;
-	width: 30px;
-	margin-bottom: -7px;
-	margin-left: 5px;
+span.tekst_poruka {
+	position: relative;
+	bottom: 125px;
 	visibility: visible;
 }
 
-img.uzvicnik_sifra_invisible {
-	height: 25px;
-	width: 30px;
-	margin-bottom: -7px;
-	margin-left: 5px;
-	visibility: hidden; 
-}
-
-img.uzvicnik_sifra_ponovo {
-	height: 25px;
-	width: 30px;
-	margin-bottom: -7px;
-	margin-left: 5px;
-	visibility: visible;
-}
-
-img.uzvicnik_sifra_ponovo_invisible {
-	height: 25px;
-	width: 30px;
-	margin-bottom: -7px;
-	margin-left: 5px;
+span.tekst_poruka_invisible {
+	position: relative;
+	bottom: 125px;
 	visibility: hidden; 
 }

@@ -27,15 +27,18 @@
 			Ovdje možete postaviti pitanje vlasniku stranice<br><br>
 			<div>
 				Ime:<br>
-				<input type="text" name="ime" id="ime" onblur="ValidirajIme()"><img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_ime_invisible">
+				<input type="text" name="ime" id="ime" onblur="ValidirajIme()"><img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_invisible">
+				<span id="tekst_ime" class="tekst_invisible">Isključivo slova</span>
 			</div><br>
 			<div>
 				Prezime:<br>
-				<input type="text" name="prezime" id="prezime" onblur="ValidirajPrezime()"><img src="photos/exclamation_point.png" id="uzvicnik_prezime" class="uzvicnik_prezime_invisible">
+				<input type="text" name="prezime" id="prezime" onblur="ValidirajPrezime()"><img src="photos/exclamation_point.png" id="uzvicnik_prezime" class="uzvicnik_invisible">
+				<span id="tekst_prezime" class="tekst_invisible">Isključivo slova</span>
 			</div><br>
 			<div>
 				E-mail:<br>
-  				<input type="email" name="email" id="email" onblur="ValidirajEmail()"><img src="photos/exclamation_point.png" id="uzvicnik_email" class="uzvicnik_email_invisible">
+  				<input type="email" name="email" id="email" onblur="ValidirajEmail()"><img src="photos/exclamation_point.png" id="uzvicnik_email" class="uzvicnik_invisible">
+  				<span id="tekst_email" class="tekst_invisible">Niste unijeli e-mail</span>
   			</div><br>
   			<div>
   				URL (ovo je <mark>opcionalno</mark>):<br>
@@ -43,8 +46,8 @@
   			</div><br>
   			<div>
 			Poruka:<br>
-				<textarea class="poruka" name="poruka" rows="8" cols="1" id="poruka" onblur="ValidirajPoruku()"></textarea>
-				<img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible">
+				<textarea class="poruka" name="poruka" rows="8" cols="1" id="poruka" onblur="ValidirajPoruku()"></textarea><img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible">
+				<span id="tekst_poruka" class="tekst_poruka_invisible">Morate unijeti poruku</span>
 			</div>
 			<br>
 			<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajKontakt()">
