@@ -22,9 +22,10 @@
 		<a href="kontakt.html" onmouseenter="SakrijSubmenu()">Kontakt</a>
 	</div>
 
-	<div id="submenu_prijava" class="submenu_invisible">
-		<a href="login.html">Login</a>
-		<a href="registracija.html">Registracija</a>
+	<div id="submenu_desavanja" class="submenu_invisible">
+		<a href="tabela.html">Pregled kalendara</a>
+		<a href="novi_event.html">Novo dešavanje</a>
+		<a href="novi_event.html">Moja dešavanja</a>
 	</div>
 
 	<div id="submenu_naslovnica" class="submenu_invisible">
@@ -33,32 +34,19 @@
 		<a href="naslovnica.html" onclick="PrikaziVijesti('novosti.html')">Sve vijesti</a>
 	</div>
 
-	<div id="submenu_desavanja" class="submenu_invisible">
-		<a href="tabela.html">Pregled kalendara</a>
-		<a href="novi_event.html">Novo dešavanje</a>
-		<a href="moji_eventi.html">Moja dešavanja</a>
-	</div>
-
 	<div id="submenu_lokacije" class="submenu_invisible">
 		<a href="linkovi.html">Sarajevo</a>
 		<a href="linkovi_zenica.html">Zenica</a>
 		<a href="linkovi_mostar.html">Mostar</a>
 	</div>
+
+	<div id="submenu_prijava" class="submenu_invisible">
+		<a href="login.html">Login</a>
+		<a href="registracija.html">Registracija</a>
+	</div>
 	
 	<div class="glavni">
-		<form>
-			<div>
-				Korisničko ime:<br>
-				<input type="text" name="korisnicko_ime" id="korisnicko_ime" onblur="ValidirajKorisnickoIme()"><img src="photos/exclamation_point.png" id="uzvicnik_korisnicko_ime" class="uzvicnik_invisible">
-				<span id="tekst_korisnicko_ime" class="tekst_invisible">Minimalno 5 karaktera</span>
-			</div><br>
-  			<div>
-				Šifra:<br>
-				<input type="text" name="sifra" id="sifra" onblur="ValidirajSifru()"><img src="photos/exclamation_point.png" id="uzvicnik_sifra" class="uzvicnik_invisible">
-				<span id="tekst_sifra" class="tekst_invisible">Minimalno 6 karaktera!</span>
-			</div><br>
-			<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()">
-		</form>
+		Za pregled Vaših dešavanja morate biti logovani!
 	</div>
 	<script src="javascript/validacija.js"></script>
 	<script src="javascript/menu.js"></script>

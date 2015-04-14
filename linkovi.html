@@ -7,7 +7,7 @@
 	<link rel="shortcut icon" href="photos/logo.ico">
 </head>
 
-<body>
+<body onload="SakrijSubmenu()">
 
 	<div class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
@@ -15,11 +15,34 @@
 	</div>
 	
 	<div class="menu">
-		<a href="naslovnica.html">Naslovnica</a>
-		<a href="tabela.html">Kalendar</a>
-		<a href="linkovi.html">Lokacije</a>
-		<a href="login.html">Prijava</a>
-		<a href="kontakt.html">Kontakt</a>
+		<a onmouseenter="PrikaziNaslovnicu()">Naslovnica</a>
+		<a onmouseenter="PrikaziDesavanja()">Dešavanja</a>
+		<a onmouseenter="PrikaziLokacije()">Lokacije</a>
+		<a onmouseenter="PrikaziPrijavu()">Prijava</a>
+		<a href="kontakt.html" onmouseenter="SakrijSubmenu()">Kontakt</a>
+	</div>
+
+	<div id="submenu_lokacije" class="submenu_invisible">
+		<a href="linkovi.html">Sarajevo</a>
+		<a href="linkovi_zenica.html">Zenica</a>
+		<a href="linkovi_mostar.html">Mostar</a>
+	</div>
+
+	<div id="submenu_naslovnica" class="submenu_invisible">
+		<a href="naslovnica.html" onclick="PrikaziVijesti('nove_vijesti.html')">Najnovije vijesti</a>
+		<a href="naslovnica.html" onclick="PrikaziVijesti('najcitanije_vijesti.html')">Najčitanije vijesti</a>
+		<a href="naslovnica.html" onclick="PrikaziVijesti('novosti.html')">Sve vijesti</a>
+	</div>
+
+	<div id="submenu_desavanja" class="submenu_invisible">
+		<a href="tabela.html">Pregled kalendara</a>
+		<a href="novi_event.html">Novo dešavanje</a>
+		<a href="moji_eventi.html">Moja dešavanja</a>
+	</div>
+
+	<div id="submenu_prijava" class="submenu_invisible">
+		<a href="login.html">Login</a>
+		<a href="registracija.html">Registracija</a>
 	</div>
 	
 	<div class="glavni">
@@ -31,7 +54,7 @@
 			<li class="linkovi"><a href="http://www.coloseum-club.com/" target="_blank">Coloseum-Club</a></li>
 		</ul>
 	</div>
-	
+	<script src="javascript/menu.js"></script>
 </body>
 
 </html>
