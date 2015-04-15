@@ -30,7 +30,8 @@ function ValidirajPrezime() {
 
 function ValidirajEmail() {
 	var email = document.getElementById("email").value;
-	if(email.length === 0) {
+	var regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i;
+	if(!regex.test(email)) {
 		document.getElementById("uzvicnik_email").className="uzvicnik";
 		document.getElementById("tekst_email").className="tekst";
 		return false;
