@@ -155,7 +155,7 @@ table {
 
 iframe.frejm {
 	width: 100%;
-	height: 320px;
+	height: 340px;
 	border: 3px solid black;
 	border-color: rgb(181,230,29);
 	background-color: rgb(243,253,172);
@@ -264,22 +264,26 @@ span.tekst {
 	margin-bottom: -7px;
 	margin-left: 5px;
 	visibility: visible;
+	color: #d01500;
 }
 
 span.tekst_invisible {
 	margin-bottom: -7px;
 	margin-left: 5px;
 	visibility: hidden;
+	color: #d01500;
 }
 
 span.tekst_poruka {
 	position: relative;
 	bottom: 125px;
 	visibility: visible;
+	color: #d01500;
 }
 
 span.tekst_poruka_invisible {
 	position: relative;
 	bottom: 125px;
 	visibility: hidden; 
+	color: #d01500;
 }

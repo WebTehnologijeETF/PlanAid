@@ -1,7 +1,7 @@
 function ValidirajIme() {
 	var ime = document.getElementById("ime").value;
-	var regex = /[a-zA-Z]*/;
-	if(!regex.test(ime) || ime.length === 0) {
+	var regex = /^[a-zšđčćž]+$/i;
+	if(!regex.test(ime)) {
 		document.getElementById("uzvicnik_ime").className="uzvicnik";
 		document.getElementById("tekst_ime").className="tekst";
 		return false;
@@ -15,8 +15,8 @@ function ValidirajIme() {
 
 function ValidirajPrezime() {
 	var prezime = document.getElementById("prezime").value;
-	var regex = /[a-zA-Z]*/;
-	if(!regex.test(prezime) || prezime.length === 0) {
+	var regex = /^[a-zšđčćž]+$/i;
+	if(!regex.test(prezime)) {
 		document.getElementById("uzvicnik_prezime").className="uzvicnik";
 		document.getElementById("tekst_prezime").className="tekst";
 		return false;
