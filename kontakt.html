@@ -8,20 +8,20 @@
 </head>
 
 <body onload="SakrijSubmenu()">
-
-	<div class="logo">
+	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
 		<a href="naslovnica.html" class="logo-text">PlanAid</a>
-	</div>
+	</header>
 	
-	<div class="menu">
+	<nav class="menu">
 		<a onmouseenter="PrikaziNaslovnicu()">Naslovnica</a>
 		<a onmouseenter="PrikaziDesavanja()">Dešavanja</a>
 		<a onmouseenter="PrikaziLokacije()">Lokacije</a>
 		<a onmouseenter="PrikaziPrijavu()">Prijava</a>
 		<a href="kontakt.html" onmouseenter="SakrijSubmenu()">Kontakt</a>
-	</div>
+	</nav>
 
+<div id="stranica">
 	<div id="submenu_naslovnica" class="submenu_invisible">
 		<a href="naslovnica.html" onclick="PrikaziVijesti('nove_vijesti.html')">Najnovije vijesti</a>
 		<a href="naslovnica.html" onclick="PrikaziVijesti('najcitanije_vijesti.html')">Najčitanije vijesti</a>
@@ -45,9 +45,9 @@
 		<a href="registracija.html">Registracija</a>
 	</div>
 	
-	<div class="glavni">
+	<section class="glavni">
 		<form>
-			Ovdje možete postaviti pitanje vlasniku stranice<br><br>
+			Imate neko pitanje? Kontaktirajte nas!<br><br>
 			<div>
 				Ime:<br>
 				<input type="text" name="ime" id="ime" onblur="ValidirajIme()"><img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_invisible">
@@ -75,7 +75,8 @@
 			<br>
 			<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajKontakt()">
 		</form>
-	</div>
+	</section>
+</div>
 	<script src="javascript/validacija.js"></script>
 	<script src="javascript/menu.js"></script>
 </body>

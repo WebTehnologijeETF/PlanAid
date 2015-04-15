@@ -9,19 +9,19 @@
 
 <body onload="SakrijSubmenu()">
 
-	<div class="logo">
+	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
 		<a href="naslovnica.html" class="logo-text">PlanAid</a>
-	</div>
+	</header>
 	
-	<div class="menu">
+	<nav class="menu">
 		<a onmouseenter="PrikaziNaslovnicu()">Naslovnica</a>
 		<a onmouseenter="PrikaziDesavanja()">Dešavanja</a>
 		<a onmouseenter="PrikaziLokacije()">Lokacije</a>
 		<a onmouseenter="PrikaziPrijavu()">Prijava</a>
 		<a href="kontakt.html" onmouseenter="SakrijSubmenu()">Kontakt</a>
-	</div>
-
+	</nav>
+<div id="stranica">
 	<div id="submenu_lokacije" class="submenu_invisible">
 		<a href="linkovi.html">Sarajevo</a>
 		<a href="linkovi_zenica.html">Zenica</a>
@@ -45,7 +45,7 @@
 		<a href="registracija.html">Registracija</a>
 	</div>
 	
-	<div class="glavni">
+	<section class="glavni">
 		<ul>
 			<li class="linkovi"><a href="http://www.skenderija.ba/" target="_blank">Centar Skenderija Sarajevo</a></li>
 			<li class="linkovi"><a href="http://www.zoi84.ba/wp/zetra/" target="_blank">Olimpijski kompleks Zetra</a></li>
@@ -53,7 +53,8 @@
 			<li class="linkovi"><a href="http://www.mladi.ba/" target="_blank">Centar za mlade Grbavica</a></li>
 			<li class="linkovi"><a href="http://www.coloseum-club.com/" target="_blank">Coloseum-Club</a></li>
 		</ul>
-	</div>
+	</section>
+</div>
 	<script src="javascript/menu.js"></script>
 </body>
 

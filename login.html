@@ -9,19 +9,19 @@
 
 <body onload="SakrijSubmenu()">
 
-	<div class="logo">
+	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
 		<a href="naslovnica.html" class="logo-text">PlanAid</a>
-	</div>
+	</header>
 	
-	<div class="menu">
+	<nav class="menu">
 		<a onmouseenter="PrikaziNaslovnicu()">Naslovnica</a>
 		<a onmouseenter="PrikaziDesavanja()">Dešavanja</a>
 		<a onmouseenter="PrikaziLokacije()">Lokacije</a>
 		<a onmouseenter="PrikaziPrijavu()">Prijava</a>
 		<a href="kontakt.html" onmouseenter="SakrijSubmenu()">Kontakt</a>
-	</div>
-
+	</nav>
+<div id="stranica">
 	<div id="submenu_prijava" class="submenu_invisible">
 		<a href="login.html">Login</a>
 		<a href="registracija.html">Registracija</a>
@@ -45,7 +45,7 @@
 		<a href="linkovi_mostar.html">Mostar</a>
 	</div>
 	
-	<div class="glavni">
+	<section class="glavni">
 		<form>
 			<div>
 				Korisničko ime:<br>
@@ -59,7 +59,8 @@
 			</div><br>
 			<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()">
 		</form>
-	</div>
+	</section>
+</div>
 	<script src="javascript/validacija.js"></script>
 	<script src="javascript/menu.js"></script>
 </body>

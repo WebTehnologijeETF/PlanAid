@@ -7,21 +7,22 @@
 	<link rel="shortcut icon" href="photos/logo.ico">
 </head>
 
-<body onload="SakrijSubmenu()">
+<body onload="SakrijSubmenu()" >
 
-	<div class="logo">
+	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
 		<a href="naslovnica.html" class="logo-text">PlanAid</a>
-	</div>
+	</header>
 	
-	<div class="menu">
+	<nav class="menu">
 		<a onmouseenter="PrikaziNaslovnicu()">Naslovnica</a>
 		<a onmouseenter="PrikaziDesavanja()">Dešavanja</a>
 		<a onmouseenter="PrikaziLokacije()">Lokacije</a>
 		<a onmouseenter="PrikaziPrijavu()">Prijava</a>
 		<a href="kontakt.html" onmouseenter="SakrijSubmenu()">Kontakt</a>
-	</div>
+	</nav>
 
+<section id="stranica">
 	<div id="submenu_naslovnica" class="submenu_invisible">
 		<a href="#" onclick="PrikaziVijesti('nove_vijesti.html')">Najnovije vijesti</a>
 		<a href="#" onclick="PrikaziVijesti('najcitanije_vijesti.html')">Najčitanije vijesti</a>
@@ -45,21 +46,22 @@
 		<a href="registracija.html">Registracija</a>
 	</div>
 	
-	<div class="glavni">
+	<section class="glavni">
 		<iframe id="frejm" src="novosti.html" class="frejm"></iframe>
-	</div>
+	</section>
 		
-	<div class="reklame">
-		<div class="reklame-body">
+	<aside class="reklame">
+		<aside class="reklame-body">
 			Generalni sponzori<br><br>
 			<a href="http://www.klix.ba" target="_blank">
 				<img src="photos/klix.png" alt="klix">
-			</a><br><br>
+			</a>
 			<a href="http://www.tuborg.com/gl/en/" target="_blank">
 				<img src="photos/tuborg.png" alt="tuborg">
 			</a>
-		</div>
-	</div>
+		</aside>
+	</aside>
+</section>
 	<script src="javascript/menu.js"></script>
 </body>
 

@@ -9,19 +9,20 @@
 
 <body onload="SakrijSubmenu()">
 
-	<div class="logo">
+	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
 		<a href="naslovnica.html" class="logo-text">PlanAid</a>
-	</div>
+	</header>
 	
-	<div class="menu">
+	<nav class="menu">
 		<a onmouseenter="PrikaziNaslovnicu()">Naslovnica</a>
 		<a onmouseenter="PrikaziDesavanja()">Dešavanja</a>
 		<a onmouseenter="PrikaziLokacije()">Lokacije</a>
 		<a onmouseenter="PrikaziPrijavu()">Prijava</a>
 		<a href="kontakt.html" onmouseenter="SakrijSubmenu()">Kontakt</a>
-	</div>
+	</nav>
 
+<div id="stranica">
 	<div id="submenu_desavanja" class="submenu_invisible">
 		<a href="tabela.html">Pregled kalendara</a>
 		<a href="novi_event.html">Novo dešavanje</a>
@@ -45,9 +46,10 @@
 		<a href="registracija.html">Registracija</a>
 	</div>
 	
-	<div class="glavni">
+	<section class="glavni">
 		Za pregled Vaših dešavanja morate biti logovani!
-	</div>
+	</section>
+</div>
 	<script src="javascript/validacija.js"></script>
 	<script src="javascript/menu.js"></script>
 </body>

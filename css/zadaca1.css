@@ -3,25 +3,60 @@
 body {
 	background-color: rgb(243,253,172);
 	font-family: 'Ubuntu';
+	background-image: url("../photos/pozadina.jpg");
+	background-repeat: none;
+	background-size: cover;
+	padding: 0;
+	margin: 0;
 }
-img.logo-image {
+
+.body_vijesti {
+	background-image: none;
+	background-color: rgb(243,253,172);
+}
+
+header {
+	background-image: none;
+	background-color: rgb(243,253,172);
+	padding: 0;
+}
+
+nav {
+	background-image: none;
+	background-color: rgb(181,230,29);
+	padding: 0;
+}
+
+#stranica {
+	
+}
+
+#submenu_svi {
+
+}
+
+section {
+	
+}
+
+.logo-image {
 	width: 250px;
 	height: 180px;
 	padding-top: 15px;
 	padding-left: 20%;
 }
 
-a.logo-text {
+.logo-text {
 	color: rgb(255,216,79);
 	font-size: 150px;
 	padding-left: 35px;
 }
 
-div.logo a {
+.logo a {
 	text-decoration: none;
 }
 
-div.logo a:visited {
+.logo a:visited {
 	text-decoration: none;
 }
 
@@ -35,52 +70,53 @@ a:hover {
 	color: white;
 }
 
-div.menu {
+.menu {
 	background-color: rgb(181,230,29);
-	padding-left: 268px;
+	padding-left: 20%;
 	font-size: 30px;
 }
 
-div.submenu {
+.submenu {
 	background-color: rgb(255,216,79);
 	font-size: 25px;
-	margin-bottom: 5%;
+	margin-bottom: 3%;
 	width: 60%;
 	height: 32px;
 	margin-left: 20%;
 	visibility: visible;
 }
 
-div.submenu_invisible {
+.submenu_invisible {
 	background-color: rgb(255,216,79);
 	font-size: 25px;
-	margin-bottom: 5%;
+	margin-bottom: 3%;
 	width: 60%;
 	height: 32px;
 	margin-left: 20%;
 	display: none;
 }
 
-div.submenu_sakrij {
+.submenu_sakrij {
 	background-color: rgb(255,216,79);
 	font-size: 25px;
-	margin-bottom: 5%;
+	margin-bottom: 3%;
 	width: 60%;
 	height: 32px;
 	margin-left: 20%;
 	visibility: hidden;
 }
 
-div.glavni {
+.glavni {
 	margin-left: 20%;
 	width: 60%;
 	color: rgb(64,128,128);
 	font-size: 20px;
 	padding-bottom: 20px;
 	float: left;
+	height: 100%;
 }
 
-div.reklame {
+.reklame {
 	color: rgb(64,128,128);
 	width: 20%;
 	height: 50%;
@@ -88,10 +124,10 @@ div.reklame {
 	text-align: center;
 }
 
-div.reklame-body {
+.reklame-body {
 	margin-left: 15%;
 	width: 70%;
-	color: rgb(64,128,128);
+	color: rgb(181,230,29);
 	font-size: 20px;
 }
 
@@ -105,7 +141,7 @@ table, th, td {
 	padding: 5px;
 }
 
-div.datum {
+.datum {
 	font-size: 25px;
 }
 
@@ -114,17 +150,17 @@ table {
 	width: 100%;
 }
 
-td.red1 {
+.red1 {
 	font-size: 25px;
 	background-color: rgb(181,230,29);
 	color: white;
 }
 
-div.glavni a {
+.glavni a {
 	font-size: 20px;
 }
 
-li.linkovi {
+.linkovi {
 	padding-bottom: 10px;
 	list-style-image: url('http://s8.postimg.org/dr84jgn4h/bullet.png')
 }
@@ -134,14 +170,23 @@ iframe.frejm {
 	height: 320px;
 	border: 3px solid black;
 	border-color: rgb(181,230,29);
+	background-color: rgb(243,253,172);
+	background-image: none;
 }
 
-div.frejm {
+#frejm {
+	background-color: rgb(243,253,172);
+	background-image: none;
+}
+
+div.frejm-text {
 	color: rgb(64,128,128);
 	height: 200px;
 	width: 55%;
 	padding-right: 5%;
 	text-align: justify;
+	background-color: rgb(243,253,172);
+	background-image: none;
 }
 
 a.frejm {
@@ -156,6 +201,8 @@ hr {
 div.frejm-image {
 	width: 40%;
 	float: right;
+	background-color: rgb(243,253,172);
+	background-image: none;
 }
 
 table.frejm-image, td.frejm-image {
@@ -173,7 +220,7 @@ img.frejm-image {
 	width: 100%;
 }
 
-textarea.poruka {
+.poruka {
 	width: 50%;
 	display: inline;
 	resize: none;
@@ -192,7 +239,7 @@ mark {
 	font-style: italic;
 }
 
-img.uzvicnik {
+.uzvicnik {
 	height: 25px;
 	width: 30px;
 	margin-bottom: -7px;
@@ -200,7 +247,7 @@ img.uzvicnik {
 	visibility: visible;
 }
 
-img.uzvicnik_invisible {
+.uzvicnik_invisible {
 	height: 25px;
 	width: 30px;
 	margin-bottom: -7px;
@@ -208,7 +255,7 @@ img.uzvicnik_invisible {
 	visibility: hidden; 
 }
 
-img.uzvicnik_poruka {
+.uzvicnik_poruka {
 	height: 25px;
 	width: 30px;
 	margin-bottom: 120px;
@@ -216,7 +263,7 @@ img.uzvicnik_poruka {
 	visibility: visible;
 }
 
-img.uzvicnik_poruka_invisible {
+.uzvicnik_poruka_invisible {
 	height: 25px;
 	width: 30px;
 	margin-bottom: 120px;
