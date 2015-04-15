@@ -27,18 +27,6 @@ nav {
 	padding: 0;
 }
 
-#stranica {
-	
-}
-
-#submenu_svi {
-
-}
-
-section {
-	
-}
-
 .logo-image {
 	width: 250px;
 	height: 180px;
@@ -183,7 +171,7 @@ div.frejm-text {
 	color: rgb(64,128,128);
 	height: 200px;
 	width: 55%;
-	padding-right: 5%;
+	padding-left: 1%;
 	text-align: justify;
 	background-color: rgb(243,253,172);
 	background-image: none;
@@ -201,6 +189,7 @@ hr {
 div.frejm-image {
 	width: 40%;
 	float: right;
+	padding-right: 1%;
 	background-color: rgb(243,253,172);
 	background-image: none;
 }
