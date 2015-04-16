@@ -14,11 +14,11 @@
 	</header>
 	
 	<nav class="menu">
-		<a onmouseenter="PrikaziNaslovnicu()">Naslovnica</a>
-		<a onmouseenter="PrikaziDesavanja()">Dešavanja</a>
-		<a onmouseenter="PrikaziLokacije()">Lokacije</a>
-		<a onmouseenter="PrikaziPrijavu()">Prijava</a>
-		<a href="kontakt.html" onmouseenter="SakrijSubmenu()">Kontakt</a>
+		<a onmouseover="PrikaziNaslovnicu()">Naslovnica</a>
+		<a onmouseover="PrikaziDesavanja()">Dešavanja</a>
+		<a onmouseover="PrikaziLokacije()">Lokacije</a>
+		<a onmouseover="PrikaziPrijavu()">Prijava</a>
+		<a href="kontakt.html" onmouseover="SakrijSubmenu()">Kontakt</a>
 	</nav>
 
 <div id="stranica">
@@ -50,17 +50,17 @@
 			Imate neko pitanje? Kontaktirajte nas!<br><br>
 			<div>
 				Ime:<br>
-				<input type="text" name="ime" id="ime" onblur="ValidirajIme()"><img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_invisible">
+				<input type="text" name="ime" id="ime" onblur="ValidirajIme()"><img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_invisible" alt="uzvicnik">
 				<span id="tekst_ime" class="tekst_invisible">Isključivo slova</span>
 			</div><br>
 			<div>
 				Prezime:<br>
-				<input type="text" name="prezime" id="prezime" onblur="ValidirajPrezime()"><img src="photos/exclamation_point.png" id="uzvicnik_prezime" class="uzvicnik_invisible">
+				<input type="text" name="prezime" id="prezime" onblur="ValidirajPrezime()"><img src="photos/exclamation_point.png" id="uzvicnik_prezime" class="uzvicnik_invisible" alt="uzvicnik">
 				<span id="tekst_prezime" class="tekst_invisible">Isključivo slova</span>
 			</div><br>
 			<div>
 				E-mail:<br>
-  				<input type="email" name="email" id="email" onblur="ValidirajEmail()"><img src="photos/exclamation_point.png" id="uzvicnik_email" class="uzvicnik_invisible">
+  				<input type="email" name="email" id="email" onblur="ValidirajEmail()"><img src="photos/exclamation_point.png" id="uzvicnik_email" class="uzvicnik_invisible" alt="uzvicnik">
   				<span id="tekst_email" class="tekst_invisible">Niste unijeli e-mail</span>
   			</div><br>
   			<div>
@@ -69,7 +69,7 @@
   			</div><br>
   			<div>
 			Poruka:<br>
-				<textarea class="poruka" name="poruka" rows="8" cols="1" id="poruka" onblur="ValidirajPoruku()"></textarea><img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible">
+				<textarea class="poruka" name="poruka" rows="8" cols="1" id="poruka" onblur="ValidirajPoruku()"></textarea><img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible" alt="uzvicnik">
 				<span id="tekst_poruka" class="tekst_poruka_invisible">Morate unijeti poruku</span>
 			</div>
 			<br>
