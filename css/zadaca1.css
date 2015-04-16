@@ -4,7 +4,7 @@ body {
 	background-color: rgb(243,253,172);
 	font-family: 'Ubuntu';
 	background-image: url("../photos/pozadina.jpg");
-	background-repeat: none;
+	background-repeat: no-repeat;
 	background-size: cover;
 	padding: 0;
 	margin: 0;
