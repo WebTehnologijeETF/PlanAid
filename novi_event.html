@@ -19,31 +19,31 @@
 		<a onmouseover="PrikaziDesavanja()">Dešavanja</a>
 		<a onmouseover="PrikaziLokacije()">Lokacije</a>
 		<a onmouseover="PrikaziPrijavu()">Prijava</a>
-		<a href="kontakt.html" onmouseover="SakrijSubmenu()">Kontakt</a>
+		<a onclick="PrikaziStranicu('kontakt')" onmouseover="SakrijSubmenu()">Kontakt</a>
 	</nav>
 
-<div id="stranica">
-	<div id="submenu_desavanja" class="submenu_invisible">
-		<a href="tabela.html">Pregled kalendara</a>
-		<a href="novi_event.html">Novo dešavanje</a>
-		<a href="moji_eventi.html">Moja dešavanja</a>
+<div>
+	<div id="submenu_naslovnica" class="submenu_invisible">
+		<a onclick="PrikaziStranicu('naslovnica')">Najnovije vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica')">Najčitanije vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica')">Sve vijesti</a>
 	</div>
 
-	<div id="submenu_naslovnica" class="submenu_invisible">
-		<a href="naslovnica.html" onclick="PrikaziVijesti('nove_vijesti.html')">Najnovije vijesti</a>
-		<a href="naslovnica.html" onclick="PrikaziVijesti('najcitanije_vijesti.html')">Najčitanije vijesti</a>
-		<a href="naslovnica.html" onclick="PrikaziVijesti('novosti.html')">Sve vijesti</a>
+	<div id="submenu_desavanja" class="submenu_invisible">
+		<a onclick="PrikaziStranicu('tabela')">Pregled kalendara</a>
+		<a onclick="PrikaziStranicu('novi_event')">Novo dešavanje</a>
+		<a onclick="PrikaziStranicu('moji_eventi')">Moja dešavanja</a>
 	</div>
 
 	<div id="submenu_lokacije" class="submenu_invisible">
-		<a href="linkovi.html">Sarajevo</a>
-		<a href="linkovi_zenica.html">Zenica</a>
-		<a href="linkovi_mostar.html">Mostar</a>
+		<a onclick="PrikaziStranicu('linkovi')">Sarajevo</a>
+		<a onclick="PrikaziStranicu('linkovi_zenica')">Zenica</a>
+		<a onclick="PrikaziStranicu('linkovi_mostar')">Mostar</a>
 	</div>
 
 	<div id="submenu_prijava" class="submenu_invisible">
-		<a href="login.html">Login</a>
-		<a href="registracija.html">Registracija</a>
+		<a onclick="PrikaziStranicu('login')">Login</a>
+		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
 	</div>
 	
 	<section class="glavni">
