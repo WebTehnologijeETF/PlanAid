@@ -1,93 +1,37 @@
-<!doctype html>
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Event planning</title>
-	<link rel="stylesheet" type="text/css" href="css/zadaca1.css">
-	<link rel="shortcut icon" href="photos/logo.ico">
-</head>
-
-<body onload="SakrijSubmenu()">
-
-	<header class="logo">
-		<img src="photos/logo.png" class="logo-image" alt="logo">
-		<a href="naslovnica.html" class="logo-text">PlanAid</a>
-	</header>
-	
-	<nav class="menu">
-		<a onmouseover="PrikaziNaslovnicu()">Naslovnica</a>
-		<a onmouseover="PrikaziDesavanja()">Dešavanja</a>
-		<a onmouseover="PrikaziLokacije()">Lokacije</a>
-		<a onmouseover="PrikaziPrijavu()">Prijava</a>
-		<a onclick="PrikaziStranicu('kontakt')" onmouseover="SakrijSubmenu()">Kontakt</a>
-	</nav>
-
-<div>
-	<div id="submenu_naslovnica" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('naslovnica')">Najnovije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica_najcitanije')">Najčitanije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica_svevijesti')">Sve vijesti</a>
-	</div>
-
-	<div id="submenu_desavanja" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('tabela')">Pregled kalendara</a>
-		<a onclick="PrikaziStranicu('novi_event')">Novo dešavanje</a>
-		<a onclick="PrikaziStranicu('moji_eventi')">Moja dešavanja</a>
-	</div>
-
-	<div id="submenu_lokacije" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('linkovi')">Sarajevo</a>
-		<a onclick="PrikaziStranicu('linkovi_zenica')">Zenica</a>
-		<a onclick="PrikaziStranicu('linkovi_mostar')">Mostar</a>
-	</div>
-
-	<div id="submenu_prijava" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('login')">Login</a>
-		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
-	</div>
-	
-	<section id="glavni">
-		<form>
-			<div>
-				Korisničko ime:<br>
-				<input type="text" name="korisnicko_ime" id="korisnicko_ime" onblur="ValidirajKorisnickoIme()"><img src="photos/exclamation_point.png" id="uzvicnik_korisnicko_ime" class="uzvicnik_invisible" alt="uzvicnik">
-				<span id="tekst_korisnicko_ime" class="tekst_invisible">Minimalno 5 karaktera</span>
-			</div><br>
-			<div>
-				E-mail:<br>
-  				<input type="email" name="email" id="email" onblur="ValidirajEmail()"><img src="photos/exclamation_point.png" id="uzvicnik_email" class="uzvicnik_invisible" alt="uzvicnik">
-  				<span id="tekst_email" class="tekst_invisible">Niste unijeli e-mail</span>
-  			</div><br>
-  			<div>
-				Unesite šifru:<br>
-				<input type="text" name="sifra" id="sifra" onblur="ValidirajSifru()"><img src="photos/exclamation_point.png" id="uzvicnik_sifra" class="uzvicnik_invisible" alt="uzvicnik">
-				<span id="tekst_sifra" class="tekst_invisible">Minimalno 6 karaktera!</span>
-			</div><br>
-			<div>
-				Ponovite šifru:<br>
-				<input type="text" name="sifra_ponovo" id="sifra_ponovo" onblur="ValidirajSifruPonovo()"><img src="photos/exclamation_point.png" id="uzvicnik_sifra_ponovo" class="uzvicnik_invisible" alt="uzvicnik">
-				<span id="tekst_sifra_ponovo" class="tekst_invisible">Neispravan unos</span>
-			</div><br>
-			<div>
-				Općina:<br>
-				<select id="opcina">
-  					<option value="Ilidza">Ilidža</option>
- 					<option value="Centar">Centar</option>
-  					<option value="NoviGrad">Novi Grad</option>
-  					<option value="StariGrad">Stari Grad</option>
-				</select>
-			</div><br>
-			<div>
-				Mjesto:<br>
-				<input type="text" name="mjesto" id="mjesto" onblur="ValidirajMjesto()"><img src="photos/exclamation_point.png" id="uzvicnik_mjesto" class="uzvicnik_invisible" alt="uzvicnik">
-				<span id="tekst_mjesto" class="tekst_invisible">Greška!</span>
-			</div><br>
-			<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()">
-		</form>
-	</section>
-</div>
-	<script src="javascript/validacija.js"></script>
-	<script src="javascript/menu.js"></script>
-</body>
-
-</html>
+<form>
+	<div>
+		Korisničko ime:<br>
+		<input type="text" name="korisnicko_ime" id="korisnicko_ime" onblur="ValidirajKorisnickoIme()"><img src="photos/exclamation_point.png" id="uzvicnik_korisnicko_ime" class="uzvicnik_invisible" alt="uzvicnik">
+		<span id="tekst_korisnicko_ime" class="tekst_invisible">Minimalno 5 karaktera</span>
+	</div><br>
+	<div>
+		E-mail:<br>
+  		<input type="email" name="email" id="email" onblur="ValidirajEmail()"><img src="photos/exclamation_point.png" id="uzvicnik_email" class="uzvicnik_invisible" alt="uzvicnik">
+  		<span id="tekst_email" class="tekst_invisible">Niste unijeli e-mail</span>
+  	</div><br>
+  	<div>
+		Unesite šifru:<br>
+		<input type="text" name="sifra" id="sifra" onblur="ValidirajSifru()"><img src="photos/exclamation_point.png" id="uzvicnik_sifra" class="uzvicnik_invisible" alt="uzvicnik">
+		<span id="tekst_sifra" class="tekst_invisible">Minimalno 6 karaktera!</span>
+	</div><br>
+	<div>
+		Ponovite šifru:<br>
+		<input type="text" name="sifra_ponovo" id="sifra_ponovo" onblur="ValidirajSifruPonovo()"><img src="photos/exclamation_point.png" id="uzvicnik_sifra_ponovo" class="uzvicnik_invisible" alt="uzvicnik">
+		<span id="tekst_sifra_ponovo" class="tekst_invisible">Neispravan unos</span>
+	</div><br>
+	<div>
+		Općina:<br>
+		<select id="opcina">
+  			<option value="Ilidza">Ilidža</option>
+ 			<option value="Centar">Centar</option>
+  			<option value="NoviGrad">Novi Grad</option>
+  			<option value="StariGrad">Stari Grad</option>
+		</select>
+	</div><br>
+	<div>
+		Mjesto:<br>
+		<input type="text" name="mjesto" id="mjesto" onblur="ValidirajMjesto()"><img src="photos/exclamation_point.png" id="uzvicnik_mjesto" class="uzvicnik_invisible" alt="uzvicnik">
+		<span id="tekst_mjesto" class="tekst_invisible">Greška!</span>
+	</div><br>
+		<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()">
+</form>

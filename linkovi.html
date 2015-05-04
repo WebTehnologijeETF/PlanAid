@@ -1,63 +1,7 @@
-<!doctype html>
-<html>
-<head>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Event planning</title>
-	<link rel="stylesheet" type="text/css" href="css/zadaca1.css">
-	<link rel="shortcut icon" href="photos/logo.ico">
-</head>
-
-<body onload="SakrijSubmenu()">
-
-	<header class="logo">
-		<img src="photos/logo.png" class="logo-image" alt="logo">
-		<a href="naslovnica.html" class="logo-text">PlanAid</a>
-	</header>
-	
-	<nav class="menu">
-		<a onmouseover="PrikaziNaslovnicu()">Naslovnica</a>
-		<a onmouseover="PrikaziDesavanja()">Dešavanja</a>
-		<a onmouseover="PrikaziLokacije()">Lokacije</a>
-		<a onmouseover="PrikaziPrijavu()">Prijava</a>
-		<a onclick="PrikaziStranicu('kontakt')" onmouseover="SakrijSubmenu()">Kontakt</a>
-	</nav>
-	
-<div>
-	<div id="submenu_naslovnica" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('naslovnica')">Najnovije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica_najcitanije')">Najčitanije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica_svevijesti')">Sve vijesti</a>
-	</div>
-
-	<div id="submenu_desavanja" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('tabela')">Pregled kalendara</a>
-		<a onclick="PrikaziStranicu('novi_event')">Novo dešavanje</a>
-		<a onclick="PrikaziStranicu('moji_eventi')">Moja dešavanja</a>
-	</div>
-
-	<div id="submenu_lokacije" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('linkovi')">Sarajevo</a>
-		<a onclick="PrikaziStranicu('linkovi_zenica')">Zenica</a>
-		<a onclick="PrikaziStranicu('linkovi_mostar')">Mostar</a>
-	</div>
-
-	<div id="submenu_prijava" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('login')">Login</a>
-		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
-	</div>
-	
-	<section id="glavni">
-		<ul>
-			<li class="linkovi"><a href="http://www.skenderija.ba/" target="_blank">Centar Skenderija Sarajevo</a></li>
-			<li class="linkovi"><a href="http://www.zoi84.ba/wp/zetra/" target="_blank">Olimpijski kompleks Zetra</a></li>
-			<li class="linkovi"><a href="http://www.cinemas.ba/" target="_blank">Cinemas Sloga</a></li>
-			<li class="linkovi"><a href="http://www.mladi.ba/" target="_blank">Centar za mlade Grbavica</a></li>
-			<li class="linkovi"><a href="http://www.coloseum-club.com/" target="_blank">Coloseum-Club</a></li>
-		</ul>
-	</section>
-</div>
-	<script src="javascript/menu.js"></script>
-</body>
-
-</html>
-
+<ul>
+	<li class="linkovi"><a href="http://www.skenderija.ba/" target="_blank">Centar Skenderija Sarajevo</a></li>
+	<li class="linkovi"><a href="http://www.zoi84.ba/wp/zetra/" target="_blank">Olimpijski kompleks Zetra</a></li>
+	<li class="linkovi"><a href="http://www.cinemas.ba/" target="_blank">Cinemas Sloga</a></li>
+	<li class="linkovi"><a href="http://www.mladi.ba/" target="_blank">Centar za mlade Grbavica</a></li>
+	<li class="linkovi"><a href="http://www.coloseum-club.com/" target="_blank">Coloseum-Club</a></li>
+</ul>
