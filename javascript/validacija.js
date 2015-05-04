@@ -43,6 +43,21 @@ function ValidirajEmail() {
 	}
 }
 
+function ValidirajURL() {
+	var url = document.getElementById("url").value;
+	var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+	if(!regex.test(url)) {
+		document.getElementById("uzvicnik_url").className="uzvicnik";
+		document.getElementById("tekst_url").className="tekst";
+		return false;
+	}
+	else {
+		document.getElementById("uzvicnik_url").className="uzvicnik_invisible";
+		document.getElementById("tekst_url").className="tekst_invisible";
+		return true;
+	}
+}
+
 function ValidirajPoruku() {
 	var poruka = document.getElementById("poruka").value;
 	if(poruka.length === 0) {
@@ -122,7 +137,6 @@ function ValidirajMjesto() {
 				document.getElementById("uzvicnik_mjesto").className="uzvicnik";
 				document.getElementById("tekst_mjesto").className="tekst";
 				mjestoValidirano = false;
-				console.log('radi');
 				return false;
 			}
 			else {
@@ -143,4 +157,37 @@ function ValidirajPrijavu() {
 	while (stanje != 2);
 	return (ValidirajKorisnickoIme() && ValidirajEmail() && ValidirajSifru()
 	 && ValidirajSifruPonovo() && mjestoValidirano);
+}
+
+function ValidirajImeDesavanja() {
+	var ime_desavanja = document.getElementById("ime_desavanja").value;
+	if(ime_desavanja.length < 5) {
+		document.getElementById("uzvicnik_ime_desavanja").className="uzvicnik";
+		document.getElementById("tekst_ime_desavanja").className="tekst";
+		return false;
+	}
+	else {
+		document.getElementById("uzvicnik_ime_desavanja").className="uzvicnik_invisible";
+		document.getElementById("tekst_ime_desavanja").className="tekst_invisible";
+		return true;
+	}
+}
+
+function ValidirajOpis() {
+	var opis = document.getElementById("opis").value;
+	var regex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})+( \w+)+$/;
+	if(!regex.test(opis)) {
+		document.getElementById("uzvicnik_opis").className="uzvicnik_poruka";
+		document.getElementById("tekst_opis").className="tekst_poruka";
+		return false;
+	}
+	else {
+		document.getElementById("uzvicnik_opis").className="uzvicnik_poruka_invisible";
+		document.getElementById("tekst_opis").className="tekst_poruka_invisible";
+		return true;
+	}
+}
+
+function ValidirajDesavanje() {
+	return (ValidirajImeDesavanja() && ValidirajURL() && ValidirajOpis())
 }

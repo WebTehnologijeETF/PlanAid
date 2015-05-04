@@ -25,8 +25,8 @@
 <div>
 	<div id="submenu_naslovnica" class="submenu_invisible">
 		<a onclick="PrikaziStranicu('naslovnica')">Najnovije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica')">Najčitanije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica')">Sve vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica_najcitanije')">Najčitanije vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica_svevijesti')">Sve vijesti</a>
 	</div>
 
 	<div id="submenu_desavanja" class="submenu_invisible">
@@ -46,8 +46,38 @@
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
 	</div>
 	
-	<section class="glavni">
-		Za pregled Vaših dešavanja morate biti logovani!
+	<section id="glavni">
+		<h3>Prikaz Vaših dešavanja</h3>
+		<form>
+			<table>
+				<tr>
+					<td class="red1"></td>
+					<td class="red1">Ime dešavanja</td>
+					<td class="red1">Slika dešavanja</td>
+					<td class="red1">Datum i lokacija</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name="radio" value="1"></td>
+					<td>Ime</td>
+					<td>Slika</td>
+					<td>Datum i lokacija</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name="radio" value="2"></td>
+					<td>Ime</td>
+					<td>Slika</td>
+					<td>Datum i lokacija</td>
+				</tr>
+				<tr>
+					<td><input type="radio" name="radio" value="3"></td>
+					<td>Ime</td>
+					<td>Slika</td>
+					<td>Datum i lokacija</td>
+				</tr>
+			</table><br>
+			<input type="button" value="Izmijeni" name="button"onclick="return Izmijeni()">
+			<input type="submit" value="Obriši" name="submit" onclick="return Obrisi()">
+		</form>
 	</section>
 </div>
 	<script src="javascript/validacija.js"></script>

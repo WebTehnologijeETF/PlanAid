@@ -24,8 +24,8 @@
 <div>
 	<div id="submenu_naslovnica" class="submenu_invisible">
 		<a onclick="PrikaziStranicu('naslovnica')">Najnovije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica')">Najčitanije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica')">Sve vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica_najcitanije')">Najčitanije vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica_svevijesti')">Sve vijesti</a>
 	</div>
 
 	<div id="submenu_desavanja" class="submenu_invisible">
@@ -45,9 +45,9 @@
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
 	</div>
 	
-	<section class="glavni">
+	<section id="glavni">
 		<form>
-			Imate neko pitanje? Kontaktirajte nas!<br><br>
+			<h3>Imate neko pitanje? Kontaktirajte nas!</h3>
 			<div>
 				Ime:<br>
 				<input type="text" name="ime" id="ime" onblur="ValidirajIme()"><img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_invisible" alt="uzvicnik">
@@ -61,11 +61,12 @@
 			<div>
 				E-mail:<br>
   				<input type="email" name="email" id="email" onblur="ValidirajEmail()"><img src="photos/exclamation_point.png" id="uzvicnik_email" class="uzvicnik_invisible" alt="uzvicnik">
-  				<span id="tekst_email" class="tekst_invisible">Niste unijeli e-mail</span>
+  				<span id="tekst_email" class="tekst_invisible">Neispravan e-mail</span>
   			</div><br>
   			<div>
   				URL (ovo je <mark>opcionalno</mark>):<br>
-  				<input type="url" name="url" id="url">
+  				<input type="url" name="url" id="url" onblur="ValidirajURL()"><img src="photos/exclamation_point.png" id="uzvicnik_url" class="uzvicnik_invisible" alt="uzvicnik">
+  				<span id="tekst_url" class="tekst_invisible">Neispravan URL</span>
   			</div><br>
   			<div>
 			Poruka:<br>

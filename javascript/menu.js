@@ -1,7 +1,3 @@
-function PrikaziVijesti(loc) {
-	document.getElementById("frejm").src = loc;
-}
-
 function PrikaziNaslovnicu() {
 	document.getElementById("submenu_lokacije").className="submenu_invisible";
 	document.getElementById("submenu_prijava").className="submenu_invisible";
@@ -44,9 +40,20 @@ function PrikaziStranicu(stranica) {
         	document.open();
             document.write(xmlhttp.responseText);
             document.close();
+            //document.getElementById("glavni").innerHTML = xmlhttp.responseText;
         }
     };
-    
+
+    //xmlhttp.open('GET', stranica, true);
     xmlhttp.open('GET', 'http://localhost/PlanAid/' + stranica + '.html', true);
     xmlhttp.send();
+}
+
+function Izmijeni() {
+	document.getElementById("dodaj").className="sacuvaj_invisible";
+	document.getElementById("sacuvaj").className="sacuvaj";
+}
+
+function ValidirajPromjene() {
+
 }

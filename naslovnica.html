@@ -15,18 +15,18 @@
 	</header>
 	
 	<nav class="menu">
-		<a onmouseover="PrikaziNaslovnicu()">Naslovnica</a>
-		<a onmouseover="PrikaziDesavanja()">Dešavanja</a>
-		<a onmouseover="PrikaziLokacije()">Lokacije</a>
-		<a onmouseover="PrikaziPrijavu()">Prijava</a>
+		<a class="kursor" onmouseover="PrikaziNaslovnicu()">Naslovnica</a>
+		<a class="kursor" onmouseover="PrikaziDesavanja()">Dešavanja</a>
+		<a class="kursor" onmouseover="PrikaziLokacije()">Lokacije</a>
+		<a class="kursor" onmouseover="PrikaziPrijavu()">Prijava</a>
 		<a onclick="PrikaziStranicu('kontakt')" onmouseover="SakrijSubmenu()">Kontakt</a>
 	</nav>
 
 <section>
 	<div id="submenu_naslovnica" class="submenu_invisible">
-		<a href="#" onclick="PrikaziVijesti('nove_vijesti.html')">Najnovije vijesti</a>
-		<a href="#" onclick="PrikaziVijesti('najcitanije_vijesti.html')">Najčitanije vijesti</a>
-		<a href="#" onclick="PrikaziVijesti('novosti.html')">Sve vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica')">Najnovije vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica_najcitanije')">Najčitanije vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica_svevijesti')">Sve vijesti</a>
 	</div>
 
 	<div id="submenu_desavanja" class="submenu_invisible">
@@ -46,7 +46,7 @@
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
 	</div>
 	
-	<section class="glavni">
+	<section id="glavni">
 		<iframe id="frejm" src="nove_vijesti.html" class="frejm"></iframe>
 	</section>
 		
@@ -63,6 +63,7 @@
 	</aside>
 </section>
 	<script src="javascript/menu.js"></script>
+	<script src="javascript/validacija.js"></script>
 </body>
 
 </html>

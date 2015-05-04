@@ -25,8 +25,8 @@
 <div>
 	<div id="submenu_naslovnica" class="submenu_invisible">
 		<a onclick="PrikaziStranicu('naslovnica')">Najnovije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica')">Najčitanije vijesti</a>
-		<a onclick="PrikaziStranicu('naslovnica')">Sve vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica_najcitanije')">Najčitanije vijesti</a>
+		<a onclick="PrikaziStranicu('naslovnica_svevijesti')">Sve vijesti</a>
 	</div>
 
 	<div id="submenu_desavanja" class="submenu_invisible">
@@ -46,7 +46,7 @@
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
 	</div>
 	
-	<section class="glavni">
+	<section id="glavni">
 		<form>
 			<div>
 				Korisničko ime:<br>
@@ -69,7 +69,7 @@
 				<span id="tekst_sifra_ponovo" class="tekst_invisible">Neispravan unos</span>
 			</div><br>
 			<div>
-				Izaberite općinu:<br>
+				Općina:<br>
 				<select id="opcina">
   					<option value="Ilidza">Ilidža</option>
  					<option value="Centar">Centar</option>
