@@ -120,7 +120,7 @@ function ValidirajSifruPonovo() {
 }
 
 var mjestoValidirano = false;
-var stanje = 0;
+//var stanje = 0;
 
 function ValidirajMjesto() {
 	var mjesto = document.getElementById("mjesto").value;
@@ -129,7 +129,7 @@ function ValidirajMjesto() {
 	var rezultat;
 
 	var xmlhttp = new XMLHttpRequest();
-	stanje = 1;    
+	//stanje = 1;    
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             rezultat = xmlhttp.responseText;
@@ -146,7 +146,7 @@ function ValidirajMjesto() {
 				return true;
 			}
         }
-        stanje = 2;
+        //stanje = 2;
     }
     
     xmlhttp.open('GET', 'http://zamger.etf.unsa.ba/wt/mjesto_opcina.php?opcina=' + opcina_tekst + '&mjesto=' + mjesto, true);
@@ -154,7 +154,6 @@ function ValidirajMjesto() {
 }
 
 function ValidirajPrijavu() {
-	while (stanje != 2);
 	return (ValidirajKorisnickoIme() && ValidirajEmail() && ValidirajSifru()
 	 && ValidirajSifruPonovo() && mjestoValidirano);
 }

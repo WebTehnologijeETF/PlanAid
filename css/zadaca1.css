@@ -289,10 +289,6 @@ span.tekst_poruka_invisible {
 	color: #d01500;
 }
 
-.sacuvaj {
-	visibility: visible;
-}
-
-.sacuvaj_invisible {
-	display: none;
+.moja_desavanja {
+	margin-top: 20px;
 }
