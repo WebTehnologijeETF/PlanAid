@@ -52,16 +52,16 @@ function PrikaziStranicu(stranica) {
         }
     };
 
-    xmlhttp.open('GET', stranica + '.html', true);
+    xmlhttp.open('GET', stranica + '.php', true);
     xmlhttp.send();
     if(stranica === 'naslovnica_novevijesti') {
-    	PrikaziVijesti('nove_vijesti.html');
+    	PrikaziVijesti('nove_vijesti.php');
     }
     else if(stranica === 'naslovnica_svevijesti') {
-    	PrikaziVijesti('sve_vijesti.html');
+    	PrikaziVijesti('sve_vijesti.php');
     }
     else if(stranica === 'naslovnica_najcitanije') {
-    	PrikaziVijesti('najcitanije_vijesti.html');
+    	PrikaziVijesti('najcitanije_vijesti.php');
     } 
 }
 
@@ -141,7 +141,7 @@ function LoadIzmijeni() {
                 document.getElementById("opis").value = selektovani_objekat.opis;
             }
         };
-        xmlhttp.open('GET', 'izmijeni_desavanje.html', true);
+        xmlhttp.open('GET', 'izmijeni_desavanje.php', true);
         xmlhttp.send();
     }
 }
@@ -153,7 +153,7 @@ function LoadDesavanja() {
             document.getElementById("glavni").innerHTML = xmlhttp.responseText;
         }
     };
-    xmlhttp.open('GET', 'moja_desavanja.html', true);
+    xmlhttp.open('GET', 'moja_desavanja.php', true);
     xmlhttp.send();
 }
 

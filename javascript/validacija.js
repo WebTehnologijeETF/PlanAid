@@ -73,8 +73,17 @@ function ValidirajPoruku() {
 }
 
 function ValidirajKontakt() {
+	return true;
 	return (ValidirajIme() && ValidirajPrezime() && ValidirajEmail()
 	 && ValidirajPoruku())
+}
+
+function ResetujKontakt() {
+    document.getElementById("ime").value = "";
+    document.getElementById("prezime").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("url").value = "";
+    document.getElementById("poruka").value = "";
 }
 
 function ValidirajKorisnickoIme() {
