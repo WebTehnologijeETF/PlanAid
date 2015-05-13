@@ -292,3 +292,11 @@ span.tekst_poruka_invisible {
 .moja_desavanja {
 	margin-top: 20px;
 }
+
+.svi_buttoni {
+	background-color: rgb(255,216,79);
+	border-top:	2px solid rgb(248,165,27);
+	border-left: 2px solid rgb(248,165,27);
+	border-right: 2px solid rgb(248,165,27);
+	border-bottom: 2px solid rgb(248,165,27);
+}

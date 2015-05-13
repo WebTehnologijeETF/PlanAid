@@ -30,6 +30,6 @@
 		<img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible" alt="uzvicnik">
 		<span id="tekst_poruka" class="tekst_poruka_invisible">Morate unijeti poruku</span>
 	</div><br>
-		<input type="submit" value="Pošalji" name="Posalji" id="Posalji" onclick="return ValidirajKontakt()">
-		<input type="button" value="Resetuj" name="Resetuj" id="Resetuj" onclick="ResetujKontakt()">
+		<input type="submit" value="Pošalji" name="Posalji" id="Posalji" onclick="return ValidirajKontakt()" class="svi_buttoni">
+		<input type="button" value="Resetuj" name="Resetuj" id="Resetuj" onclick="ResetujKontakt()" class="svi_buttoni">
 </form>

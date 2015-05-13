@@ -40,6 +40,17 @@
 						'</table>' .
 						'</div>';
 					}
+					else {
+						$sadrzaj_stranice .= '<div class="frejm-image">' .
+						'<table class="frejm-image">' .
+						'<tr>' . 
+							'<td class="frejm-image">' .
+								'<img src="../photos/noimage.gif" class="frejm-image" alt="slika">' .
+							'</td>' .
+						'</tr>' .
+						'</table>' .
+						'</div>';
+					}
 					$sadrzaj_stranice .= '<div class="frejm-text">' . 
 						htmlspecialchars($news[0], ENT_QUOTES, 'UTF-8') . 
 						'<br>' .

@@ -39,5 +39,5 @@
 		<img src="photos/exclamation_point.png" id="uzvicnik_mjesto" class="uzvicnik_invisible" alt="uzvicnik">
 		<span id="tekst_mjesto" class="tekst_invisible">Greška!</span>
 	</div><br>
-		<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()">
+		<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()" class="svi_buttoni">
 </form>

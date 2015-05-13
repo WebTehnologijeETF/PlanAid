@@ -12,5 +12,5 @@
 		<img src="photos/exclamation_point.png" id="uzvicnik_sifra" class="uzvicnik_invisible" alt="uzvicnik">
 		<span id="tekst_sifra" class="tekst_invisible">Minimalno 6 karaktera!</span>
 	</div><br>
-		<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()">
+		<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()" class="svi_buttoni">
 </form>

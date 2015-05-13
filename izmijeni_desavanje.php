@@ -18,5 +18,5 @@
 		<img src="photos/exclamation_point.png" id="uzvicnik_opis" class="uzvicnik_poruka_invisible" alt="uzvicnik">
 		<span id="tekst_opis" class="tekst_poruka_invisible">Morate unijeti opis</span>
 	</div><br>
-		<input type="button" value="Sačuvaj promjene" name="button" id="sacuvaj" onclick="Sacuvaj()">
+		<input type="button" value="Sačuvaj promjene" name="button" id="sacuvaj" onclick="Sacuvaj()" class="svi_buttoni">
 </form>

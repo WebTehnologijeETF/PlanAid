@@ -59,7 +59,7 @@
 					'</li><li class="linkovi">Email: ' . htmlspecialchars($_GLOBALS['email'], ENT_QUOTES, 'UTF-8') . '</li><li class="linkovi">URL: ' .
 					htmlspecialchars($_GLOBALS['url'], ENT_QUOTES, 'UTF-8') . '</li><li class="linkovi">Poruka: ' . htmlspecialchars($_GLOBALS['poruka'], ENT_QUOTES, 'UTF-8') . '</li></ul>';
 					echo '<h4>Da li ste sigurni da želite poslati ove podatke?</h4>';
-					echo '<input type="submit" value="Siguran sam" name="Siguran" id="Siguran">';
+					echo '<input type="submit" value="Siguran sam" name="Siguran" id="Siguran" class="svi_buttoni">';
 					echo '<h4>Ako ste pogrešno popunili formu, možete ispod prepraviti unesene podatke</h4>';
 					echo '<div>
 							Ime:<br>
@@ -191,8 +191,8 @@
 						</div><br>';
 				}
 			?>
-				<input type="submit" value="Pošalji" name="Posalji" id="Posalji" onclick="return ValidirajKontakt()">
-				<input type="button" value="Resetuj" name="Resetuj" id="Resetuj" onclick="ResetujKontakt()">
+				<input type="submit" value="Pošalji" name="Posalji" id="Posalji" onclick="return ValidirajKontakt()" class="svi_buttoni">
+				<input type="button" value="Resetuj" name="Resetuj" id="Resetuj" onclick="ResetujKontakt()" class="svi_buttoni">
 		</form>
 	</section>
 		
