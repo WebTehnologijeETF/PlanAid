@@ -44,11 +44,16 @@ function SakrijSubmenu() {
 	document.getElementById("submenu_prijava").className="submenu_invisible";
 }
 
-function PrikaziStranicu(stranica) {
+function PrikaziStranicu(stranica, detalji) {
 	var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("glavni").innerHTML = xmlhttp.responseText;
+            if(detalji === 1) {
+                document.getElementById("frejm").innerHTML = xmlhttp.responseText;
+            }
+            else {
+                document.getElementById("glavni").innerHTML = xmlhttp.responseText;
+            }
         }
     };
 

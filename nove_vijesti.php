@@ -9,14 +9,18 @@
 
 <body onload="SakrijSubmenu()" class="body_vijesti">
 
-	<section id="frejm"><br>
+	<section id="frejm">
 		<?php
 			header('Content-Type: text/html; charset=UTF-8');
 			$vijesti = array();
 			$lista_fajlova = scandir("php/novosti/nove_vijesti");
-			for ($i = 2; $i < count($lista_fajlova); $i++) {
-				$sadrzaj_fajla = file('php/novosti/nove_vijesti/' . $lista_fajlova[$i]);
-				array_push($vijesti, $sadrzaj_fajla);
+			$lista_vijesti = array();
+			for ($i = 0; $i < count($lista_fajlova); $i++) {
+				if (!is_dir('php/novosti/nove_vijesti/' . $lista_fajlova[$i])) {
+					$sadrzaj_fajla = file('php/novosti/nove_vijesti/' . $lista_fajlova[$i]);
+					array_push($vijesti, $sadrzaj_fajla);
+					array_push($lista_vijesti, $lista_fajlova[$i]);
+				}
 			}
 			usort ($vijesti, function($a, $b) { 	
 						$datum1 = date('Y-m-d H:i:s', strtotime($a[0]));
@@ -24,24 +28,24 @@
 						return $datum1 < $datum2;
 					});
 			foreach ($vijesti as $news) {
-				echo '<div>';
+				$sadrzaj_stranice = '<br><div>';
 					if($news[3] != "") {
-						echo '<div class="frejm-image">' .
+						$sadrzaj_stranice .= '<div class="frejm-image">' .
 						'<table class="frejm-image">' .
 						'<tr>' . 
 							'<td class="frejm-image">' .
-								'<img src="' . $news[3] . '" class="frejm-image" alt="slika">' .
+								'<img src="' . htmlspecialchars($news[3], ENT_QUOTES, 'UTF-8') . '" class="frejm-image" alt="slika">' .
 							'</td>' .
 						'</tr>' .
 						'</table>' .
 						'</div>';
 					}
-					echo '<div class="frejm-text">' . 
-						$news[0] . 
+					$sadrzaj_stranice .= '<div class="frejm-text">' . 
+						htmlspecialchars($news[0], ENT_QUOTES, 'UTF-8') . 
 						'<br>' .
-						$news[1] . 
+						htmlspecialchars($news[1], ENT_QUOTES, 'UTF-8') . 
 						'<br><br>' .
-						$news[2] . 
+						htmlspecialchars($news[2], ENT_QUOTES, 'UTF-8') . 
 						'<br><br>';
 					$brojac = count($news);
 					for ($i = 4; $i < count($news); $i++) {
@@ -49,14 +53,27 @@
 							$brojac = $i;
 							break;
 						}
-						echo $news[$i];
-					}
-					if ($brojac != count($news)) {
-						echo ' <a href="#" class="frejm">' . ' Detaljnije...' . '</a>';
-					}		
-					echo '</div>' . '<br>' . 
+						$sadrzaj_stranice .= htmlspecialchars($news[$i], ENT_QUOTES, 'UTF-8');
+					}					
+					if ($brojac != count($news)) {	
+						$ime_detalji = 'php/novosti/nove_vijesti/detalji/' .
+							substr($lista_vijesti[array_search($news, $vijesti)], 0, -4);
+						$sadrzaj_fajla_detalji = $sadrzaj_stranice;					
+						$sadrzaj_stranice .= ' <a class="frejm" onclick="PrikaziStranicu(\'' . $ime_detalji . '\', 1)">' . ' Detaljnije...' . '</a>';
+						$brojac++;
+						$detalji = '';
+						for ($j = $brojac; $j < count($news); $j++) {
+							$detalji .= $news[$j];
+						}			
+						$sadrzaj_fajla_detalji .= $detalji;	
+						$sadrzaj_fajla_detalji .= '</div>' . '</div>';
+						$fajl_detalji = fopen($ime_detalji . '.php', 'w+');
+						fwrite($fajl_detalji, $sadrzaj_fajla_detalji);
+					}	
+					$sadrzaj_stranice .= '</div>' . '<br>' . 
 							'<hr>' .
-							'</div>';			
+							'</div>';
+					echo html_entity_decode(htmlspecialchars($sadrzaj_stranice, ENT_QUOTES, 'UTF-8'));		
 			}
 		?>
 	</section>

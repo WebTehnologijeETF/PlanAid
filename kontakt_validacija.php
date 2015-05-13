@@ -15,7 +15,7 @@
 
 	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
-		<a href="naslovnica.php" class="logo-text">PlanAid</a>
+		<a href="index.php" class="logo-text">PlanAid</a>
 	</header>
 	
 	<nav class="menu">
