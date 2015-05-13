@@ -9,52 +9,56 @@
 
 <body onload="SakrijSubmenu()" class="body_vijesti">
 
-	<section id="frejm">
-		<br>
-		<div>
-			<div class="frejm-image">
-				<table class="frejm-image">
-					<tr>
-						<td class="frejm-image">
-							<img src="http://www.pozitivanritam.hr/sites/default/files/clubbing/petar2.jpg" class="frejm-image" alt="petar dundov">
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="frejm-text">
-				14.04.2015. 17:25
-				<br>
-				Aida Pločo
-				<br><br><br>
-				Iz naše susjedne države stiže nam DJ Petar Dundov.
-				Nastupat će u VIP Areni Zenica u subotu 9. maja 2015. godine.
-				Karte se već mogu naći u predprodaji 8KM, a na dan eventa iznosit će 10KM.
-				<a href="#" class="frejm">Detaljnije...</a>
-			</div><br>
-			<hr>
-		</div>
-		<div>
-			<div class="frejm-image">
-				<table class="frejm-image">
-					<tr>
-						<td class="frejm-image">
-							<img src="http://primate.hu/wp-content/uploads/2014/12/Carl-Cox-Garnier_zps035219de.jpg" class="frejm-image" alt="carl cox">
-						</td>
-					</tr>
-				</table>
-			</div>
-			<div class="frejm-text">
-				28.03.2015. 13:53
-				<br>
-				Aida Pločo
-				<br><br><br>
-				VinylRecords vam predstavlja DJ Carl Cox-a globalnu techno i house zvijezdu.
-				Proglašen je najboljim DJ-em 1996. i 1997. od strane DJ Magazine.
-				Nastupao je na mnogim festivalima, među kojima su i Ultra Music Festival, Tomorrowland,
-				Global Gathering i Electric Daisy Carnival. <a href="#" class="frejm">Detaljnije...</a>
-			</div><br>
-			<hr>
-		</div>
+	<section id="frejm"><br>
+		<?php
+			header('Content-Type: text/html; charset=UTF-8');
+			$vijesti = array();
+			$lista_fajlova = scandir("php/novosti/nove_vijesti");
+			for ($i = 2; $i < count($lista_fajlova); $i++) {
+				$sadrzaj_fajla = file('php/novosti/nove_vijesti/' . $lista_fajlova[$i]);
+				array_push($vijesti, $sadrzaj_fajla);
+			}
+			usort ($vijesti, function($a, $b) { 	
+						$datum1 = date('Y-m-d H:i:s', strtotime($a[0]));
+						$datum2 = date('Y-m-d H:i:s', strtotime($b[0]));
+						return $datum1 < $datum2;
+					});
+			foreach ($vijesti as $news) {
+				echo '<div>';
+					if($news[3] != "") {
+						echo '<div class="frejm-image">' .
+						'<table class="frejm-image">' .
+						'<tr>' . 
+							'<td class="frejm-image">' .
+								'<img src="' . $news[3] . '" class="frejm-image" alt="slika">' .
+							'</td>' .
+						'</tr>' .
+						'</table>' .
+						'</div>';
+					}
+					echo '<div class="frejm-text">' . 
+						$news[0] . 
+						'<br>' .
+						$news[1] . 
+						'<br><br>' .
+						$news[2] . 
+						'<br><br>';
+					$brojac = count($news);
+					for ($i = 4; $i < count($news); $i++) {
+						if (substr($news[$i], 0, 2) == '--') {
+							$brojac = $i;
+							break;
+						}
+						echo $news[$i];
+					}
+					if ($brojac != count($news)) {
+						echo ' <a href="#" class="frejm">' . ' Detaljnije...' . '</a>';
+					}		
+					echo '</div>' . '<br>' . 
+							'<hr>' .
+							'</div>';			
+			}
+		?>
 	</section>
 	<script src="javascript/menu.js"></script>
 </body>
