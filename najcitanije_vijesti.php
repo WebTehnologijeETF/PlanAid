@@ -56,7 +56,7 @@
 						'<br>' .
 						htmlspecialchars($news[1], ENT_QUOTES, 'UTF-8') . 
 						'<br><br>' .
-						htmlspecialchars($news[2], ENT_QUOTES, 'UTF-8') . 
+						htmlspecialchars(strtoupper(substr($news[2], 0, 1)) . strtolower(substr($news[2], 1)), ENT_QUOTES, 'UTF-8') . 
 						'<br><br>';
 					$brojac = count($news);
 					for ($i = 4; $i < count($news); $i++) {

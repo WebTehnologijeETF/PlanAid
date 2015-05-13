@@ -1,9 +1,11 @@
-<br><div><div class="frejm-image"><table class="frejm-image"><tr><td class="frejm-image"><img src="http://static.underthegunreview.net/uploads/2012/02/iron-maiden-300x170.jpg
-" class="frejm-image" alt="slika"></td></tr></table></div><div class="frejm-text">25.03.2015. 22:43:12
+<br><div><div class="frejm-image"><table class="frejm-image"><tr><td class="frejm-image"><img src="http://primate.hu/wp-content/uploads/2014/12/Carl-Cox-Garnier_zps035219de.jpg
+" class="frejm-image" alt="slika"></td></tr></table></div><div class="frejm-text">28.03.2015. 13:53:44
 <br>Aida Pločo
-<br><br>Iron Maiden Zetra
-<br><br>Sa velikim ponosom vam predstavljamo, po prvi put u BiH nastupat će Iron Maiden, koji mnogi smatraju sinonimom heavy metala.
-Bend koji iza sebe ima 15 albuma i preko 85 miliona prodanih albuma širom svijeta će nastupati u sarajev
+<br><br>Carl cox skenderija
+<br><br>VinylRecords vam predstavlja DJ Carl Cox-a globalnu techno i house zvijezdu.
+Proglašen je najboljim DJ-em 1996. i 1997. od strane DJ Magazine.
+Nastupao je na mnogim festivalima, među kojima su i Ultra Music Festival, Tomorrowland,
+Global Gathering i Electric Daisy Carnival.
 Ovdje sada slijedi detaljniji tekst novosti. 
 Lorem ipsum dolor sit amet i tako dalje mrsko mi je da kopiram.
 Lorem ipsum dolor sit amet i tako dalje mrsko mi je da kopiram.</div></div>
