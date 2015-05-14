@@ -58,8 +58,7 @@
 				if($_POST) {
 
 						$eol = PHP_EOL;
-						$message = 'Ime i prezime: ' . $_GLOBALS['ime'] . ' ' . $_GLOBALS['prezime'] . "\r\n" . 'Email: ' . $_GLOBALS['email'] . "\r\n" . 
-							$_GLOBALS['url'] . "\r\n" . "\r\n" . "\r\n" . $_GLOBALS['poruka'];
+						$message = 'Ime i prezime: ' . $_GLOBALS['ime'] . ' ' . $_GLOBALS['prezime'] . "\r\n" . 'Email: ' . $_GLOBALS['email'] . "\r\n" . 'URL: ' . $_GLOBALS['url'] . "\r\n" . "\r\n" . "\r\n" . $_GLOBALS['poruka'];
                         
 
 						$service_plan_id = "sendgrid_e2d43"; // your OpenShift Service Plan ID
