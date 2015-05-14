@@ -79,7 +79,7 @@
 						{
 							$sendgrid->send($email);
 							echo '<script>alert("Zahvaljujemo se što ste nas kontaktirali!");</script>';
-							header("location: ../kontakt_validacija.php");
+							header("location: ../index.php");
 						}
 						catch (\SendGrid\Exception $e)
 						{
