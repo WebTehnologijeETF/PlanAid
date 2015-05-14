@@ -13,11 +13,11 @@
 		<?php
 			header('Content-Type: text/html; charset=UTF-8');
 			$vijesti = array();
-			$lista_fajlova = scandir("php/novosti/najcitanije_vijesti");
+			$lista_fajlova = scandir("phpskripte/novosti/najcitanije_vijesti");
 			$lista_vijesti = array();
 			for ($i = 0; $i < count($lista_fajlova); $i++) {
-				if (!is_dir('php/novosti/najcitanije_vijesti/' . $lista_fajlova[$i])) {
-					$sadrzaj_fajla = file('php/novosti/najcitanije_vijesti/' . $lista_fajlova[$i]);
+				if (!is_dir('phpskripte/novosti/najcitanije_vijesti/' . $lista_fajlova[$i])) {
+					$sadrzaj_fajla = file('phpskripte/novosti/najcitanije_vijesti/' . $lista_fajlova[$i]);
 					array_push($vijesti, $sadrzaj_fajla);
 					array_push($lista_vijesti, $lista_fajlova[$i]);
 				}
@@ -67,7 +67,7 @@
 						$sadrzaj_stranice .= htmlspecialchars($news[$i], ENT_QUOTES, 'UTF-8');
 					}					
 					if ($brojac != count($news)) {	
-						$ime_detalji = 'php/novosti/najcitanije_vijesti/detalji/' .
+						$ime_detalji = 'phpskripte/novosti/najcitanije_vijesti/detalji/' .
 							substr($lista_vijesti[array_search($news, $vijesti)], 0, -4);
 						$sadrzaj_fajla_detalji = $sadrzaj_stranice;					
 						$sadrzaj_stranice .= ' <a class="frejm" onclick="PrikaziStranicu(\'' . $ime_detalji . '\', 1)">' . ' Detaljnije...' . '</a>';

@@ -1,5 +1,5 @@
 <?php
-	require('php/validacija.php');
+	require('phpskripte/validacija.php');
 ?>
 
 <!doctype html>
@@ -51,7 +51,6 @@
 	</div>
 	
 	<section id="glavni">
-		<form method="POST" action="kontakt_validacija.php">
 			<?php
 				if($_GLOBALS['validno']) {
 					echo '<h3>Provjerite da li ste ispravno popunili kontakt formu</h3>';
@@ -59,8 +58,16 @@
 					'</li><li class="linkovi">Email: ' . htmlspecialchars($_GLOBALS['email'], ENT_QUOTES, 'UTF-8') . '</li><li class="linkovi">URL: ' .
 					htmlspecialchars($_GLOBALS['url'], ENT_QUOTES, 'UTF-8') . '</li><li class="linkovi">Poruka: ' . htmlspecialchars($_GLOBALS['poruka'], ENT_QUOTES, 'UTF-8') . '</li></ul>';
 					echo '<h4>Da li ste sigurni da želite poslati ove podatke?</h4>';
-					echo '<input type="submit" value="Siguran sam" name="Siguran" id="Siguran" class="svi_buttoni">';
+					echo '<form method="POST" action="slanje_maila.php"><input type="text" name="ime" id="ime" class="nevidljivo" value="' . htmlspecialchars($_GLOBALS['ime'], ENT_QUOTES, 'UTF-8') . '">' .
+							'<input type="text" name="prezime" id="prezime" class="nevidljivo" value="' . htmlspecialchars($_GLOBALS['prezime'], ENT_QUOTES, 'UTF-8') . '">' .
+							'<input type="email" name="email" id="email" class="nevidljivo" value="' . htmlspecialchars($_GLOBALS['email'], ENT_QUOTES, 'UTF-8') . '">' . 
+							'<input type="url" name="url" id="url" class="nevidljivo" value="' . htmlspecialchars($_GLOBALS['url'], ENT_QUOTES, 'UTF-8') . '">' . 
+							'<textarea name="poruka" rows="8" cols="1" id="poruka" class="nevidljivo">' . htmlspecialchars($_GLOBALS['poruka'], ENT_QUOTES, 'UTF-8') . '</textarea>' . 
+							'<input type="submit" value="Siguran sam" name="Siguran" id="Siguran" class="svi_buttoni"></form>';
 					echo '<h4>Ako ste pogrešno popunili formu, možete ispod prepraviti unesene podatke</h4>';
+					?>
+			<form method="POST" action="kontakt_validacija.php">
+					<?php
 					echo '<div>
 							Ime:<br>
 							<input type="text" name="ime" id="ime" value="' . htmlspecialchars($_GLOBALS['ime'], ENT_QUOTES, 'UTF-8') . '" onblur="ValidirajIme()">

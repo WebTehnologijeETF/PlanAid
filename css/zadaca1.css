@@ -300,3 +300,7 @@ span.tekst_poruka_invisible {
 	border-right: 2px solid rgb(248,165,27);
 	border-bottom: 2px solid rgb(248,165,27);
 }
+
+.nevidljivo {
+	display: none;
+}
