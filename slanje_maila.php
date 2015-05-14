@@ -73,7 +73,7 @@
 						      ->setReplyTo($_GLOBALS['email'])
 						      ->setFrom($_GLOBALS['email'])
 						      ->setSubject("Kontakt forma")
-						      ->setText($_GLOBALS['poruka']);
+						      ->setText($message);
 
 						try
 						{
