@@ -12,16 +12,30 @@
 	<section id="frejm">
 		<?php
 			header('Content-Type: text/html; charset=UTF-8');
-			$vijesti = array();
-			$lista_fajlova = scandir("phpskripte/novosti/najcitanije_vijesti");
-			$lista_vijesti = array();
-			for ($i = 0; $i < count($lista_fajlova); $i++) {
-				if (!is_dir('phpskripte/novosti/najcitanije_vijesti/' . $lista_fajlova[$i])) {
-					$sadrzaj_fajla = file('phpskripte/novosti/najcitanije_vijesti/' . $lista_fajlova[$i]);
-					array_push($vijesti, $sadrzaj_fajla);
-					array_push($lista_vijesti, $lista_fajlova[$i]);
-				}
+			$ime_servera = "localhost";
+			$username = "zloco";
+			$sifra = "wtplanaid";
+			$ime_baze = "planaid";
+
+			try {
+				$konekcija = new PDO("mysql:dbname=" . $ime_baze . ";host=" . $ime_servera, $username, $sifra);
+				$konekcija->exec('set names utf8');
 			}
+			catch (PDOException $e) {
+				echo "Greska! : " . $e->getMessage() . "<br>";
+				die();
+			}
+
+			$vijesti = array();			
+			$lista_vijesti = array();
+
+			$upit = 'SELECT datum, autor, naslov, slika, tekst, detaljnije, id
+			    	FROM novosti
+			    	WHERE vrsta_novosti = :vrsta_novosti';
+			$statement = $konekcija->prepare($upit, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+			$statement->execute(array(':vrsta_novosti' => 'najcitanije_vijesti'));
+			$vijesti = $statement->fetchAll();
+			
 			usort ($vijesti, function($a, $b) { 	
 						$datum1 = date('Y-m-d H:i:s', strtotime($a[0]));
 						$datum2 = date('Y-m-d H:i:s', strtotime($b[0]));
@@ -57,26 +71,38 @@
 						htmlspecialchars($news[1], ENT_QUOTES, 'UTF-8') . 
 						'<br><br>' .
 						htmlspecialchars(strtoupper(substr($news[2], 0, 1)) . strtolower(substr($news[2], 1)), ENT_QUOTES, 'UTF-8') . 
-						'<br><br>';
-					$brojac = count($news);
-					for ($i = 4; $i < count($news); $i++) {
-						if (substr($news[$i], 0, 2) == '--') {
-							$brojac = $i;
-							break;
-						}
-						$sadrzaj_stranice .= htmlspecialchars($news[$i], ENT_QUOTES, 'UTF-8');
-					}					
-					if ($brojac != count($news)) {	
+						'<br><br>';				
+					$sadrzaj_stranice .= htmlspecialchars($news[4], ENT_QUOTES, 'UTF-8');				
+					if ($news[5] !== '') {	
 						$ime_detalji = 'phpskripte/novosti/najcitanije_vijesti/detalji/' .
-							substr($lista_vijesti[array_search($news, $vijesti)], 0, -4);
+							$news[2];
 						$sadrzaj_fajla_detalji = $sadrzaj_stranice;					
 						$sadrzaj_stranice .= ' <a class="frejm" onclick="PrikaziStranicu(\'' . $ime_detalji . '\', 1)">' . ' Detaljnije...' . '</a>';
-						$brojac++;
-						$detalji = '';
-						for ($j = $brojac; $j < count($news); $j++) {
-							$detalji .= $news[$j];
-						}			
+						$detalji = $news[5];		
 						$sadrzaj_fajla_detalji .= $detalji;	
+						try {
+							$konekcija = new PDO("mysql:dbname=" . $ime_baze . ";host=" . $ime_servera, $username, $sifra);
+							$konekcija->exec('set names utf8');
+						}
+						catch (PDOException $e) {
+							echo "Greska! : " . $e->getMessage() . "<br>";
+							die();
+						}
+
+						$upit = 'SELECT *
+			    		FROM komentari
+			    		WHERE id = :id';
+						$statement = $konekcija->prepare($upit, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+						$statement->execute(array(':id'=>$news[6]));
+						$komentari = $statement->fetchAll();
+						$brojac = count($komentari);
+						$sadrzaj_fajla_detalji .= '<br><br><form method="get" action="/PlanAid/komentari.php"><input type="hidden" name="idVijesti" value="' .
+						$news[6] . '"><input type="submit" value="' . $brojac . ' Komentara' . '" name="Komentarisi" id="Komentarisi" class="svi_buttoni"></form>';
+						$sadrzaj_fajla_detalji .= '<br><br><form method="get" action="/PlanAid/napisi_komentar.php">' . 
+						'Ime:<br><input type="text" name="imeKomentar"><br><br>Email:<br><input type="text" name="emailKomentar"><br><br>' . 
+						'<textarea class="komentar" name="komentar" rows="8" cols="1" id="komentar"></textarea><br><br>' .
+						'<input type="hidden" name="idVijesti" value="' . $news[6] . '">' .
+						'<input type="submit" value="Komentariši" name="Komentarisi" id="Komentarisi" class="svi_buttoni"></form>';
 						$sadrzaj_fajla_detalji .= '</div>' . '</div>';
 						$fajl_detalji = fopen($ime_detalji . '.php', 'w+');
 						fwrite($fajl_detalji, $sadrzaj_fajla_detalji);

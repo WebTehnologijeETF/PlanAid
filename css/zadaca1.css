@@ -218,6 +218,14 @@ img.frejm-image {
 	font-family: 'Ubuntu';
 }
 
+.komentar {
+	width: 100%;
+	display: inline;
+	resize: none;
+	font-size: 16px;
+	font-family: 'Ubuntu';
+}
+
 input {
 	font-family: 'Ubuntu';
 	font-size: 16px;
