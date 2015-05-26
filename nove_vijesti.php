@@ -98,7 +98,7 @@
 						$statement->execute(array(':id'=>$news[6]));
 						$komentari = $statement->fetchAll();
 						$brojac = count($komentari);
-						$sadrzaj_fajla_detalji .= '<br><br><form method="get" action="/PlanAid/komentari.php"><input type="hidden" name="idVijesti" value="' .
+						$sadrzaj_fajla_detalji .= '<br><br><form method="get" action="/PlanAid/komentari2.php"><input type="hidden" name="idVijesti" value="' .
 						$news[6] . '"><input type="submit" value="' . $brojac . ' Komentara' . '" name="komentari" id="komentari" class="svi_buttoni"></form>';
 						$sadrzaj_fajla_detalji .= '<br><br><form method="get" action="/PlanAid/napisi_komentar.php">' . 
 						'Ime:<br><input type="text" name="imeKomentar"><br><br>Email:<br><input type="text" name="emailKomentar"><br><br>' . 

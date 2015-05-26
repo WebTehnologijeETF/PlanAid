@@ -27,7 +27,6 @@
 			}
 
 			$komentari = array();
-			$_REQUEST['idVijesti'] = $_GET['id'];
 
 			$vijest = htmlspecialchars($_REQUEST['idVijesti'], ENT_QUOTES, 'UTF-8');
 
