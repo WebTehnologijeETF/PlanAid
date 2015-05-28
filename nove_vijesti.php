@@ -1,3 +1,7 @@
+<?php
+    require("phpskripte/podaci_baza.php");
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -13,13 +17,8 @@
 		<?php
 			header('Content-Type: text/html; charset=UTF-8');
 
-			$ime_servera = "localhost";
-			$username = "zloco";
-			$sifra = "wtplanaid";
-			$ime_baze = "planaid";
-
 			try {
-				$konekcija = new PDO("mysql:dbname=" . $ime_baze . ";host=" . $ime_servera, $username, $sifra);
+				$konekcija = new PDO("mysql:dbname=" . $ime_baze . ";host=" . $ime_servera, $usrnm, $password);
 				$konekcija->exec('set names utf8');
 			}
 			catch (PDOException $e) {
@@ -82,7 +81,7 @@
 						$sadrzaj_fajla_detalji .= $detalji;
 
 						try {
-							$konekcija = new PDO("mysql:dbname=" . $ime_baze . ";host=" . $ime_servera, $username, $sifra);
+							$konekcija = new PDO("mysql:dbname=" . $ime_baze . ";host=" . $ime_servera, $usrnm, $password);
 							$konekcija->exec('set names utf8');
 						}
 						catch (PDOException $e) {

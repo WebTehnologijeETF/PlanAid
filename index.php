@@ -1,3 +1,13 @@
+<?php
+	session_start();
+	if(isset($_SESSION['username'])) {
+		echo '<script type=\"text/javascript\">
+            document.getElementById("adminmenu").className="admin_visible";
+            </script>';
+	}
+	require("phpskripte/podaci_baza.php");
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -54,9 +64,9 @@
 	</div>
 
 	<div id="submenu_admin" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('admin_novosti')">Novosti</a>
-		<a onclick="PrikaziStranicu('brisanje_komentara')">Komentari</a>
-		<a onclick="PrikaziStranicu('korisnici')">Korisnici</a>
+		<a onclick="admin_panel.php">Novosti</a>
+		<a onclick="brisanje_komentara.php">Komentari</a>
+		<a onclick="korisnici.php">Korisnici</a>
 	</div>
 	
 	<section id="glavni">

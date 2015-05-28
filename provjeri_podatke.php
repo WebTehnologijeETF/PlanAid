@@ -1,9 +1,9 @@
 <?php
+    require("phpskripte/podaci_baza.php");
+?>
+
+<?php
     header('Content-Type: text/html; charset=UTF-8');
-	$ime_servera = "localhost";
-	$usrnm = "zloco";
-	$password = "wtplanaid";
-	$ime_baze = "planaid";
 
 try {
     $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $usrnm, $password);

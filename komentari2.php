@@ -1,3 +1,7 @@
+<?php
+    require("phpskripte/podaci_baza.php");
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -18,7 +22,7 @@
 			$ime_baze = "planaid";
 
 			try {
-				$konekcija = new PDO("mysql:dbname=" . $ime_baze . ";host=" . $ime_servera, $username, $sifra);
+				$konekcija = new PDO("mysql:dbname=" . $ime_baze . ";host=" . $ime_servera, $usrnm, $password);
 				$konekcija->exec('set names utf8');
 			}
 			catch (PDOException $e) {

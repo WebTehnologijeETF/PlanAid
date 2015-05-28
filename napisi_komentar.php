@@ -1,11 +1,11 @@
 <?php
-	$ime_servera = "localhost";
-	$username = "zloco";
-	$sifra = "wtplanaid";
-	$ime_baze = "planaid";
+    require("phpskripte/podaci_baza.php");
+?>
+
+<?php
 
 try {
-    $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $username, $sifra);
+    $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $usrnm, $password);
     $konekcija->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $datum = date("d.m.Y H:i:s");

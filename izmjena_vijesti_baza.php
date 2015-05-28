@@ -2,11 +2,10 @@
     require("phpskripte/podaci_baza.php");
 ?>
 
-
 <?php
-header('Content-Type: text/html; charset=UTF-8');
+
 try {
-    $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $username, $sifra);
+    $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $usrnm, $password);
     $konekcija->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $datetime = new DateTime();
@@ -18,9 +17,16 @@ try {
     $detaljnije = htmlspecialchars($_REQUEST['detaljnije'], ENT_QUOTES, 'UTF-8');
     $vrsta_novosti = "nove_vijesti";
 
-
-    $upit = $konekcija->prepare("INSERT INTO novosti (datum, autor, naslov, slika, tekst, detaljnije, vrsta_novosti) 
-    VALUES (:datum, :autor, :naslov, :slika, :tekst, :detaljnije, :vrsta_novosti)");
+    $id = $_REQUEST['idv'];
+    $upit = $konekcija->prepare('UPDATE novosti
+                                 SET datum = :datum,
+                                    autor = :autor,
+                                    naslov = :naslov,
+                                    slika = :slika,
+                                    tekst = :tekst,
+                                    detaljnije = :detaljnije
+                                    vrsta_novosti = :vrsta_novosti
+                                WHERE id = :id');
     $upit->bindParam(':datum', $datum);
     $upit->bindParam(':autor', $autor);
     $upit->bindParam(':naslov', $naslov);
@@ -28,6 +34,7 @@ try {
     $upit->bindParam(':tekst', $tekst);
     $upit->bindParam(':detaljnije', $detaljnije);
     $upit->bindParam(':vrsta_novosti', $vrsta_novosti);
+    $upit->bindParam(':id', $id);
     $upit->execute();
 }
 catch(PDOException $e)

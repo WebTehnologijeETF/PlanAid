@@ -89,81 +89,44 @@
 		$statement1->execute(array(':vrsta_novosti' => 'nove_vijesti'));
 		$nove_vijesti = $statement1->fetchAll();
 
-		echo '<form method="POST" action="dodaj_vijest.php">
+		$id = $_REQUEST['idv'];
+		foreach($nove_vijesti as $news) {
+			if($id === $news['id']) {
+				echo '<form method="POST" action="izmjena_vijesti_baza.php">
 		<div>
 		Autor:<br>
-		<input type="text" name="autor" id="autor" onblur="ValidirajIme()">
+		<input type="text" name="autor" id="autor" onblur="ValidirajIme()" value="' . $news['autor'] .'">
 		<img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_invisible" alt="uzvicnik">
 		<span id="tekst_ime" class="tekst_invisible">Isključivo slova</span>
 			</div><br>
 		<div>
 			Naslov:<br>
-			<input type="text" name="naslov" id="naslov" onblur="ValidirajPoruku()">
+			<input type="text" name="naslov" id="naslov" onblur="ValidirajPoruku()" value="' . $news['naslov'] .'">
 			<img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_invisible" alt="uzvicnik">
 			<span id="tekst_ime" class="tekst_invisible">Morate unijeti naslov</span>
 		</div><br>
 		<div>
 			Slika:<br>
-			<input type="url" name="slika" id="slika" onblur="ValidirajPoruku()">
+			<input type="url" name="slika" id="slika" onblur="ValidirajPoruku()" value="' . $news['slika'] .'">
 			<img src="photos/exclamation_point.png" id="uzvicnik_ime" class="uzvicnik_invisible" alt="uzvicnik">
 			<span id="tekst_ime" class="tekst_invisible">Morate unijeti url slike</span>
 		</div><br>
 		<div>
 			Tekst:<br>
-	  		<textarea class="poruka" name="tekst" rows="8" cols="1" id="tekst" onblur="ValidirajPoruku()"></textarea>
+	  		<textarea class="poruka" name="tekst" rows="8" cols="1" id="tekst" onblur="ValidirajPoruku()">' . $news['tekst'] .'</textarea>
 			<img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible" alt="uzvicnik">
 			<span id="tekst_poruka" class="tekst_poruka_invisible">Morate unijeti poruku</span>
 	  	</div><br>
 	  	<div>
 	  		Detaljnije:<br>
-	  		<textarea class="poruka" name="detaljnije" rows="8" cols="1" id="detaljnije" onblur="ValidirajPoruku()"></textarea>
+	  		<textarea class="poruka" name="detaljnije" rows="8" cols="1" id="detaljnije" onblur="ValidirajPoruku()">' . $news['detaljnije'] .'</textarea>
 			<img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible" alt="uzvicnik">
 			<span id="tekst_poruka" class="tekst_poruka_invisible">Morate unijeti poruku</span>
 	  	</div><br>
-	  		<input type="submit" value="Dodaj" name="dodaj" class="svi_buttoni"></form>
-			<form method="POST" action="izmjena_vijesti.php">
-			<table id="moja_desavanja" class="moja_desavanja">
-				<tr>
-					<td class="red1"></td>
-					<td class="red1">Datum</td>
-					<td class="red1">Autor</td>
-					<td class="red1">Naslov</td>
-				</tr>';
-				$id;
-				foreach($nove_vijesti as $vijest) {
-					$datetime = new DateTime($vijest['datum']);
-					$datum = $datetime->format('d.m.y H:i:s');
-					$id = htmlspecialchars($vijest['id'], ENT_QUOTES, 'UTF-8');
-					echo '<tr><td><input type="radio" name="radio" value="' .
-							$id . '" checked="checked"></td><td>' .
-							htmlspecialchars($datum, ENT_QUOTES, 'UTF-8') . '</td><td>' .
-							htmlspecialchars($vijest['autor'], ENT_QUOTES, 'UTF-8') . '</td><td>' .
-							htmlspecialchars($vijest['naslov'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
-				}
-			echo '</table><input type="hidden" value="' . $id . '" name="idv"><br>
-				<input type="submit" value="Izmijeni" name="izmijeni" class="svi_buttoni"></form>
-			<form method="POST" action="brisanje_vijesti.php">
-			<table id="moja_desavanja" class="moja_desavanja">
-				<tr>
-					<td class="red1"></td>
-					<td class="red1">Datum</td>
-					<td class="red1">Autor</td>
-					<td class="red1">Naslov</td>
-				</tr>';
-				$id;
-				foreach($nove_vijesti as $vijest) {
-					$datetime = new DateTime($vijest['datum']);
-					$datum = $datetime->format('d.m.y H:i:s');
-					$id = htmlspecialchars($vijest['id'], ENT_QUOTES, 'UTF-8');
-					echo '<tr><td><input type="radio" name="radio" value="' .
-							$id . '" checked="checked"></td><td>' .
-							htmlspecialchars($datum, ENT_QUOTES, 'UTF-8') . '</td><td>' .
-							htmlspecialchars($vijest['autor'], ENT_QUOTES, 'UTF-8') . '</td><td>' .
-							htmlspecialchars($vijest['naslov'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
-				}
-			echo '</table><input type="hidden" value="' . $id . '" name="idv"><br>
-				<input type="submit" value="Obriši" name="obrisi" class="svi_buttoni">
-		</form>';
+	  		<input type="hidden" value="' . $id . '" name="idv" class="svi_buttoni">
+	  		<input type="submit" value="Izmijeni" name="izmijeni" class="svi_buttoni"></form>';
+			}
+		}
 		?>
 	</section>
 		
