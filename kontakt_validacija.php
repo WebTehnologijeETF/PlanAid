@@ -52,9 +52,9 @@
 	</div>
 
 	<div id="submenu_admin" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('admin_novosti')">Novosti</a>
-		<a onclick="PrikaziStranicu('brisanje_komentara')">Komentari</a>
-		<a onclick="PrikaziStranicu('korisnici')">Korisnici</a>
+		<a href="admin_panel.php">Novosti</a>
+		<a href="brisanje_komentara.php">Komentari</a>
+		<a href="korisnici.php">Korisnici</a>
 	</div>
 	
 	<section id="glavni">

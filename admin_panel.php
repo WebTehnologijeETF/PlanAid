@@ -62,9 +62,9 @@
 	</div>
 
 	<div id="submenu_admin" class="submenu_invisible">
-		<a onclick="admin_panel.php">Novosti</a>
-		<a onclick="brisanje_komentara.php">Komentari</a>
-		<a onclick="korisnici.php">Korisnici</a>
+		<a href="admin_panel.php">Novosti</a>
+		<a href="brisanje_komentara.php">Komentari</a>
+		<a href="korisnici.php">Korisnici</a>
 	</div>
 	
 	<section id="glavni">
