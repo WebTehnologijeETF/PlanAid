@@ -8,7 +8,7 @@ try {
     $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $username, $sifra);
     $konekcija->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $datum = date("Y-m-d H:i:s");
+    $datum = date("d.m.Y H:i:s");
     $autor = htmlspecialchars($_REQUEST['imeKomentar'], ENT_QUOTES, 'UTF-8');
     $email = htmlspecialchars($_REQUEST['emailKomentar'], ENT_QUOTES, 'UTF-8');
     $tekst = htmlspecialchars($_REQUEST['komentar'], ENT_QUOTES, 'UTF-8');

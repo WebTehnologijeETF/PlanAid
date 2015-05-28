@@ -7,7 +7,13 @@
 	<link rel="shortcut icon" href="photos/logo.ico">
 </head>
 
-<body onload="SakrijSubmenu()">
+<body onload="SakrijSubmenu();
+	<?php
+		if(isset($_GET['poruka'])) {
+		echo "alert('" . $_GET['poruka'] . "');";
+	}
+	?>
+">
 
 	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
@@ -20,6 +26,7 @@
 		<a class="kursor" onmouseover="PrikaziLokacije()">Lokacije</a>
 		<a class="kursor" onmouseover="PrikaziPrijavu()">Prijava</a>
 		<a onclick="PrikaziStranicu('kontakt')" onmouseover="SakrijSubmenu()">Kontakt</a>
+		<a class="admin" id="adminmenu" onmouseover="PrikaziAdmin()">Admin</a>
 	</nav>
 
 <section>
@@ -44,6 +51,12 @@
 	<div id="submenu_prijava" class="submenu_invisible">
 		<a onclick="PrikaziStranicu('login')">Login</a>
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
+	</div>
+
+	<div id="submenu_admin" class="submenu_invisible">
+		<a onclick="PrikaziStranicu('admin_novosti')">Novosti</a>
+		<a onclick="PrikaziStranicu('brisanje_komentara')">Komentari</a>
+		<a onclick="PrikaziStranicu('korisnici')">Korisnici</a>
 	</div>
 	
 	<section id="glavni">

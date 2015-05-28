@@ -164,7 +164,7 @@ function ValidirajMjesto() {
 
 function ValidirajPrijavu() {
 	return (ValidirajKorisnickoIme() && ValidirajEmail() && ValidirajSifru()
-	 && ValidirajSifruPonovo() && mjestoValidirano);
+	 && ValidirajSifruPonovo());
 }
 
 function ValidirajImeDesavanja() {
@@ -198,4 +198,8 @@ function ValidirajOpis() {
 
 function ValidirajDesavanje() {
 	return (ValidirajImeDesavanja() && ValidirajURL() && ValidirajOpis())
+}
+
+function ValidirajAdmin() {
+	document.getElementById("adminmenu").className="admin_visible";
 }

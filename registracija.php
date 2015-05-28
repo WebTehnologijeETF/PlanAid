@@ -1,4 +1,4 @@
-<form onsubmit="return ValidirajPrijavu()">
+<form method="POST" action="dodaj_korisnika.php">
 	<h3>Postanite novi član!</h3>
 	<div>
 		Korisničko ime:<br>

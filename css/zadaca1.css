@@ -69,6 +69,27 @@ a:hover {
 	cursor: text;
 }
 
+.admin a:hover {
+	cursor: text;
+}
+
+.admin_visible a:hover {
+	cursor: text;
+}
+
+.admin {
+	display: none;
+	background-color: rgb(181,230,29);
+	padding-left: 20%;
+	font-size: 25px;
+}
+
+.admin_visible {
+	visibility: visible;
+	background-color: rgb(181,230,29);
+	font-size: 30px;
+}
+
 .submenu {
 	background-color: rgb(255,216,79);
 	font-size: 25px;

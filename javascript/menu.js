@@ -14,6 +14,7 @@ function PrikaziNaslovnicu() {
 	document.getElementById("submenu_prijava").className="submenu_invisible";
 	document.getElementById("submenu_desavanja").className="submenu_invisible";
 	document.getElementById("submenu_naslovnica").className="submenu";
+    document.getElementById("submenu_admin").className="submenu_invisible";
 }
 
 function PrikaziDesavanja() {
@@ -21,6 +22,7 @@ function PrikaziDesavanja() {
 	document.getElementById("submenu_lokacije").className="submenu_invisible";
 	document.getElementById("submenu_prijava").className="submenu_invisible";
 	document.getElementById("submenu_desavanja").className="submenu";
+    document.getElementById("submenu_admin").className="submenu_invisible";
 }
 
 function PrikaziLokacije() {
@@ -28,6 +30,7 @@ function PrikaziLokacije() {
 	document.getElementById("submenu_desavanja").className="submenu_invisible";
 	document.getElementById("submenu_naslovnica").className="submenu_invisible";
 	document.getElementById("submenu_lokacije").className="submenu";
+    document.getElementById("submenu_admin").className="submenu_invisible";
 }
 
 function PrikaziPrijavu() {
@@ -35,6 +38,15 @@ function PrikaziPrijavu() {
 	document.getElementById("submenu_naslovnica").className="submenu_invisible";
 	document.getElementById("submenu_lokacije").className="submenu_invisible";
 	document.getElementById("submenu_prijava").className="submenu";
+    document.getElementById("submenu_admin").className="submenu_invisible";
+}
+
+function PrikaziAdmin() {
+    document.getElementById("submenu_desavanja").className="submenu_invisible";
+    document.getElementById("submenu_naslovnica").className="submenu_invisible";
+    document.getElementById("submenu_lokacije").className="submenu_invisible";
+    document.getElementById("submenu_prijava").className="submenu_invisible";
+    document.getElementById("submenu_admin").className="submenu";
 }
 
 function SakrijSubmenu() {
@@ -42,6 +54,7 @@ function SakrijSubmenu() {
 	document.getElementById("submenu_naslovnica").className="submenu_invisible";
 	document.getElementById("submenu_lokacije").className="submenu_invisible";
 	document.getElementById("submenu_prijava").className="submenu_invisible";
+    document.getElementById("submenu_prijava").className="submenu_invisible";
 }
 
 function PrikaziStranicu(stranica, detalji) {
