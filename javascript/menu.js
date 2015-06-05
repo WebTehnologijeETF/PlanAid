@@ -54,7 +54,7 @@ function SakrijSubmenu() {
 	document.getElementById("submenu_naslovnica").className="submenu_invisible";
 	document.getElementById("submenu_lokacije").className="submenu_invisible";
 	document.getElementById("submenu_prijava").className="submenu_invisible";
-    document.getElementById("submenu_prijava").className="submenu_invisible";
+    document.getElementById("submenu_admin").className="submenu_invisible";
 }
 
 function PrikaziStranicu(stranica, detalji) {
