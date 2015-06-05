@@ -21,17 +21,20 @@
                 $statement1->execute(array(':vrsta_vijesti' => 'nove_vijesti'));
                 $vijesti = $statement1->fetchAll();  
 
-
-        if(isset($_REQUEST['radio'])) {
+        $id = htmlspecialchars($_POST['radio'], ENT_QUOTES, 'UTF-8');
             foreach($vijesti as $news) {
-            if ($_REQUEST['idv'] == $news['id']) {
-                $answer = $_REQUEST['idv'];
+            if ($id === $news['id']) {
                 try {
+                    $upit3 = 'DELETE
+                                FROM komentari
+                                WHERE vijest = :vijest';
+                    $statement3 = $konekcija->prepare($upit3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                    $statement3->execute(array(':vijest' => $id));
                     $upit2 = 'DELETE
                         FROM novosti
                         WHERE id = :id';
                     $statement2 = $konekcija->prepare($upit2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                    $statement2->execute(array(':id' => $answer));
+                    $statement2->execute(array(':id' => $id));
                     $vijesti2 = $statement2->fetchAll();
                 }
                 catch(PDOException $e) {
@@ -39,6 +42,5 @@
                 }
             }
          }
-        }
         header("Location: admin_panel.php");
 ?>

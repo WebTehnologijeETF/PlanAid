@@ -24,6 +24,7 @@
 		<a class="kursor" onmouseover="PrikaziLokacije()">Lokacije</a>
 		<a class="kursor" onmouseover="PrikaziPrijavu()">Prijava</a>
 		<a onclick="PrikaziStranicu('kontakt')" onmouseover="SakrijSubmenu()">Kontakt</a>
+		<a class="admin" id="adminmenu" onmouseover="PrikaziAdmin()">Admin</a>
 	</nav>
 
 <section>
@@ -48,6 +49,12 @@
 	<div id="submenu_prijava" class="submenu_invisible">
 		<a onclick="PrikaziStranicu('login')">Login</a>
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
+	</div>
+
+	<div id="submenu_admin" class="submenu_invisible">
+		<a href="admin_panel.php">Novosti</a>
+		<a href="prikazi_komentare.php">Komentari</a>
+		<a href="korisnici.php">Korisnici</a>
 	</div>
 	
 	<section id="glavni">

@@ -6,7 +6,7 @@
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 try {
-    $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $username, $sifra);
+    $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $usrnm, $password);
     $konekcija->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $datetime = new DateTime();

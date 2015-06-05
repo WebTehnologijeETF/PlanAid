@@ -63,7 +63,7 @@
 
 	<div id="submenu_admin" class="submenu_invisible">
 		<a onclick="PrikaziStranicu('admin_novosti')">Novosti</a>
-		<a onclick="PrikaziStranicu('brisanje_komentara')">Komentari</a>
+		<a onclick="PrikaziStranicu('prikazi_komentare')">Komentari</a>
 		<a onclick="PrikaziStranicu('korisnici')">Korisnici</a>
 	</div>
 	
@@ -79,54 +79,37 @@
             echo "Error: " . $e->getMessage();
         }    
 
-        $vijesti = array();  
+        $komentari = array();
+        $id = htmlspecialchars($_POST['radio'], ENT_QUOTES, 'UTF-8');
 
-        $upit2 = 'SELECT naslov
-                        FROM novosti
-                        WHERE vrsta_novosti = :vrsta_novosti';
-                $statement2 = $konekcija->prepare($upit2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                $statement2->execute(array(':vrsta_novosti' => 'nove_vijesti'));
-                $vijesti = $statement2->fetchAll();  
+        $upit1 = 'SELECT datum, autor, email, tekst, vijest, id
+                FROM komentari
+                WHERE vijest = :vijest';
+        $statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $statement1->execute(array(':vijest' => $id));
+        $komentari = $statement1->fetchAll();
 
         
 
-        echo '<h3>Komentari</h3><form method="POST" action="prikazi_komentare.php">
-        <div>
-        Naslov vijesti:<br>
-        <select id="news">';
-            foreach($vijesti as $news) {
-                echo '<option name="combobox" value="' . htmlspecialchars($news['id'], ENT_QUOTES, 'UTF-8') . '">' . htmlspecialchars($news['naslov'], ENT_QUOTES, 'UTF-8') . '</option>';
-            }
-        echo '</select>
-            </div><br>
-            <input type="submit" value="Prikaži komentare" name="prikazi" class="svi_buttoni" onclick="return ValidirajID()"></form>
+        echo '<h3>Komentari</h3><form method="POST" action="brisanje_komentara.php">
             <form><table id="moja_desavanja" class="moja_desavanja">
                 <tr>
                     <td class="red1"></td>
                     <td class="red1">Datum</td>
                     <td class="red1">Autor</td>
-                    <td class="red1">Naslov</td>
+                    <td class="red1">Komentar</td>
                 </tr>';
-                    $brojac = 0;
-                    $komentari = isset($_GET['komentari']);
-                    if(count($komentari) !== 0) {
-                    	var_dump(count($komentari));
-                        foreach($komentari as $kom) {
-                        $brojac++;
-                        $datetime = new DateTime($kom['datum']);
-                        $datum = $datetime->format('d.m.y H:i:s');
-                        echo '<tr><td><input type="radio" name="' . $brojac . '"></td><td>' .
-                            htmlspecialchars($datum, ENT_QUOTES, 'UTF-8') . '</td><td>' .
-                            htmlspecialchars($kom['autor'], ENT_QUOTES, 'UTF-8') . '</td><td>' .
-                            htmlspecialchars($kom['email'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
-                        }
-                    }
-                /*else {
-                    $poruka_korisniku = "Morate unijeti ID";
-                    header("Location: admin_panel.php?poruka=".$poruka_korisniku);
-                }*/
+                $idkom;
+                foreach($komentari as $kom) {
+	                $datetime = new DateTime($kom['datum']);
+	                $datum = $datetime->format('d.m.y H:i:s');
+	                $idkom = htmlspecialchars($kom['id'], ENT_QUOTES, 'UTF-8');
+	                echo '<tr><td><input type="radio" name="radio" value="' . $idkom . '"></td><td>' .
+	                    htmlspecialchars($datum, ENT_QUOTES, 'UTF-8') . '</td><td>' .
+	                    htmlspecialchars($kom['autor'], ENT_QUOTES, 'UTF-8') . '</td><td>' .
+	                    htmlspecialchars($kom['tekst'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
+                }
             echo '</table><br>
-                <input type="submit" value="Izmijeni" name="izmijeni" class="svi_buttoni">
                 <input type="submit" value="Obriši" name="obrisi" class="svi_buttoni">
         </form>';
 ?>

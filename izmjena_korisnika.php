@@ -63,7 +63,7 @@
 
 	<div id="submenu_admin" class="submenu_invisible">
 		<a onclick="admin_panel.php">Novosti</a>
-		<a onclick="brisanje_komentara.php">Komentari</a>
+		<a onclick="prikazi_komentare.php">Komentari</a>
 		<a onclick="korisnici.php">Korisnici</a>
 	</div>
 	
@@ -89,7 +89,7 @@
         $statement1->execute(array(':id' => "1"));
         $korisnici = $statement1->fetchAll();  
 
-		$id = $_REQUEST['idv'];
+		$id = htmlspecialchars($_POST['radio'], ENT_QUOTES, 'UTF-8');
 		foreach($korisnici as $user) {
 			if($id === $user['id']) {
 				echo '<form method="POST" action="izmjena_korisnika_baza.php">

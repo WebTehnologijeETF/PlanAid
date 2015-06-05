@@ -53,7 +53,7 @@
 
 	<div id="submenu_admin" class="submenu_invisible">
 		<a href="admin_panel.php">Novosti</a>
-		<a href="brisanje_komentara.php">Komentari</a>
+		<a href="prikazi_komentare.php">Komentari</a>
 		<a href="korisnici.php">Korisnici</a>
 	</div>
 	

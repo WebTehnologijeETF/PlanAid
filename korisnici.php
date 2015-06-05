@@ -63,7 +63,7 @@
 
     <div id="submenu_admin" class="submenu_invisible">
         <a href="admin_panel.php">Novosti</a>
-        <a href="brisanje_komentara.php">Komentari</a>
+        <a href="prikazi_komentare.php">Komentari</a>
         <a href="korisnici.php">Korisnici</a>
     </div>
     
@@ -105,7 +105,7 @@
                             htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
                     }
                 }
-            echo '</table><input type="hidden" value="' . $id . '" name="idv"><br>
+            echo '</table><br>
                 <input type="submit" value="Izmijeni" name="izmijeni" class="svi_buttoni"></form>
             <form method="POST" action="brisanje_korisnika.php">
             <table id="moja_desavanja" class="moja_desavanja">
@@ -124,7 +124,7 @@
                             htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
                     }
                 }
-            echo '</table><input type="hidden" value="' . $id . '" name="idv"><br>
+            echo '</table><br>
                 <input type="submit" value="Obriši" name="obrisi" class="svi_buttoni">
         </form>';
         ?>
