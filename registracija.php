@@ -1,4 +1,4 @@
-<form method="POST" action="dodaj_korisnika.php">
+<form method="POST">
 	<h3>Postanite novi član!</h3>
 	<div>
 		Korisničko ime:<br>
@@ -39,5 +39,5 @@
 		<img src="photos/exclamation_point.png" id="uzvicnik_mjesto" class="uzvicnik_invisible" alt="uzvicnik">
 		<span id="tekst_mjesto" class="tekst_invisible">Greška!</span>
 	</div><br>
-		<input type="submit" value="Pošalji" name="submit" id="submit" onclick="return ValidirajPrijavu()" class="svi_buttoni">
+		<input type="button" value="Pošalji" name="posalji" id="posalji" onclick="DodajKorisnika()" class="svi_buttoni">
 </form>

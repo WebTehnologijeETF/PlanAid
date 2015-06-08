@@ -1,13 +1,3 @@
-<?php
-	session_start();
-	if(isset($_SESSION['username'])) {
-		echo '<script type=\"text/javascript\">
-            document.getElementById("adminmenu").className="admin_visible";
-            </script>';
-	}
-	require("phpskripte/podaci_baza.php");
-?>
-
 <!doctype html>
 <html>
 <head>
@@ -17,13 +7,7 @@
 	<link rel="shortcut icon" href="photos/logo.ico">
 </head>
 
-<body onload="SakrijSubmenu();
-	<?php
-		if(isset($_GET['poruka'])) {
-		echo "alert('" . $_GET['poruka'] . "');";
-	}
-	?>
-">
+<body onload="SakrijSubmenu()">
 
 	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
@@ -39,7 +23,7 @@
 		<a class="admin" id="adminmenu" onmouseover="PrikaziAdmin()">Admin</a>
 	</nav>
 
-<section>
+<div>
 	<div id="submenu_naslovnica" class="submenu_invisible">
 		<a onclick="PrikaziStranicu('naslovnica_novevijesti')">Najnovije vijesti</a>
 		<a onclick="PrikaziStranicu('naslovnica_najcitanije')">Najčitanije vijesti</a>
@@ -69,9 +53,9 @@
 		<a href="korisnici.php">Korisnici</a>
 	</div>
 	
-	<section id="glavni">
+	<div id="glavni">
 		<iframe id="frejm" src="nove_vijesti.php" class="frejm"></iframe>
-	</section>
+	</div>
 		
 	<aside class="reklame">
 		<aside class="reklame-body">
@@ -84,10 +68,9 @@
 			</a>
 		</aside>
 	</aside>
-</section>
+</div>
 	<script src="javascript/menu.js"></script>
-	<script src="javascript/validacija.js"></script>
+	<script src="javascript/validacija.js"></script>	
 </body>
 
 </html>
-

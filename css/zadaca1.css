@@ -189,7 +189,7 @@ iframe.frejm {
 	background-image: none;
 }
 
-div.frejm-text {
+.frejm-text {
 	color: rgb(64,128,128);
 	height: 200px;
 	width: 55%;
@@ -199,8 +199,24 @@ div.frejm-text {
 	background-image: none;
 }
 
+div.frejm {
+	color: rgb(64,128,128);
+	height: 200px;
+	width: 98%;
+	padding-left: 1%;
+	padding-right: 1%;
+	text-align: justify;
+	background-color: rgb(243,253,172);
+	background-image: none;
+}
+
 a.frejm {
+	visibility: visible;
 	text-decoration: underline;
+}
+
+a.frejm_invisible {
+	display: none;
 }
 
 hr {

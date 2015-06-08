@@ -69,27 +69,7 @@
 	
 	<section id="glavni">
 		<h3>Novosti</h3>
-		<?php
-		header('Content-Type: text/html; charset=UTF-8');
-
-		try {
-		    $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $usrnm, $password);
-		    $konekcija->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-		}
-		catch(PDOException $e) {
-	    	echo "Error: " . $e->getMessage();
-		}
-
-		$nove_vijesti = array();
-
-		$upit1 = 'SELECT datum, autor, naslov, slika, tekst, detaljnije, id
-			    	FROM novosti
-			    	WHERE vrsta_novosti = :vrsta_novosti';
-		$statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-		$statement1->execute(array(':vrsta_novosti' => 'nove_vijesti'));
-		$nove_vijesti = $statement1->fetchAll();
-
-		echo '<form method="POST" action="dodaj_vijest.php">
+		<form method="POST">
 		<div>
 		Autor:<br>
 		<input type="text" name="autor" id="autor" onblur="ValidirajIme()">
@@ -121,50 +101,28 @@
 			<span id="tekst_poruka" class="tekst_poruka_invisible">Morate unijeti poruku</span>
 	  	</div><br>
 	  		<input type="submit" value="Dodaj" name="dodaj" class="svi_buttoni"></form>
-			<form method="POST" action="izmjena_vijesti.php">
+			<form method="PUT">
 			<table id="moja_desavanja" class="moja_desavanja">
 				<tr>
 					<td class="red1"></td>
 					<td class="red1">Datum</td>
 					<td class="red1">Autor</td>
 					<td class="red1">Naslov</td>
-				</tr>';
-				$id;
-				foreach($nove_vijesti as $vijest) {
-					$datetime = new DateTime($vijest['datum']);
-					$datum = $datetime->format('d.m.y H:i:s');
-					$id = htmlspecialchars($vijest['id'], ENT_QUOTES, 'UTF-8');
-					echo '<tr><td><input type="radio" name="radio" value="' .
-							$id . '" checked="checked"></td><td>' .
-							htmlspecialchars($datum, ENT_QUOTES, 'UTF-8') . '</td><td>' .
-							htmlspecialchars($vijest['autor'], ENT_QUOTES, 'UTF-8') . '</td><td>' .
-							htmlspecialchars($vijest['naslov'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
-				}
-			echo '</table><br>
-				<input type="submit" value="Izmijeni" name="izmijeni" class="svi_buttoni"></form>
-			<form method="POST" action="brisanje_vijesti.php">
+				</tr>
+			</table><br>
+				<input type="submit" value="Izmijeni" name="izmijeni" class="svi_buttoni">
+			</form>
+			<form method="DELETE">
 			<table id="moja_desavanja" class="moja_desavanja">
 				<tr>
 					<td class="red1"></td>
 					<td class="red1">Datum</td>
 					<td class="red1">Autor</td>
 					<td class="red1">Naslov</td>
-				</tr>';
-				$id;
-				foreach($nove_vijesti as $vijest) {
-					$datetime = new DateTime($vijest['datum']);
-					$datum = $datetime->format('d.m.y H:i:s');
-					$id = htmlspecialchars($vijest['id'], ENT_QUOTES, 'UTF-8');
-					echo '<tr><td><input type="radio" name="radio" value="' .
-							$id . '" checked="checked"></td><td>' .
-							htmlspecialchars($datum, ENT_QUOTES, 'UTF-8') . '</td><td>' .
-							htmlspecialchars($vijest['autor'], ENT_QUOTES, 'UTF-8') . '</td><td>' .
-							htmlspecialchars($vijest['naslov'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
-				}
-			echo '</table><br>
+				</tr>
+			</table><br>
 				<input type="submit" value="Obriši" name="obrisi" class="svi_buttoni">
-		</form>';
-		?>
+		</form>
 	</section>
 		
 	<aside class="reklame">

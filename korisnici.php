@@ -69,65 +69,26 @@
     
     <section id="glavni">
     <h3>Korisnici</h3>
-        <?php
-        header('Content-Type: text/html; charset=UTF-8');
-
-        try {
-            $konekcija = new PDO("mysql:host=$ime_servera;dbname=$ime_baze", $usrnm, $password);
-            $konekcija->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        }
-        catch(PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-
-        $korisnici = array();
-
-        $upit1 = 'SELECT *
-                    FROM korisnici';
-        $statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-        $statement1->execute();
-        $korisnici = $statement1->fetchAll();
-
-        echo '<form method="POST" action="izmjena_korisnika.php">
-            <table id="moja_desavanja" class="moja_desavanja">
+        <form method="PUT">
+            <table id="editovanje_korisnika" class="moja_desavanja">
                 <tr>
                     <td class="red1"></td>
                     <td class="red1">Username</td>
                     <td class="red1">Email</td>
-                </tr>';
-                $id;
-                foreach($korisnici as $user) {
-                    if($user['id'] !== "1") {
-                        $id = htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8');
-                    echo '<tr><td><input type="radio" name="radio" value="' .
-                            $id . '" checked="checked"></td><td>' .
-                            htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') . '</td><td>' .
-                            htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
-                    }
-                }
-            echo '</table><br>
-                <input type="submit" value="Izmijeni" name="izmijeni" class="svi_buttoni"></form>
-            <form method="POST" action="brisanje_korisnika.php">
-            <table id="moja_desavanja" class="moja_desavanja">
+                </tr>
+            </table><br>
+                <input type="button" value="Izmijeni" name="izmijeni" class="svi_buttoni" onclick="EditujKorisnika()">
+            </form>
+            <form method="DELETE">
+            <table id="brisanje_korisnika" class="moja_desavanja">
                 <tr>
                     <td class="red1"></td>
                     <td class="red1">Username</td>
                     <td class="red1">Email</td>
-                </tr>';
-                $id;
-                foreach($korisnici as $user) {
-                    if($user['id'] !== "1") {
-                        $id = htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8');
-                    echo '<tr><td><input type="radio" name="radio" value="' .
-                            $id . '" checked="checked"></td><td>' .
-                            htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8') . '</td><td>' .
-                            htmlspecialchars($user['email'], ENT_QUOTES, 'UTF-8') . '</td></tr>';
-                    }
-                }
-            echo '</table><br>
-                <input type="submit" value="Obriši" name="obrisi" class="svi_buttoni">
-        </form>';
-        ?>
+                </tr>
+            </table><br>
+                <input type="button" value="Obriši" name="obrisi" class="svi_buttoni" onclick="ObrisiKorisnika()">
+        </form>
     </section>
         
     <aside class="reklame">
@@ -144,6 +105,7 @@
 </section>
     <script src="javascript/menu.js"></script>
     <script src="javascript/validacija.js"></script>
+    <script src="javascript/korisnici.js"></script>
 </body>
 
 </html>
