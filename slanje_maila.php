@@ -52,7 +52,7 @@
 	</div>
 
 	<div id="submenu_admin" class="submenu_invisible">
-		<a href="admin_panel.php">Novosti</a>
+		<a href="PrikaziStranicu('admin_panel')">Novosti</a>
 		<a href="prikazi_komentare.php">Komentari</a>
 		<a href="korisnici.php">Korisnici</a>
 	</div>

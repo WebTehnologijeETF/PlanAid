@@ -64,7 +64,7 @@
         }
 
         $datetime = new DateTime();
-	    $datum = $datetime->format('d.m.y H:i:s');
+	    $datum = $datetime->format('Y.m.d H:i:s');
 	    $vijest = htmlspecialchars($data['vijest'], ENT_QUOTES, 'UTF-8');
 	    $tekst = htmlspecialchars($data['tekst'], ENT_QUOTES, 'UTF-8');
 

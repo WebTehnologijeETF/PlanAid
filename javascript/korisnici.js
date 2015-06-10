@@ -27,7 +27,7 @@ function DodajRedTextBox(username, email, indeks, ime_tabele) {
     usernametd.innerHTML = '<input type="text" name="usernametextbox' + indeks + '" value="' + username + '" ' + 'id="' + indeks + '">';
     red.appendChild(usernametd);
     var emailtd = document.createElement('td');
-    emailtd.innerHTML = '<input type="text" name="emailtextbox' + indeks + '" value="' + email + '" ' + 'id="' + indeks + '">';
+    emailtd.innerHTML = '<input type="email" name="emailtextbox' + indeks + '" value="' + email + '" ' + 'id="' + indeks + '">';
     red.appendChild(emailtd);
     var tabela = document.getElementById(ime_tabele);
     tabela.appendChild(red);
@@ -66,20 +66,30 @@ function EditujKorisnika() {
     var radios = document.getElementsByName('radio2');
     for (var i = 0; i < radios.length; i++) {
         if (radios[i].type === 'radio' && radios[i].checked) {
-            var novi_id = radios[i].value;
-            var novi_username = document.getElementsByName('usernametextbox' + novi_id)[0].value;
-            var novi_email = document.getElementsByName('emailtextbox' + novi_id)[0].value;
+            var id = radios[i].value;
+            if(document.getElementsByName('usernametextbox' + id)[0].length < 5) {
+                alert("Minimalno 5 karaktera za korisničko ime");
+                return;
+            }
+            var regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i;
+            var email = document.getElementsByName('emailtextbox' + id)[0].value;
+            if(!regex.test(email)) {
+                alert("Morate unijeti ispravan email");
+                return;
+            }
+
+            var novi_username = document.getElementsByName('usernametextbox' + id)[0].value;
+            var novi_email = document.getElementsByName('emailtextbox' + id)[0].value;
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    console.log(xmlhttp.responseText);
                 }
             };
 
             xmlhttp.open('PUT', 'servis/korisnik_rest.php', true);
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-            xmlhttp.send('id=' + novi_id + '&username=' + novi_username + '&email=' + novi_email);
-            alert("Uspješno ste editovali korisnika.");
+            xmlhttp.send('id=' + id + '&username=' + novi_username + '&email=' + novi_email);
+            alert("Uspješno ste editovali korisnika");
             break;
         }
     }
@@ -100,23 +110,32 @@ function ObrisiKorisnika() {
             xmlhttp.open('DELETE', 'servis/korisnik_rest.php', true);
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             xmlhttp.send('id=' + id);
-            alert("Uspješno ste obrisali korisnika.");
+            alert("Uspješno ste obrisali korisnika");
             break;
         }
     }
 }
 
 function DodajKorisnika() {
-    var username = document.getElementById('korisnicko_ime').value;
-    var email = document.getElementById('email').value;
-    var sifra = document.getElementById('sifra').value;
-    var sifra_ponovo = document.getElementById('sifra_ponovo').value;
-    if(username == null || email == null || sifra == null || sifra_ponovo == null) {
-        alert("Morate unijeti username, email i sifru dvaput");
+    if(document.getElementById('korisnicko_ime').length < 5) {
+        alert("Minimalno 5 karaktera za korisničko ime");
         return;
     }
+    if(document.getElementById('sifra').length < 6) {
+        alert("Minimalno 6 karaktera za šifru");
+        return;
+    }
+    var regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/i;
+    var email = document.getElementById('email').value;
+    if(!regex.test(email)) {
+        alert("Morate unijeti ispravan email");
+        return;
+    }
+    var username = document.getElementById('korisnicko_ime').value;
+    var sifra = document.getElementById('sifra').value;
+    var sifra_ponovo = document.getElementById('sifra_ponovo').value;
     if(sifra !== sifra_ponovo) {
-        alert("Sifre se ne poklapaju");
+        alert("Šifre se ne poklapaju");
         return;
     }
 
@@ -130,7 +149,7 @@ function DodajKorisnika() {
     xmlhttp.open('POST', 'servis/korisnik_rest.php', true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send('username=' + username + '&email=' + email + '&sifra=' + sifra);
-    alert("Uspješno ste dodali korisnika.");
+    alert("Uspješno ste dodali korisnika");
 }
 
 PrikaziKorisnike();

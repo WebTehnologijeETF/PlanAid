@@ -1,5 +1,6 @@
 var vijesti;
 var ids = [];
+var brojac = 0;
 
 function DodajSliku(slika) {
 	var imgdiv = document.createElement('div');
@@ -57,6 +58,7 @@ function DodajTekst(id, datum, autor, naslov, tekst, vrsta_novosti) {
 	            document.getElementById("frejm").innerHTML = xmlhttp.responseText;
 	        }
 	    };
+	    PrebrojKomentare(id);
 	    PrikaziDetalje(id);
 
 	    xmlhttp.open('GET', "detaljnije.php", true);
@@ -113,6 +115,7 @@ function DodajDetalje(id, datum, autor, naslov, tekst, detaljnije, vrsta_novosti
 	            document.getElementById("frejm").innerHTML = xmlhttp.responseText;
 	        }
 	    };
+	    
 	    PrikaziVijest();
 
 	    if(vrsta_novosti === "nove_vijesti") {
@@ -129,7 +132,20 @@ function DodajDetalje(id, datum, autor, naslov, tekst, detaljnije, vrsta_novosti
 	    xmlhttp.send();
 	}
 	detaljnijediv.appendChild(sakrijlink);
+	divspace = document.createElement('div');
+	divspace.innerHTML = "<br>";
+	tekstdiv.appendChild(divspace);
+
+	var kombtn = document.createElement('button');
+	var btntxt = brojac.toString() + " komentara";
+	var komtxt = document.createTextNode(btntxt);
+	kombtn.appendChild(komtxt);
+	kombtn.className = "svi_buttoni";
+	kombtn.onclick = function() {
+		PokreniStranicu();
+	}
 	textdiv.appendChild(tekstdiv);
+	textdiv.appendChild(kombtn);
 	return textdiv;
 }
 
@@ -162,7 +178,13 @@ function DodajDivD(id, datum, autor, slika, naslov, tekst, detaljnije, vrsta_nov
 	tempdiv.appendChild(imgdiv);
 	tempdiv.appendChild(textdiv);
 	var div = document.getElementById("cijela_vijest_detalji");
+	var divspace = document.createElement('div');
+	divspace.innerHTML = "<br>";
 	div.appendChild(tempdiv);
+	div.appendChild(divspace);
+	divspace = document.createElement('div');
+	divspace.innerHTML = "<br>";
+	div.appendChild(divspace);
 }
 
 function PrikaziVijest() {	
@@ -249,16 +271,14 @@ function PrikaziKomentare() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             komentari = JSON.parse(xmlhttp.responseText);
             for(var i = 0; i < komentari.length; i++) {
-            	if(idvijest === komentari[i]['vijest']) {
-            		PrikaziDivKomentar(komentari[i]['id'], komentari[i]['datum'], komentari[i]['username'], komentari[i]['email'],
-            		komentari[i]['vijest'], komentari[i]['tekst']);
-            	}
+        		PrikaziDivKomentar(komentari[i]['id'], komentari[i]['datum'], komentari[i]['username'], komentari[i]['email'],
+        		komentari[i]['vijest'], komentari[i]['tekst']);
             }
         }
     };
-    xmlhttp.open('GET', 'servis/komentari_rest.php', true);
+    xmlhttp.open('GET', 'servis/komentari_rest.php?vijest=' + idvijest, true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    xmlhttp.send('vijest=' + idvijest);
+    xmlhttp.send();
 }
 
 function PokreniStranicu() {
@@ -292,4 +312,20 @@ function DodajKomentar() {
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send('vijest=' + idvijest + '&tekst=' + kom);
     PokreniStranicu();
+}
+
+function PrebrojKomentare(idvijest) {
+	var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        	brojac = 0;
+            komentari = JSON.parse(xmlhttp.responseText);
+            for(var i = 0; i < komentari.length; i++) {
+        		brojac++;
+            }
+        }
+    };
+    xmlhttp.open('GET', 'servis/komentari_rest.php?vijest=' + idvijest, true);
+    xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xmlhttp.send();
 }

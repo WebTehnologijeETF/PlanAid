@@ -203,3 +203,60 @@ function ValidirajDesavanje() {
 function ValidirajAdmin() {
 	document.getElementById("adminmenu").className="admin_visible";
 }
+
+function ValidirajAutor() {
+	var autor = document.getElementById("autor").value;
+	if(autor.length < 3) {
+		document.getElementById("uzvicnik_autor").className="uzvicnik";
+		document.getElementById("tekst_autor").className="tekst";
+		return false;
+	}
+	else {
+		document.getElementById("uzvicnik_autor").className="uzvicnik_invisible";
+		document.getElementById("tekst_autor").className="tekst_invisible";
+		return true;
+	}
+}
+
+function ValidirajNaslov() {
+	var naslov = document.getElementById("naslov").value;
+	if(autor.length < 1) {
+		document.getElementById("uzvicnik_naslov").className="uzvicnik";
+		document.getElementById("tekst_naslov").className="tekst";
+		return false;
+	}
+	else {
+		document.getElementById("uzvicnik_naslov").className="uzvicnik_invisible";
+		document.getElementById("tekst_naslov").className="tekst_invisible";
+		return true;
+	}
+}
+
+function ValidirajSliku() {
+	var slika = document.getElementById("slika").value;
+	var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
+	if(!regex.test(slika)) {
+		document.getElementById("uzvicnik_slika").className="uzvicnik";
+		document.getElementById("tekst_slika").className="tekst";
+		return false;
+	}
+	else {
+		document.getElementById("uzvicnik_slika").className="uzvicnik_invisible";
+		document.getElementById("tekst_slika").className="tekst_invisible";
+		return true;
+	}
+}
+
+function ValidirajTekst() {
+	var tekst = document.getElementById("tekst").value;
+	if(tekst.length < 1) {
+		document.getElementById("uzvicnik_poruka").className="uzvicnik_poruka";
+		document.getElementById("tekst_poruka").className="tekst_poruka";
+		return false;
+	}
+	else {
+		document.getElementById("uzvicnik_poruka").className="uzvicnik_poruka_invisible";
+		document.getElementById("tekst_poruka").className="tekst_poruka_invisible";
+		return true;
+	}
+}

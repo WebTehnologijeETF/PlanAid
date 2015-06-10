@@ -47,6 +47,10 @@
         }
 	}
 
+	function rest_post ($request, $data) { }
+	function rest_delete ($request, $data) { }
+	function rest_put ($request, $data) { }
+
 	function rest_error ($request) { 
 		$poruka = array("greska"=>"Pogresni parametri");
 		echo json_encode($poruka);

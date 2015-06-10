@@ -48,14 +48,25 @@
 	</div>
 
 	<div id="submenu_admin" class="submenu_invisible">
-		<a href="admin_panel.php">Novosti</a>
-		<a href="prikazi_komentare.php">Komentari</a>
-		<a href="korisnici.php">Korisnici</a>
+		<a onclick="PrikaziStranicu('admin_panel')">Novosti</a>
+		<a onclick="prikazi_komentare.php">Komentari</a>
+		<a onclick="korisnici.php">Korisnici</a>
 	</div>
+
+	<aside class="login">
+		<aside class="login-body">
+			<form><br><br><br>
+				Korisničko ime:<br>
+				<input type="text" id="username_lijevo" name="username_lijevo" value=""><br>
+				<br>Šifra:<br>
+				<input type="password" id="sifra_lijevo" name="sifra_lijevo" value="">
+			</form>
+		</aside>
+	</aside>
 	
-	<div id="glavni">
+	<section id="glavni">
 		<iframe id="frejm" src="nove_vijesti.php" class="frejm"></iframe>
-	</div>
+	</section>
 		
 	<aside class="reklame">
 		<aside class="reklame-body">
@@ -70,7 +81,9 @@
 	</aside>
 </div>
 	<script src="javascript/menu.js"></script>
-	<script src="javascript/validacija.js"></script>	
+	<script src="javascript/validacija.js"></script>
+	<script src="javascript/korisnici_login.js"></script>
+	<script src="javascript/vijesti_admin.js"></script>
 </body>
 
 </html>

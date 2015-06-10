@@ -48,8 +48,7 @@
 	}
 
 	function rest_post ($request, $data) { 
-		if(!isset($data['autor']) || !isset($data['naslov']) || !isset($data['slika'])
-			|| !isset($data['tekst'])) {
+		if(!isset($data['autor']) || !isset($data['naslov']) || !isset($data['tekst'])) {
         	rest_error($request);
         	return;
         }
@@ -64,26 +63,29 @@
         }
 
         $datetime = new DateTime();
-	    $datum = $datetime->format('d.m.y H:i:s');
+	    $datum = $datetime->format('Y.m.d H:i:s');
 	    $autor = htmlspecialchars($data['autor'], ENT_QUOTES, 'UTF-8');
 	    $naslov = htmlspecialchars($data['naslov'], ENT_QUOTES, 'UTF-8');
 	    $slika = htmlspecialchars($data['slika'], ENT_QUOTES, 'UTF-8');
 	    $tekst = htmlspecialchars($data['tekst'], ENT_QUOTES, 'UTF-8');
 	    $vrsta_novosti = "nove_vijesti";
+	    $detaljnije = "";
 
 	    $upit = $konekcija->prepare("INSERT INTO novosti (datum, autor, naslov, slika, tekst, detaljnije, vrsta_novosti) 
 	    VALUES (:datum, :autor, :naslov, :slika, :tekst, :detaljnije, :vrsta_novosti)");
 	    $upit->bindParam(':datum', $datum);
 	    $upit->bindParam(':autor', $autor);
 	    $upit->bindParam(':naslov', $naslov);
-	    $upit->bindParam(':slika', $slika);
 	    $upit->bindParam(':tekst', $tekst);
-	    $upit->bindParam(':vrsta_novosti', $vrsta_novosti);
-	    $upit->bindParam(':detaljnije', "");
+	    $upit->bindParam(':vrsta_novosti', $vrsta_novosti);	    
 	    if(isset($data['detaljnije'])) {
 	    	$detaljnije = htmlspecialchars($data['detaljnije'], ENT_QUOTES, 'UTF-8');
-	    	$upit->bindParam(':detaljnije', $detaljnije);
 	    }
+	    if(isset($data['slika'])) {
+	    	$slika = htmlspecialchars($data['slika'], ENT_QUOTES, 'UTF-8');
+	    }
+	    $upit->bindParam(':detaljnije', $detaljnije);
+	    $upit->bindParam(':slika', $slika);
 	    $upit->execute();
 	}
 
@@ -104,32 +106,42 @@
 
         $vijesti = array();
         $id = htmlspecialchars($data['id'], ENT_QUOTES, 'UTF-8');
+        $upit1 = 'SELECT *
+        			FROM novosti
+        			WHERE vrsta_novosti = :vrsta_novosti';
+        $statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $statement1->execute(array(':vrsta_novosti' => "nove_vijesti"));
+        $vijesti = $statement1->fetchAll();
 
         foreach($vijesti as $news) {
             if ($id === $news['id']) {
-                try {
-                    $upit3 = 'DELETE
-                                FROM komentari
-                                WHERE vijest = :vijest';
-                    $statement3 = $konekcija->prepare($upit3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                    $statement3->execute(array(':vijest' => $id));
-                    $upit2 = 'DELETE
-			                FROM novosti
-			                WHERE id = :id';
-			        $statement2 = $konekcija->prepare($upit2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-			        $statement2->execute(array(':id' => $id));
-			        $vijesti = $statement2->fetchAll();
-                }
-                catch(PDOException $e) {
-                    echo "Error: " . $e->getMessage();
+                $upit3 = 'SELECT *
+                            FROM komentari
+                            WHERE vijest = :vijest';
+                $statement3 = $konekcija->prepare($upit3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                $statement3->execute(array(':vijest' => $id));
+                $komentari = $statement3->fetchAll();
+                if(count($komentari) !== 0) {
+                	foreach($komentari as $kom) {
+                    	$upit = 'DELETE
+                    			FROM komentari
+                    			WHERE vijest = :vijest';
+                    	$statement = $konekcija->prepare($upit, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                    	$statement->execute(array(':vijest' => $id));
+                    }
                 }
             }
 		}
+		$upit2 = 'DELETE
+                FROM novosti
+                WHERE id = :id';
+        $statement2 = $konekcija->prepare($upit2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $statement2->execute(array(':id' => $id));
+        $vijesti = $statement2->fetchAll();
 	}
 
 	function rest_put ($request, $data) {
-		if(!isset($data['autor']) || !isset($data['naslov']) || !isset($data['slika'])
-			|| !isset($data['tekst']) || !isset($data['id'])) {
+		if(!isset($data['autor']) || !isset($data['naslov']) || !isset($data['tekst']) || !isset($data['id'])) {
         	rest_error($request);
         	return;
         }
@@ -144,32 +156,38 @@
         }
 
         $id = htmlspecialchars($data['id'], ENT_QUOTES, 'UTF-8');
+        $datum = htmlspecialchars($data['datum'], ENT_QUOTES, 'UTF-8');
 	    $autor = htmlspecialchars($data['autor'], ENT_QUOTES, 'UTF-8');
-	    $naslov = htmlspecialchars($data['naslov'], ENT_QUOTES, 'UTF-8');
+	    $naslov = htmlspecialchars($data['naslov'], ENT_QUOTES, 'UTF-8'); 
 	    $slika = htmlspecialchars($data['slika'], ENT_QUOTES, 'UTF-8');
 	    $tekst = htmlspecialchars($data['tekst'], ENT_QUOTES, 'UTF-8');
+	    $detaljnije = htmlspecialchars($data['detaljnije'], ENT_QUOTES, 'UTF-8');
 	    $vrsta_novosti = "nove_vijesti";
 
 	    $upit = $konekcija->prepare('UPDATE novosti
-                                 SET datum = :datum,
-                                    autor = :autor,
+                                 SET datum = :datum, 
+                                 	autor = :autor,
                                     naslov = :naslov,
                                     slika = :slika,
                                     tekst = :tekst,
                                     detaljnije = :detaljnije,
                                     vrsta_novosti = :vrsta_novosti
                                 WHERE id = :id');
-        $upit->bindParam(':datum', $datum);
+	    $upit->bindParam(':id', $id);
+	    $upit->bindParam(':datum', $datum);
         $upit->bindParam(':autor', $autor);
         $upit->bindParam(':naslov', $naslov);
-        $upit->bindParam(':slika', $slika);
         $upit->bindParam(':tekst', $tekst);
+        $upit->bindParam(':detaljnije', $detaljnije);
         $upit->bindParam(':vrsta_novosti', $vrsta_novosti);
-        $upit->bindParam(':detaljnije', "");
-	    if(isset($data['detaljnije'])) {
-	    	$detaljnije = htmlspecialchars($data['detaljnije'], ENT_QUOTES, 'UTF-8');
-	    	$upit->bindParam(':detaljnije', $detaljnije);
+	    if(isset($data['slika'])) {
+	    	$slika = htmlspecialchars($data['slika'], ENT_QUOTES, 'UTF-8');
 	    }
+	    else {
+	    	$slika = "http://ak.picdn.net/shutterstock/videos/3244579/preview/stock-footage-white-music-notes-floating-down-with-black-background.jpg";
+	    }
+        $upit->bindParam(':slika', $slika);	    
+	    
         $upit->execute();
 	}
 

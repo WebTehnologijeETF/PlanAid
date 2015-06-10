@@ -29,16 +29,18 @@
 	        echo json_encode($korisnici);
         }
         else {
-        	if(!isset($data['id'])) {
+        	if(!isset($data['username']) && !isset($data['sifra'])) {
         		rest_error($request);
         		return;
         	}
-        	$id = htmlspecialchars($data['id'], ENT_QUOTES, 'UTF-8');
+        	$username = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
+            $sifra = htmlspecialchars($data['sifra'], ENT_QUOTES, 'UTF-8');
         	$upit1 = 'SELECT *
                     FROM korisnici
-                    WHERE id = :id';
+                    WHERE username = :username
+                    AND sifra = :sifra';
 	        $statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-	        $statement1->execute(array(':id' => $id));
+	        $statement1->execute(array(':username' => $username, ':sifra' => $sifra));
 	        $korisnici = $statement1->fetchAll();
 
 	        echo json_encode($korisnici);

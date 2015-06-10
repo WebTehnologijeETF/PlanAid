@@ -62,7 +62,7 @@
     </div>
 
     <div id="submenu_admin" class="submenu_invisible">
-        <a href="admin_panel.php">Novosti</a>
+        <a onclick="PrikaziStranicu('admin_panel')">Novosti</a>
         <a href="prikazi_komentare.php">Komentari</a>
         <a href="korisnici.php">Korisnici</a>
     </div>
@@ -77,9 +77,9 @@
                     <td class="red1">Email</td>
                 </tr>
             </table><br>
-                <input type="button" value="Izmijeni" name="izmijeni" class="svi_buttoni" onclick="EditujKorisnika()">
-            </form>
-            <form method="DELETE">
+            <input type="button" value="Izmijeni" name="izmijeni" class="svi_buttoni" onclick="EditujKorisnika()">
+        </form>
+        <form method="DELETE">
             <table id="brisanje_korisnika" class="moja_desavanja">
                 <tr>
                     <td class="red1"></td>
@@ -87,7 +87,7 @@
                     <td class="red1">Email</td>
                 </tr>
             </table><br>
-                <input type="button" value="Obriši" name="obrisi" class="svi_buttoni" onclick="ObrisiKorisnika()">
+            <input type="button" value="Obriši" name="obrisi" class="svi_buttoni" onclick="ObrisiKorisnika()">
         </form>
     </section>
         

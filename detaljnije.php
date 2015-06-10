@@ -12,10 +12,7 @@
 		<div id="cijela_vijest_detalji"></div>
 		<br><br>
 		<div class="frejm-text">
-			<form method="GET">
-				<input type="button" value="Komentari" class="svi_buttoni" name="komentari"
-				id="komentari" onclick="PokreniStranicu()">
-			</form><br>
+			<form method="GET"></form><br>
 			<form method="POST">
 				Komentar:<br>
 				<textarea class="komentar" name="komentar" rows="8" cols="1" id="komentar"></textarea><br><br>
