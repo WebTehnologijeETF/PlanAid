@@ -68,8 +68,8 @@
 	    $naslov = htmlspecialchars($data['naslov'], ENT_QUOTES, 'UTF-8');
 	    $slika = htmlspecialchars($data['slika'], ENT_QUOTES, 'UTF-8');
 	    $tekst = htmlspecialchars($data['tekst'], ENT_QUOTES, 'UTF-8');
+	    $detaljnije = htmlspecialchars($data['detaljnije'], ENT_QUOTES, 'UTF-8');
 	    $vrsta_novosti = "nove_vijesti";
-	    $detaljnije = "";
 
 	    $upit = $konekcija->prepare("INSERT INTO novosti (datum, autor, naslov, slika, tekst, detaljnije, vrsta_novosti) 
 	    VALUES (:datum, :autor, :naslov, :slika, :tekst, :detaljnije, :vrsta_novosti)");
@@ -79,7 +79,7 @@
 	    $upit->bindParam(':tekst', $tekst);
 	    $upit->bindParam(':vrsta_novosti', $vrsta_novosti);	    
 	    if(isset($data['detaljnije'])) {
-	    	$detaljnije = htmlspecialchars($data['detaljnije'], ENT_QUOTES, 'UTF-8');
+	    	
 	    }
 	    if(isset($data['slika'])) {
 	    	$slika = htmlspecialchars($data['slika'], ENT_QUOTES, 'UTF-8');

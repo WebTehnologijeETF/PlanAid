@@ -1,3 +1,13 @@
+<?php
+	session_start();
+	if(isset($_SESSION['username'])) {
+		echo '<script type="text/javascript" src="javascript/korisnici_login.js">'
+		   , 'ObicniKorisnik();'
+		   , '</script>';
+		echo '<div id="sesija" class="nevidljivo">' . $_SESSION['username'] .'</div>';
+	}
+?>
+
 <!doctype html>
 <html>
 <head>
@@ -43,7 +53,6 @@
 	</div>
 
 	<div id="submenu_prijava" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('login')">Login</a>
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
 	</div>
 
@@ -53,13 +62,26 @@
 		<a onclick="korisnici.php">Korisnici</a>
 	</div>
 
-	<aside class="login">
+	<aside id="nije_ulogovan" class="login">
 		<aside class="login-body">
-			<form><br><br><br>
+			<form method="GET"><br><br><br>
 				Korisničko ime:<br>
-				<input type="text" id="username_lijevo" name="username_lijevo" value=""><br>
+				<input type="text" id="username_lijevo" name="username_lijevo"><br>
 				<br>Šifra:<br>
-				<input type="password" id="sifra_lijevo" name="sifra_lijevo" value="">
+				<input type="password" id="sifra_lijevo" name="sifra_lijevo"><br><br>
+				<input type="button" id="login_lijevo" name="login_lijevo" class="svi_buttoni"
+				value="Pošalji" onclick="ProvjeriPodatke()">
+			</form>
+		</aside>
+	</aside>
+
+	<aside id="ulogovan" class="ulogovan_invisible">
+		<aside class="ulogovan-body">
+			<form method="GET"><br><br><br>
+				Korisničko ime:<br>
+				<div id="korisnicko_ime_lijevo"></div><br><br>
+				<input type="button" id="logout_lijevo" name="logout_lijevo" class="svi_buttoni"
+				value="Odjava" onclick="Odjava()">
 			</form>
 		</aside>
 	</aside>

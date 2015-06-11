@@ -3,7 +3,6 @@
 	if(!isset($_SESSION['username'])) {
 		die("Niste ulogovani kao admin");
 	}
-    require("phpskripte/podaci_baza.php");
 ?>
 
 <!doctype html>

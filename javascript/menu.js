@@ -49,14 +49,6 @@ function PrikaziAdmin() {
     document.getElementById("submenu_admin").className="submenu";
 }
 
-function SakrijSubmenu() {
-	document.getElementById("submenu_desavanja").className="submenu_sakrij";
-	document.getElementById("submenu_naslovnica").className="submenu_invisible";
-	document.getElementById("submenu_lokacije").className="submenu_invisible";
-	document.getElementById("submenu_prijava").className="submenu_invisible";
-    document.getElementById("submenu_admin").className="submenu_invisible";
-}
-
 function PrikaziStranicu(stranica, detalji) {
 	var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -81,6 +73,10 @@ function PrikaziStranicu(stranica, detalji) {
     else if(stranica === 'naslovnica_najcitanije') {
     	PrikaziVijesti('najcitanije_vijesti.php');
     } 
+    if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
+        document.getElementById("username_lijevo").value = "";
+        document.getElementById("sifra_lijevo").value = "";
+    }
 }
 
 var objekti = [];

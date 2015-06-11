@@ -47,12 +47,11 @@
 	</div>
 
 	<div id="submenu_prijava" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('login')">Login</a>
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
 	</div>
 
 	<div id="submenu_admin" class="submenu_invisible">
-		<a href="admin_panel.php">Novosti</a>
+		<a onclick="PrikaziStranicu('admin_panel')">Novosti</a>
 		<a href="prikazi_komentare.php">Komentari</a>
 		<a href="korisnici.php">Korisnici</a>
 	</div>

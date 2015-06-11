@@ -57,7 +57,6 @@
 	</div>
 
 	<div id="submenu_prijava" class="submenu_invisible">
-		<a onclick="PrikaziStranicu('login')">Login</a>
 		<a onclick="PrikaziStranicu('registracija')">Registracija</a>
 	</div>
 

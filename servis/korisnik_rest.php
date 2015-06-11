@@ -5,8 +5,18 @@
 		header ('ContentType: text/html');
 		header ('AccessControlAllowOrigin:*');
 	}
+
+    $sesija_username = "";
 	
-	function rest_get ($request, $data) { 
+	function rest_get ($request, $data) {     
+        $korisnici = array();    
+        if(isset($_COOKIE['username'])) {
+            $_SESSION['username'] = $_COOKIE['username'];
+            $sesija_username = $_SESSION['username'];
+            $korisnici2 = array();
+            echo json_encode($korisnici2);
+            return;
+        }
 		try {
             $konekcija = new PDO("mysql:host=" . $GLOBALS['ime_servera'] .
             	";dbname=" . $GLOBALS['ime_baze'], $GLOBALS['usrnm'], $GLOBALS['password']);
@@ -16,8 +26,6 @@
         catch(PDOException $e) {
             echo "Error: " . $e->getMessage();
         }
-
-        $korisnici = array();
 
         if(count($data) === 0) {
         	$upit1 = 'SELECT *
@@ -29,25 +37,38 @@
 	        echo json_encode($korisnici);
         }
         else {
-        	if(!isset($data['username']) && !isset($data['sifra'])) {
-        		rest_error($request);
-        		return;
+            ini_set('session.gc_maxlifetime', 30*60);
+            ini_set('session.cookie_lifetime', 30*60);
+            session_start();
+        	if(isset($data['username']) && isset($data['sifra'])) {
+                $username = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
+                $sifra = htmlspecialchars($data['sifra'], ENT_QUOTES, 'UTF-8');
+                $upit1 = 'SELECT *
+                        FROM korisnici
+                        WHERE username = :username
+                        AND sifra = :sifra';
+                $statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                $statement1->execute(array(':username' => $username, ':sifra' => $sifra));
+                $korisnici = $statement1->fetchAll();
+                setcookie("username", $username, time()+1800);
+                $_SESSION['username'] = $username;
+        		echo json_encode($korisnici);
         	}
-        	$username = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
-            $sifra = htmlspecialchars($data['sifra'], ENT_QUOTES, 'UTF-8');
-        	$upit1 = 'SELECT *
-                    FROM korisnici
-                    WHERE username = :username
-                    AND sifra = :sifra';
-	        $statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-	        $statement1->execute(array(':username' => $username, ':sifra' => $sifra));
-	        $korisnici = $statement1->fetchAll();
-
-	        echo json_encode($korisnici);
+        	else {
+                rest_error($request);
+                return;
+            }
         }
 	}
 
 	function rest_post ($request, $data) { 
+        if($sesija_username !== "") {
+            session_unset();
+            session_destroy();
+            setcookie("username", "", time()-3600);
+            setcookie("PHPSESSID","",time()-3600,"/");
+            return;
+        }
 		if(!isset($data['username']) || !isset($data['sifra']) || !isset($data['email'])) {
         	rest_error($request);
         	return;

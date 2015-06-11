@@ -145,6 +145,7 @@ a:hover {
 }
 
 .login {
+	visibility: visible;
 	color: rgb(64,128,128);
 	width: 20%;
 	height: 50%;
@@ -152,7 +153,32 @@ a:hover {
 	text-align: left;
 }
 
+.login_invisible {
+	display: none;
+}
+
 .login-body {
+	margin-left: 10%;
+	margin-right: 5%;
+	width: 70%;
+	color: rgb(64,128,128);
+	font-size: 20px;
+}
+
+.ulogovan {
+	visibility: visible;
+	color: rgb(64,128,128);
+	width: 20%;
+	height: 50%;
+	float: left;
+	text-align: left;
+}
+
+.ulogovan_invisible {
+	display: none;
+}
+
+.ulogovan-body {
 	margin-left: 10%;
 	margin-right: 5%;
 	width: 70%;
