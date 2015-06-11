@@ -22,11 +22,21 @@
         if(count($data) === 0) {
         	$upit1 = 'SELECT kom.id, kom.email, kom.tekst, kom.vijest, kom.autor, kom.datum, kor.username
                     FROM komentari kom
-                    JOIN korisnici kor ON kom.autor = kor.id';
+                    JOIN korisnici kor ON kom.autor = kor.id
+                    WHERE kom.autor <> 0
+                    ORDER BY kom.datum ASC';
 	        $statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 	        $statement1->execute();
-	        $komentari = $statement1->fetchAll();
+	        $komentari1 = $statement1->fetchAll();
 
+	        $upit2 = 'SELECT kom.id, kom.email, kom.tekst, kom.vijest, kom.autor, kom.datum
+                    FROM komentari kom
+                    WHERE kom.autor = 0
+                    ORDER BY kom.datum ASC';
+	        $statement2 = $konekcija->prepare($upit2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+	        $statement2->execute();
+	        $komentari2 = $statement2->fetchAll();
+	        $komentari = array_merge($komentari1, $komentari2);
 	        echo json_encode($komentari);
         }
         else if(count($data) !== 0 && isset($data['vijest'])) {
@@ -35,18 +45,43 @@
                     FROM komentari kom
                     JOIN korisnici kor ON kom.autor = kor.id
 			    	WHERE kom.vijest = :vijest
+			    	AND kom.autor <> 0
 			    	ORDER BY kom.datum ASC';
 			$statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
 			$statement1->execute(array(':vijest' => $vijest));
-			$komentari = $statement1->fetchAll();
+			$komentari1 = $statement1->fetchAll();
+
+	        $upit2 = 'SELECT kom.id, kom.email, kom.tekst, kom.vijest, kom.autor, kom.datum
+                    FROM komentari kom
+                    WHERE kom.vijest = :vijest
+			    	AND kom.autor = 0
+			    	ORDER BY kom.datum ASC';
+	        $statement2 = $konekcija->prepare($upit2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+	        $statement2->execute(array(':vijest' => $vijest));
+	        $komentari2 = $statement2->fetchAll();
+	        $komentari = array_merge($komentari1, $komentari2);
 
 			echo json_encode($komentari);
+
+			if(isset($_COOKIE['username']) && isset($data['autor'])) {
+	            $sesija_username = $_COOKIE['username'];
+		    	$upit = 'SELECT kom.autor
+	                    FROM komentari kom
+	                    JOIN korisnici kor ON kom.autor = kor.id
+				    	WHERE kor.username = :username';
+				$statement = $konekcija->prepare($upit, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+				$statement->execute(array(':username' => $sesija_username));
+				$autori = $statement->fetchAll();
+				echo json_encode($autori[0]['autor']);
+		    }
         }
         else {
         	rest_error($request);
         	return;
         }
 	}
+
+	$sesija_username = "";
 
 	function rest_post ($request, $data) { 
 		if(!isset($data['vijest'])	|| !isset($data['tekst'])) {
@@ -74,9 +109,16 @@
 	    $upit->bindParam(':vijest', $vijest);
 	    $upit->bindParam(':tekst', $tekst);    
 	    
-	    if(isset($data['autor'])) {
-	    	$autor = htmlspecialchars($data['autor'], ENT_QUOTES, 'UTF-8');
-	    	$upit->bindParam(':autor', $autor);
+	    if(isset($_COOKIE['username'])) {
+            $sesija_username = $_COOKIE['username'];
+	    	$upit1 = 'SELECT kom.autor
+                    FROM komentari kom
+                    JOIN korisnici kor ON kom.autor = kor.id
+			    	WHERE kor.username = :username';
+			$statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+			$statement1->execute(array(':username' => $sesija_username));
+			$autori = $statement1->fetchAll();
+	    	$upit->bindParam(':autor', $autori[0]['autor']);
 	    }
 	    else {
 	    	$autor = 0;

@@ -6,6 +6,7 @@ body {
 	background-image: url("../photos/pozadina.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-position: 0px 260px;
 	padding: 0;
 	margin: 0;
 }
@@ -31,13 +32,14 @@ nav {
 	width: 250px;
 	height: 180px;
 	padding-top: 15px;
-	padding-left: 20%;
+	padding-left: 265px;
 }
 
 .logo-text {
 	color: rgb(255,216,79);
 	font-size: 150px;
 	padding-left: 35px;
+	padding-right: 25px;
 }
 
 .logo a {
@@ -140,7 +142,7 @@ a:hover {
 .reklame-body {
 	margin-left: 15%;
 	width: 70%;
-	color: rgb(181,230,29);
+	color: rgb(64,128,128);
 	font-size: 20px;
 }
 
@@ -307,12 +309,6 @@ img.frejm-image {
 input {
 	font-family: 'Ubuntu';
 	font-size: 16px;
-}
-
-mark {
-	background-color: rgb(255,216,79);
-	color: rgb(64,128,128);
-	font-style: italic;
 }
 
 .uzvicnik {

@@ -10,7 +10,7 @@
 	
 	function rest_get ($request, $data) {     
         $korisnici = array();    
-        if(isset($_COOKIE['username'])) {
+        if(isset($_COOKIE['username']) && count($data) === 0) {
             $_SESSION['username'] = $_COOKIE['username'];
             $sesija_username = $_SESSION['username'];
             $korisnici2 = array();
@@ -54,6 +54,18 @@
                 $_SESSION['username'] = $username;
         		echo json_encode($korisnici);
         	}
+            else if(isset($data['username']) && !isset($data['sifra'])) {
+                $admini = array();
+                $username = htmlspecialchars($data['username'], ENT_QUOTES, 'UTF-8');
+                $upit1 = 'SELECT *
+                        FROM korisnici
+                        WHERE username = :username
+                        AND admin = :admin';
+                $statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+                $statement1->execute(array(':username' => $username, ':admin' => 1));
+                $admini = $statement1->fetchAll();
+                echo json_encode($admini);
+            }
         	else {
                 rest_error($request);
                 return;

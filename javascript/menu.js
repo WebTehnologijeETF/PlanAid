@@ -215,3 +215,12 @@ function Obrisi() {
         xmlhttp.send('akcija=brisanje&proizvod=' + JSON.stringify(selektovani_objekat));
     }
 }
+
+function ObrisiPolja() {
+    if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
+        document.getElementById("username_lijevo").value = "";
+        document.getElementById("sifra_lijevo").value = "";
+    }
+}
+
+ObrisiPolja();

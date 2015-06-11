@@ -1,6 +1,33 @@
 var sesija_username;
-
 var pokrenuto = false;
+var admin = false;
+
+function ObrisiPolja() {
+    if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
+        document.getElementById("username_lijevo").value = '';
+        document.getElementById("sifra_lijevo").value = '';
+    }
+}
+
+function JelAdmin() {
+    if(document.getElementById("sesija") != null) {
+        sesija_username = document.getElementById("sesija").innerHTML;
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                admini = JSON.parse(xmlhttp.responseText);
+                if(admini.length === 1) {
+                    admin = true;
+                }
+            }
+        };
+
+        xmlhttp.open('GET', 'servis/korisnici_sesija_rest.php?username='+sesija_username, true);
+        xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xmlhttp.send();
+    }
+}
+
 function PokrenutaSesija() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
@@ -12,23 +39,33 @@ function PokrenutaSesija() {
         }
     };
 
-    xmlhttp.open('GET', 'servis/korisnik_rest.php', true);
+    xmlhttp.open('GET', 'servis/korisnici_sesija_rest.php', true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send();
 }
 
 function SakrijSubmenu() {
-    if(pokrenuto) {
-        ObicniKorisnik();
-    }
     document.getElementById("submenu_desavanja").className="submenu_sakrij";
     document.getElementById("submenu_naslovnica").className="submenu_invisible";
     document.getElementById("submenu_lokacije").className="submenu_invisible";
     document.getElementById("submenu_prijava").className="submenu_invisible";
     document.getElementById("submenu_admin").className="submenu_invisible";
-    if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
-        document.getElementById("username_lijevo").value = "";
-        document.getElementById("sifra_lijevo").value = "";
+}
+
+function Pokreni() {
+    SakrijSubmenu();
+    ObrisiPolja();
+    if(pokrenuto) {
+        if(admin) {
+            document.getElementById("adminmenu").className = "admin_visible";
+            OtvoriAdminPanel();
+            return;
+        }
+        else {
+            document.getElementById("adminmenu").className = "admin";
+            ObicniKorisnik();
+            return;
+        }
     }
 }
 
@@ -36,10 +73,13 @@ function OtvoriAdminPanel(username) {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("nije_ulogovan").className="login_invisible";
-            document.getElementById("ulogovan").className="ulogovan";
-            document.getElementById("korisnicko_ime_lijevo").value = username;
+            if(sesija_username == null) {
+                sesija_username = document.getElementById("sesija").innerHTML;
+            }
+            PostaviAside(sesija_username);
             document.getElementById("glavni").innerHTML = xmlhttp.responseText;
+            document.getElementById("ulogovan").className = "ulogovan";
+            document.getElementById("nije_ulogovan").className = "login_invisible";
         }
     };
     xmlhttp.open('GET', "admin_panel.php", true);
@@ -53,10 +93,6 @@ function PostaviAside(username) {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             document.getElementById("ulogovan").innerHTML = xmlhttp.responseText;
             document.getElementById("korisnicko_ime_lijevo").innerHTML = username;
-            if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
-                document.getElementById("username_lijevo").value = "";
-                document.getElementById("sifra_lijevo").value = "";
-            }
         }
     };
     xmlhttp.open('GET', "aside_ulogovan.php", true);
@@ -69,10 +105,6 @@ function PostaviAsidePocetna() {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             document.getElementById("nije_ulogovan").innerHTML = xmlhttp.responseText;
-            if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
-                document.getElementById("username_lijevo").value = "";
-                document.getElementById("sifra_lijevo").value = "";
-            }
         }
     };
     xmlhttp.open('GET', "aside_login.php", true);
@@ -88,10 +120,6 @@ function ObicniKorisnik() {
                 sesija_username = document.getElementById("sesija").innerHTML;
             }
             PostaviAside(sesija_username);
-            if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
-                document.getElementById("username_lijevo").value = "";
-                document.getElementById("sifra_lijevo").value = "";
-            }
             document.getElementById("glavni").innerHTML = xmlhttp.responseText;
             document.getElementById("ulogovan").className = "ulogovan";
             document.getElementById("nije_ulogovan").className = "login_invisible";
@@ -111,9 +139,9 @@ function ProvjeriPodatke() {
             korisnici = JSON.parse(xmlhttp.responseText);
             if(korisnici.length === 1) {
                 sesija_username = korisnici[0]['username'];
-                if(korisnici[0]['admin'] === true) {
+                if(korisnici[0]['admin'] === "1") {
                     document.getElementById("adminmenu").className="admin_visible";
-                    OtvoriAdminPanel(korisnici[0]['username']);
+                    OtvoriAdminPanel();
                     return;
                 }
                 else {
@@ -129,19 +157,16 @@ function ProvjeriPodatke() {
         }
     };
 
-    xmlhttp.open('GET', 'servis/korisnik_rest.php?username='+username+'&sifra='+sifra, true);
+    xmlhttp.open('GET', 'servis/korisnici_sesija_rest.php?username='+username+'&sifra='+sifra, true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send();
 }
 
 function PrikaziPocetnu() {
+    ObrisiPolja();
     var xmlhttp1 = new XMLHttpRequest();
     xmlhttp1.onreadystatechange = function() {
         if (xmlhttp1.readyState == 4 && xmlhttp1.status == 200) {
-            if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
-                document.getElementById("username_lijevo").value = "";
-                document.getElementById("sifra_lijevo").value = "";
-            }
             document.getElementById("glavni").innerHTML = xmlhttp1.responseText;
             document.getElementById("ulogovan").className = "ulogovan_invisible";
             document.getElementById("nije_ulogovan").className = "login";
@@ -157,17 +182,15 @@ function Odjava() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
-                document.getElementById("username_lijevo").value = "";
-                document.getElementById("sifra_lijevo").value = "";
-            }
             PrikaziPocetnu();
         }
     };
 
-    xmlhttp.open('POST', 'servis/korisnik_rest.php', true);
+    xmlhttp.open('POST', 'servis/korisnici_sesija_rest.php', true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send();
 }
 
 PokrenutaSesija();
+JelAdmin();
+ObrisiPolja();

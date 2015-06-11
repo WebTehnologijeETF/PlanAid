@@ -1,4 +1,5 @@
 <?php
+	require("podaci_baza.php");
 	function zag () {
 		header ("{$_SERVER [ 'SERVER_PROTOCOL' ] } 200 OK");
 		header ('ContentType: text/html');

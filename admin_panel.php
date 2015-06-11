@@ -1,13 +1,13 @@
 <?php
 	session_start();
 	if(!isset($_SESSION['username'])) {
-		die("Niste ulogovani kao admin");
+		die("Istekla je sesija. Logujte se ponovo.");
 	}
 ?>
 
 <!doctype html>
 <html>
-	<head id="head">
+	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<title>Event planning</title>
 		<link rel="stylesheet" type="text/css" href="css/zadaca1.css">

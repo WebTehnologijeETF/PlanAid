@@ -1,9 +1,6 @@
 <?php
 	session_start();
 	if(isset($_SESSION['username'])) {
-		echo '<script type="text/javascript" src="javascript/korisnici_login.js">'
-		   , 'ObicniKorisnik();'
-		   , '</script>';
 		echo '<div id="sesija" class="nevidljivo">' . $_SESSION['username'] .'</div>';
 	}
 ?>
@@ -17,7 +14,7 @@
 	<link rel="shortcut icon" href="photos/logo.ico">
 </head>
 
-<body onload="SakrijSubmenu()">
+<body onload="Pokreni()">
 
 	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
@@ -58,16 +55,16 @@
 
 	<div id="submenu_admin" class="submenu_invisible">
 		<a onclick="PrikaziStranicu('admin_panel')">Novosti</a>
-		<a onclick="prikazi_komentare.php">Komentari</a>
-		<a onclick="korisnici.php">Korisnici</a>
+		<a onclick="PrikaziStranicu('prikazi_komentare')">Komentari</a>
+		<a onclick="PrikaziStranicu('korisnici')">Korisnici</a>
 	</div>
 
 	<aside id="nije_ulogovan" class="login">
 		<aside class="login-body">
-			<form method="GET"><br><br><br>
-				Korisničko ime:<br>
+			<form method="GET"><br>
+				<h4>Korisničko ime:</h4>
 				<input type="text" id="username_lijevo" name="username_lijevo"><br>
-				<br>Šifra:<br>
+				<br><h4>Šifra:</h4>
 				<input type="password" id="sifra_lijevo" name="sifra_lijevo"><br><br>
 				<input type="button" id="login_lijevo" name="login_lijevo" class="svi_buttoni"
 				value="Pošalji" onclick="ProvjeriPodatke()">
@@ -77,8 +74,8 @@
 
 	<aside id="ulogovan" class="ulogovan_invisible">
 		<aside class="ulogovan-body">
-			<form method="GET"><br><br><br>
-				Korisničko ime:<br>
+			<form method="GET"><br>
+				<h4>Korisničko ime:</h4><br>
 				<div id="korisnicko_ime_lijevo"></div><br><br>
 				<input type="button" id="logout_lijevo" name="logout_lijevo" class="svi_buttoni"
 				value="Odjava" onclick="Odjava()">
@@ -92,7 +89,7 @@
 		
 	<aside class="reklame">
 		<aside class="reklame-body">
-			Generalni sponzori<br><br>
+			<h3>Generalni sponzori</h3><br><br>
 			<a href="http://www.klix.ba" target="_blank">
 				<img src="photos/klix.png" alt="klix">
 			</a>
@@ -104,8 +101,11 @@
 </div>
 	<script src="javascript/menu.js"></script>
 	<script src="javascript/validacija.js"></script>
-	<script src="javascript/korisnici_login.js"></script>
+	<script src="javascript/vijesti.js"></script>
+	<script src="javascript/korisnici_login.js"></script>	
+	<script src="javascript/korisnici.js"></script>
 	<script src="javascript/vijesti_admin.js"></script>
+	<script src="javascript/komentari.js"></script>
 </body>
 
 </html>

@@ -57,7 +57,7 @@ function PrikaziKorisnike() {
         }
     };
 
-    xmlhttp.open('GET', 'servis/korisnik_rest.php', true);
+    xmlhttp.open('GET', 'servis/korisnici_rest.php', true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send();
 }
@@ -86,7 +86,7 @@ function EditujKorisnika() {
                 }
             };
 
-            xmlhttp.open('PUT', 'servis/korisnik_rest.php', true);
+            xmlhttp.open('PUT', 'servis/korisnici_rest.php', true);
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             xmlhttp.send('id=' + id + '&username=' + novi_username + '&email=' + novi_email);
             alert("Uspješno ste editovali korisnika");
@@ -107,7 +107,7 @@ function ObrisiKorisnika() {
                 }
             };
 
-            xmlhttp.open('DELETE', 'servis/korisnik_rest.php', true);
+            xmlhttp.open('DELETE', 'servis/korisnici_rest.php', true);
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             xmlhttp.send('id=' + id);
             alert("Uspješno ste obrisali korisnika");
@@ -146,7 +146,7 @@ function DodajKorisnika() {
         }
     };
 
-    xmlhttp.open('POST', 'servis/korisnik_rest.php', true);
+    xmlhttp.open('POST', 'servis/korisnici_rest.php', true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send('username=' + username + '&email=' + email + '&sifra=' + sifra);
     alert("Uspješno ste dodali korisnika");
