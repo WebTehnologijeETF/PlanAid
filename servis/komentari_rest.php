@@ -39,7 +39,7 @@
 	        $komentari = array_merge($komentari1, $komentari2);
 	        echo json_encode($komentari);
         }
-        else if(count($data) !== 0 && isset($data['vijest'])) {
+        else if(isset($data['vijest'])) {
         	$vijest = htmlspecialchars($data['vijest'], ENT_QUOTES, 'UTF-8');
         	$upit1 = 'SELECT kom.id, kom.email, kom.tekst, kom.vijest, kom.autor, kom.datum, kor.username
                     FROM komentari kom
@@ -51,9 +51,10 @@
 			$statement1->execute(array(':vijest' => $vijest));
 			$komentari1 = $statement1->fetchAll();
 
-	        $upit2 = 'SELECT kom.id, kom.email, kom.tekst, kom.vijest, kom.autor, kom.datum
+	        $upit2 = 'SELECT kom.id, kom.email, kom.tekst, kom.vijest, kom.autor, kom.datum, kor.username
                     FROM komentari kom
-                    WHERE kom.vijest = :vijest
+                    JOIN korisnici kor ON kom.autor = kor.id
+			    	WHERE kom.vijest = :vijest
 			    	AND kom.autor = 0
 			    	ORDER BY kom.datum ASC';
 	        $statement2 = $konekcija->prepare($upit2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
@@ -61,19 +62,7 @@
 	        $komentari2 = $statement2->fetchAll();
 	        $komentari = array_merge($komentari1, $komentari2);
 
-			echo json_encode($komentari);
-
-			if(isset($_COOKIE['username']) && isset($data['autor'])) {
-	            $sesija_username = $_COOKIE['username'];
-		    	$upit = 'SELECT kom.autor
-	                    FROM komentari kom
-	                    JOIN korisnici kor ON kom.autor = kor.id
-				    	WHERE kor.username = :username';
-				$statement = $konekcija->prepare($upit, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-				$statement->execute(array(':username' => $sesija_username));
-				$autori = $statement->fetchAll();
-				echo json_encode($autori[0]['autor']);
-		    }
+	        echo json_encode($komentari);
         }
         else {
         	rest_error($request);
@@ -152,23 +141,13 @@
 
         $komentari = array();
         $id = htmlspecialchars($data['id'], ENT_QUOTES, 'UTF-8');
-        $vijest = htmlspecialchars($data['vijest'], ENT_QUOTES, 'UTF-8');
 
-        foreach($komentari as $kom) {
-            if ($id === $kom['id']) {
-                try {
-                    $upit3 = 'DELETE
-                                FROM komentari
-                                WHERE vijest = :vijest';
-                    $statement3 = $konekcija->prepare($upit3, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-                    $statement3->execute(array(':vijest' => $vijest));
-                    $komentari = $statement3->fetchAll();
-                }
-                catch(PDOException $e) {
-                    echo "Error: " . $e->getMessage();
-                }
-            }
-		}
+        $upit2 = 'DELETE
+                FROM komentari
+                WHERE id = :id';
+        $statement2 = $konekcija->prepare($upit2, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+        $statement2->execute(array(':id' => $id));
+        $komentari = $statement2->fetchAll();
 	}
 
 	function rest_put ($request, $data) {

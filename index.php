@@ -89,7 +89,7 @@
 		
 	<aside class="reklame">
 		<aside class="reklame-body">
-			<h3>Generalni sponzori</h3><br><br>
+			<h3>Generalni sponzori</h3>
 			<a href="http://www.klix.ba" target="_blank">
 				<img src="photos/klix.png" alt="klix">
 			</a>

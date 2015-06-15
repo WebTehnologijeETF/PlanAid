@@ -20,12 +20,14 @@ header {
 	background-image: none;
 	background-color: rgb(243,253,172);
 	padding: 0;
+	margin: 0;
 }
 
 nav {
 	background-image: none;
 	background-color: rgb(181,230,29);
 	padding: 0;
+	margin: 0;
 }
 
 .logo-image {
@@ -39,7 +41,7 @@ nav {
 	color: rgb(255,216,79);
 	font-size: 150px;
 	padding-left: 35px;
-	padding-right: 25px;
+	//padding-right: 25px;
 }
 
 .logo a {
@@ -279,7 +281,7 @@ table.frejm-image, td.frejm-image {
 	border: 5px solid black;
 	border-color: rgb(64,128,128);
 	background-color: black;
-	height: 100%;
+	height: 100px;
 	width: 100%;
 	margin: 0px;
 	padding: 0px;
@@ -388,4 +390,8 @@ span.tekst_poruka_invisible {
 
 .nevidljivo {
 	display: none;
+}
+
+.textboxtabela {
+	width: 100%;
 }

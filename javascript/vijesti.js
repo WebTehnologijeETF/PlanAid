@@ -1,7 +1,8 @@
 var vijesti;
 var ids = [];
 var brojac = 0;
-var sesija_autor;
+var sesija_username = document.getElementById("sesija").innerHTML;
+var idvijest;
 
 function DodajSliku(slika) {
 	var imgdiv = document.createElement('div');
@@ -72,7 +73,6 @@ function DodajTekst(id, datum, autor, naslov, tekst, vrsta_novosti) {
 	return textdiv;
 }
 
-var idvijest;
 function DodajDetalje(id, datum, autor, naslov, tekst, detaljnije, vrsta_novosti) {
 	if(detaljnije == null) return;
 	idvijest = id;
@@ -231,13 +231,7 @@ function PrikaziDivKomentar(id, datum, autor, email, vijest, tekst) {
 	var divdatum = document.createElement('div');
 	divdatum.innerHTML = datum;
 	var divautor = document.createElement('div');
-	if(autor == 0) {
-		divautor.innerHTML = "Anonymous";
-	}
-	else {
-		divautor.innerHTML = document.getElementById("sesija");
-		console.log(document.getElementById("sesija"));
-	}
+	divautor.innerHTML = autor;
 	var divemail = document.createElement('div');
 	if(email === "") {
 		divemail.innerHTML = "";
@@ -267,36 +261,14 @@ function PrikaziDivKomentar(id, datum, autor, email, vijest, tekst) {
 	div.appendChild(divspace);
 }
 
-function SaznajAutora() {
-	var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            sesija_autor = JSON.parse(xmlhttp.responseText);
-        }
-    };
-    xmlhttp.open('GET', 'servis/komentari_rest.php?vijest=' + idvijest + '&autor=0', true);
-    xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    xmlhttp.send();
-}
-
 function PrikaziKomentare() {	
 	var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             komentari = JSON.parse(xmlhttp.responseText);
             for(var i = 0; i < komentari.length; i++) {
-            	if(sesija_autor != null) {
-            		komentari[i]['autor'] = sesija_autor;
-            	}
-            	if(komentari[i]['autor'] == 0) {
-		    		var username = "Anonymous";
-		    		PrikaziDivKomentar(komentari[i]['id'], komentari[i]['datum'], username, komentari[i]['email'],
+            	PrikaziDivKomentar(komentari[i]['id'], komentari[i]['datum'], komentari[i]['username'], komentari[i]['email'],
         			komentari[i]['vijest'], komentari[i]['tekst']);
-		    	}
-		    	else {
-		    		PrikaziDivKomentar(komentari[i]['id'], komentari[i]['datum'], komentari[i]['autor'], komentari[i]['email'],
-        			komentari[i]['vijest'], komentari[i]['tekst']);
-		    	}
             }
         }
     };

@@ -15,8 +15,6 @@
 </head>
 
 <body>
-    <img src="photos/bullet.png" alt="slika" 
-     onload="PrikaziKorisnike();this.parentNode.removeChild(this);" />
     <h3>Korisnici</h3>
         <form method="PUT">
             <table id="editovanje_korisnika" class="moja_desavanja">

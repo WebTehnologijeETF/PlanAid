@@ -1,14 +1,3 @@
-function PrikaziVijesti(loc) {
-	var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("frejm").innerHTML = xmlhttp.responseText;
-        }
-    };
-    xmlhttp.open('GET', loc, true);
-    xmlhttp.send();
-}
-
 function PrikaziNaslovnicu() {
 	document.getElementById("submenu_lokacije").className="submenu_invisible";
 	document.getElementById("submenu_prijava").className="submenu_invisible";
@@ -47,36 +36,6 @@ function PrikaziAdmin() {
     document.getElementById("submenu_lokacije").className="submenu_invisible";
     document.getElementById("submenu_prijava").className="submenu_invisible";
     document.getElementById("submenu_admin").className="submenu";
-}
-
-function PrikaziStranicu(stranica, detalji) {
-	var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            if(detalji === 1) {
-                document.getElementById("frejm").innerHTML = xmlhttp.responseText;
-            }
-            else {
-                document.getElementById("glavni").innerHTML = xmlhttp.responseText;
-            }
-        }
-    };
-
-    xmlhttp.open('GET', stranica + '.php', true);
-    xmlhttp.send();
-    if(stranica === 'naslovnica_novevijesti') {
-    	PrikaziVijesti('nove_vijesti.php');
-    }
-    else if(stranica === 'naslovnica_svevijesti') {
-    	PrikaziVijesti('sve_vijesti.php');
-    }
-    else if(stranica === 'naslovnica_najcitanije') {
-    	PrikaziVijesti('najcitanije_vijesti.php');
-    } 
-    if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
-        document.getElementById("username_lijevo").value = "";
-        document.getElementById("sifra_lijevo").value = "";
-    }
 }
 
 var objekti = [];

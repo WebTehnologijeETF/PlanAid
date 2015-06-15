@@ -157,6 +157,7 @@
                                     WHERE id = :id');
         $upit->bindParam(':username', $username);
         $upit->bindParam(':email', $email);
+        $upit->bindParam(':id', $id);
         $upit->execute();
 	}
 

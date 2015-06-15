@@ -1,6 +1,6 @@
 var korisnici;
 
-function DodajRed(username, email, indeks, ime_tabele) {
+function DodajRedKorisnici(username, email, indeks, ime_tabele) {
     var red = document.createElement('tr');
     var radiotd = document.createElement('td');
     radiotd.innerHTML = '<input type="radio" name="radio1" value="' + indeks + '" ' + 'id="' + indeks + '">';
@@ -15,32 +15,42 @@ function DodajRed(username, email, indeks, ime_tabele) {
     tabela.appendChild(red);
 }
 
-function DodajRedTextBox(username, email, indeks, ime_tabele) {
-    if(username === null || email === null || indeks === null || ime_tabele === null) {
+function DodajRedTextBoxKorisnici(username, email, indeks, ime_tabele) {
+    if(username === null || email === null || indeks === null) {
         return;
     }
     var red = document.createElement('tr');
     var radiotd = document.createElement('td');
-    radiotd.innerHTML = '<input type="radio" name="radio2" value="' + indeks +'" ' + 'id="' + indeks + '">';
+    radiotd.innerHTML = '<input type="radio" name="radio2" value="' + indeks +'" ' + 'id="' + indeks + '" class="textboxtabela">';
     red.appendChild(radiotd);
     var usernametd = document.createElement('td');
-    usernametd.innerHTML = '<input type="text" name="usernametextbox' + indeks + '" value="' + username + '" ' + 'id="' + indeks + '">';
+    usernametd.innerHTML = '<input type="text" name="usernametextbox' + indeks + '" value="' + username + '" ' + 'id="' + indeks + '" class="textboxtabela">';
     red.appendChild(usernametd);
     var emailtd = document.createElement('td');
-    emailtd.innerHTML = '<input type="email" name="emailtextbox' + indeks + '" value="' + email + '" ' + 'id="' + indeks + '">';
+    emailtd.innerHTML = '<input type="email" name="emailtextbox' + indeks + '" value="' + email + '" ' + 'id="' + indeks + '" class="textboxtabela">';
     red.appendChild(emailtd);
     var tabela = document.getElementById(ime_tabele);
     tabela.appendChild(red);
 }
 
-function PopuniTabelu(ime_tabele, textbox) {
+function PopuniTabeluKorisnici(ime_tabele, textbox) {
     for(var i = 1; i < korisnici.length; i++) {
         if(textbox === 1) {
-            DodajRedTextBox(korisnici[i]['username'], korisnici[i]['email'], korisnici[i]['id'], ime_tabele);
+            DodajRedTextBoxKorisnici(korisnici[i]['username'], korisnici[i]['email'], korisnici[i]['id'], ime_tabele);
         }
         else {
-            DodajRed(korisnici[i]['username'], korisnici[i]['email'], korisnici[i]['id'], ime_tabele);
+            DodajRedKorisnici(korisnici[i]['username'], korisnici[i]['email'], korisnici[i]['id'], ime_tabele);
         }
+    }
+}
+
+function IsprazniTabeluKorisnici(ime_tabele) {
+    var elmtTable = document.getElementById(ime_tabele);
+    var tableRows = elmtTable.getElementsByTagName('tr');
+    var rowCount = tableRows.length;
+
+    for (var i = rowCount - 1; i > 0; i--) {
+       elmtTable.removeChild(tableRows[i]);
     }
 }
 
@@ -51,8 +61,10 @@ function PrikaziKorisnike() {
             korisnici = JSON.parse(xmlhttp.responseText);
             if(document.getElementById('editovanje_korisnika') !== null
                 || document.getElementById('brisanje_korisnika') !== null) {
-                PopuniTabelu("editovanje_korisnika", 1);
-                PopuniTabelu("brisanje_korisnika");
+                IsprazniTabeluKorisnici("editovanje_korisnika", 1);
+                IsprazniTabeluKorisnici("brisanje_korisnika");
+                PopuniTabeluKorisnici("editovanje_korisnika", 1);
+                PopuniTabeluKorisnici("brisanje_korisnika");
             }
         }
     };
@@ -90,7 +102,7 @@ function EditujKorisnika() {
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             xmlhttp.send('id=' + id + '&username=' + novi_username + '&email=' + novi_email);
             alert("Uspješno ste editovali korisnika");
-            break;
+            PrikaziKorisnike();
         }
     }
 }
@@ -111,7 +123,7 @@ function ObrisiKorisnika() {
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             xmlhttp.send('id=' + id);
             alert("Uspješno ste obrisali korisnika");
-            break;
+            PrikaziKorisnike();
         }
     }
 }
@@ -152,4 +164,46 @@ function DodajKorisnika() {
     alert("Uspješno ste dodali korisnika");
 }
 
-PrikaziKorisnike();
+function PrikaziVijesti(loc) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("frejm").innerHTML = xmlhttp.responseText;
+        }
+    };
+    xmlhttp.open('GET', loc, true);
+    xmlhttp.send();
+}
+
+function PrikaziStranicu(stranica, detalji) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            if(detalji === 1) {
+                document.getElementById("frejm").innerHTML = xmlhttp.responseText;
+            }
+            else {
+                document.getElementById("glavni").innerHTML = xmlhttp.responseText;
+                if(stranica === "korisnici") {
+                    PrikaziKorisnike();
+                }
+            }
+        }
+    };
+
+    xmlhttp.open('GET', stranica + '.php', true);
+    xmlhttp.send();
+    if(stranica === 'naslovnica_novevijesti') {
+        PrikaziVijesti('nove_vijesti.php');
+    }
+    else if(stranica === 'naslovnica_svevijesti') {
+        PrikaziVijesti('sve_vijesti.php');
+    }
+    else if(stranica === 'naslovnica_najcitanije') {
+        PrikaziVijesti('najcitanije_vijesti.php');
+    } 
+    if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
+        document.getElementById("username_lijevo").value = "";
+        document.getElementById("sifra_lijevo").value = "";
+    }
+}

@@ -2,6 +2,7 @@ var komentari;
 var tabelak;
 var vijesti;
 var tabelav;
+var idvijest;
 
 function DodajRedK(datum, autor, tekst, indeks, ime_tabele) {
     var red = document.createElement('tr');
@@ -22,6 +23,7 @@ function DodajRedK(datum, autor, tekst, indeks, ime_tabele) {
 }
 
 function PopuniTabeluK(ime_tabele) {
+	console.log(komentari.length);
     for(var i = 0; i < komentari.length; i++) {
     	if(komentari[i]['autor'] == 0) {
     		var autor = "Anonymous";
@@ -57,6 +59,20 @@ function PrikaziKomentareAdmin() {
     xmlhttp.send();
 }
 
+function OdabranaVijest() {
+	var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+        	komentari = JSON.parse(xmlhttp.responseText);
+        	PrikaziKomentareAdmin();
+        }
+    };
+
+    xmlhttp.open('GET', 'servis/komentari_rest.php?id=' + idvijest, true);
+    xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xmlhttp.send();
+}
+
 function ObrisiKomentar() {
     var radios = document.getElementsByName('radio2');
     for (var i = 0; i < radios.length; i++) {
@@ -72,7 +88,7 @@ function ObrisiKomentar() {
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             xmlhttp.send('id=' + id);
             alert("Uspješno ste obrisali komentar");
-            PrikaziKomentareAdmin();
+        	OdabranaVijest();
         }
     }
 }
@@ -82,6 +98,7 @@ function IzaberiVijest() {
     for (var i = 0; i < radios.length; i++) {
         if (radios[i].type === 'radio' && radios[i].checked) {
             var id = radios[i].value;
+            idvijest = id;
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
