@@ -1,6 +1,8 @@
 var vijesti;
 var ids = [];
 var brojac = 0;
+var sesija_username = document.getElementById("sesija").innerHTML;
+var idvijest;
 
 function DodajSliku(slika) {
 	var imgdiv = document.createElement('div');
@@ -71,7 +73,6 @@ function DodajTekst(id, datum, autor, naslov, tekst, vrsta_novosti) {
 	return textdiv;
 }
 
-var idvijest;
 function DodajDetalje(id, datum, autor, naslov, tekst, detaljnije, vrsta_novosti) {
 	if(detaljnije == null) return;
 	idvijest = id;
@@ -230,12 +231,7 @@ function PrikaziDivKomentar(id, datum, autor, email, vijest, tekst) {
 	var divdatum = document.createElement('div');
 	divdatum.innerHTML = datum;
 	var divautor = document.createElement('div');
-	if(autor === 0) {
-		divautor.innerHTML = "Anonymous";
-	}
-	else {
-		divautor.innerHTML = autor;
-	}
+	divautor.innerHTML = autor;
 	var divemail = document.createElement('div');
 	if(email === "") {
 		divemail.innerHTML = "";
@@ -271,8 +267,8 @@ function PrikaziKomentare() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             komentari = JSON.parse(xmlhttp.responseText);
             for(var i = 0; i < komentari.length; i++) {
-        		PrikaziDivKomentar(komentari[i]['id'], komentari[i]['datum'], komentari[i]['username'], komentari[i]['email'],
-        		komentari[i]['vijest'], komentari[i]['tekst']);
+            	PrikaziDivKomentar(komentari[i]['id'], komentari[i]['datum'], komentari[i]['username'], komentari[i]['email'],
+        			komentari[i]['vijest'], komentari[i]['tekst']);
             }
         }
     };
@@ -286,12 +282,12 @@ function PokreniStranicu() {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             document.getElementById("frejm").innerHTML = xmlhttp.responseText;
+            PrikaziKomentare();
         }
     };
     xmlhttp.open('GET', "komentari.php", true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send();
-    PrikaziKomentare();
 }
 
 function DodajKomentar() {
@@ -304,14 +300,12 @@ function DodajKomentar() {
 	var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-
+        	PokreniStranicu();
         }
     };
-    console.log(kom);
     xmlhttp.open('POST', 'servis/komentari_rest.php', true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send('vijest=' + idvijest + '&tekst=' + kom);
-    PokreniStranicu();
 }
 
 function PrebrojKomentare(idvijest) {
@@ -329,3 +323,12 @@ function PrebrojKomentare(idvijest) {
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send();
 }
+
+function ObrisiPolja() {
+    if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
+        document.getElementById("username_lijevo").value = "";
+        document.getElementById("sifra_lijevo").value = "";
+    }
+}
+
+ObrisiPolja();
