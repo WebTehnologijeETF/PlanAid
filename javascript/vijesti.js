@@ -156,12 +156,14 @@ function DodajDiv(id, datum, autor, slika, naslov, tekst, vrsta_novosti) {
 	
 	var imgdiv = DodajSliku(slika);
 	var textdiv = DodajTekst(id, datum, autor, naslov, tekst, vrsta_novosti);
-	
+	var divspace = document.createElement('div');
+	divspace.innerHTML = "<br>";
 	var tempdiv = document.createElement('div');
 	tempdiv.appendChild(imgdiv);
 	tempdiv.appendChild(textdiv);
 	tempdiv.appendChild(br);
 	tempdiv.appendChild(hr);
+	//tempdiv.appendChild(divspace);
 
 	var div = document.getElementById("cijela_vijest");
 	div.appendChild(tempdiv);
@@ -178,14 +180,15 @@ function DodajDivD(id, datum, autor, slika, naslov, tekst, detaljnije, vrsta_nov
 	var tempdiv = document.createElement('div');
 	tempdiv.appendChild(imgdiv);
 	tempdiv.appendChild(textdiv);
+	tempdiv.className="cijelifrejm";
 	var div = document.getElementById("cijela_vijest_detalji");
 	var divspace = document.createElement('div');
-	divspace.innerHTML = "<br>";
-	div.appendChild(tempdiv);
-	div.appendChild(divspace);
+	tempdiv.appendChild(divspace);
 	divspace = document.createElement('div');
 	divspace.innerHTML = "<br>";
-	div.appendChild(divspace);
+	tempdiv.appendChild(divspace);
+	divspace.innerHTML = "<br>";
+	div.appendChild(tempdiv);
 }
 
 function PrikaziVijest() {	
@@ -243,22 +246,25 @@ function PrikaziDivKomentar(id, datum, autor, email, vijest, tekst) {
 	var divspace = document.createElement('div');
 	divspace.innerHTML = "<br>";
 
+	var tempdiv = document.createElement('div');
+
 	var divkomentar = document.createElement('div');
 	divkomentar.innerHTML = tekst;
 	var div = document.getElementById('svi_komentari');
 	div.className="frejm";
-	div.appendChild(divdatum);
-	div.appendChild(divautor);
-	div.appendChild(divemail);
-	div.appendChild(divspace);
-	div.appendChild(divkomentar);
+	tempdiv.appendChild(divdatum);
+	tempdiv.appendChild(divautor);
+	tempdiv.appendChild(divemail);
+	tempdiv.appendChild(divspace);
+	tempdiv.appendChild(divkomentar);
 
 	var hr = document.createElement('hr');
 	divspace = document.createElement('div');
 	divspace.innerHTML = "<br>";
-	div.appendChild(divspace);
-	div.appendChild(hr);
-	div.appendChild(divspace);
+	tempdiv.appendChild(divspace);
+	tempdiv.appendChild(hr);
+	tempdiv.className="tempfrejm";
+	div.appendChild(tempdiv);
 }
 
 function PrikaziKomentare() {	

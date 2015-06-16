@@ -15,7 +15,6 @@
 </head>
 
 <body onload="Pokreni()">
-
 	<header class="logo">
 		<img src="photos/logo.png" class="logo-image" alt="logo">
 		<a href="index.php" class="logo-text">PlanAid</a>
@@ -64,7 +63,7 @@
 			<form method="GET"><br>
 				<h4>Korisničko ime:</h4>
 				<input type="text" id="username_lijevo" name="username_lijevo"><br>
-				<br><h4>Šifra:</h4>
+				<h4>Šifra:</h4>
 				<input type="password" id="sifra_lijevo" name="sifra_lijevo"><br><br>
 				<input type="button" id="login_lijevo" name="login_lijevo" class="svi_buttoni"
 				value="Pošalji" onclick="ProvjeriPodatke()">

@@ -9,7 +9,7 @@
 
 	<body class="body_vijesti" id="frejm">
 		<br>
-		<div id="svi_komentari"></div>
+		<div id="svi_komentari" class="cijelifrejm"></div>
 	</body>
 	<script src="javascript/vijesti.js"></script>
 </html>

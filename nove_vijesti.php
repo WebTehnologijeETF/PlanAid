@@ -16,7 +16,8 @@
 
 	<body class="body_vijesti" onload="PrikaziVijest()" id="frejm">
 		<br>
-		<div id="cijela_vijest"></div>
+		<div id="cijela_vijest" class="cijelifrejm"></div>
 	</body>
+	<script src="javascript/menu.js"></script>
 	<script src="javascript/vijesti.js"></script>
 </html>

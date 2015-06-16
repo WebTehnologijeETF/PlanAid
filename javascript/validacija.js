@@ -1,15 +1,23 @@
+var ime_v = false;
+var prezime_v = false;
+var email_v = false;
+var url_v = false;
+var poruka_v = false;
+var validirano = false;
+
 function ValidirajIme() {
 	var ime = document.getElementById("ime").value;
 	var regex = /^[a-zšđčćž]+$/i;
 	if(!regex.test(ime)) {
 		document.getElementById("uzvicnik_ime").className="uzvicnik";
 		document.getElementById("tekst_ime").className="tekst";
-		return false;
+		ime_v = false;
 	}
 	else {
 		document.getElementById("uzvicnik_ime").className="uzvicnik_invisible";
 		document.getElementById("tekst_ime").className="tekst_invisible";
-		return true;
+		ime_v = true;
+		ValidirajKontakt();
 	}
 }
 
@@ -19,12 +27,13 @@ function ValidirajPrezime() {
 	if(!regex.test(prezime)) {
 		document.getElementById("uzvicnik_prezime").className="uzvicnik";
 		document.getElementById("tekst_prezime").className="tekst";
-		return false;
+		prezime_v = false;
 	}
 	else {
 		document.getElementById("uzvicnik_prezime").className="uzvicnik_invisible";
 		document.getElementById("tekst_prezime").className="tekst_invisible";
-		return true;
+		prezime_v = true;
+		ValidirajKontakt();
 	}
 }
 
@@ -34,27 +43,29 @@ function ValidirajEmail() {
 	if(!regex.test(email)) {
 		document.getElementById("uzvicnik_email").className="uzvicnik";
 		document.getElementById("tekst_email").className="tekst";
-		return false;
+		email_v = false;
 	}
 	else {
 		document.getElementById("uzvicnik_email").className="uzvicnik_invisible";
 		document.getElementById("tekst_email").className="tekst_invisible";
-		return true;
+		email_v = true;
+		ValidirajKontakt();
 	}
 }
 
 function ValidirajURL() {
 	var url = document.getElementById("url").value;
 	var regex = new RegExp("^(http[s]?:\\/\\/(www\\.)?|ftp:\\/\\/(www\\.)?|www\\.){1}([0-9A-Za-z-\\.@:%_\+~#=]+)+((\\.[a-zA-Z]{2,3})+)(/(.)*)?(\\?(.)*)?");
-	if(!regex.test(url)) {
+	if(!regex.test(url) && url.length !== 0) {
 		document.getElementById("uzvicnik_url").className="uzvicnik";
 		document.getElementById("tekst_url").className="tekst";
-		return false;
+		url_v = false;
 	}
 	else {
 		document.getElementById("uzvicnik_url").className="uzvicnik_invisible";
 		document.getElementById("tekst_url").className="tekst_invisible";
-		return true;
+		url_v = true;
+		ValidirajKontakt();
 	}
 }
 
@@ -63,19 +74,23 @@ function ValidirajPoruku() {
 	if(poruka.length === 0) {
 		document.getElementById("uzvicnik_poruka").className="uzvicnik_poruka";
 		document.getElementById("tekst_poruka").className="tekst_poruka";
-		return false;
+		poruka_v = false;
 	}
 	else {
 		document.getElementById("uzvicnik_poruka").className="uzvicnik_poruka_invisible";
 		document.getElementById("tekst_poruka").className="tekst_poruka_invisible";
-		return true;
+		poruka_v = true;
+		ValidirajKontakt();
 	}
 }
 
 function ValidirajKontakt() {
-	return true;
-	return (ValidirajIme() && ValidirajPrezime() && ValidirajEmail()
-	 && ValidirajPoruku())
+	if(ime_v && prezime_v && email_v && url_v && poruka_v) {
+		validirano = true;
+	}
+	else {
+		validirano = false;
+	}
 }
 
 function ResetujKontakt() {
@@ -266,6 +281,32 @@ function ObrisiPolja() {
         document.getElementById("username_lijevo").value = "";
         document.getElementById("sifra_lijevo").value = "";
     }
+}
+
+function PosaljiMail() {
+	if(validirano) {
+		var ime = document.getElementById("ime").value;
+		var prezime = document.getElementById("prezime").value;
+		var email = document.getElementById("email").value;
+		var url = document.getElementById("url").value;
+		var poruka = document.getElementById("poruka").value;
+
+		var xmlhttp = new XMLHttpRequest();
+	    xmlhttp.onreadystatechange = function() {
+	        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+	        	console.log(xmlhttp);
+	            alert("Zahvaljujemo se što ste nas kontaktirali!");
+	        }
+	    };
+
+	    xmlhttp.open('POST', 'servis/mail_rest.php', true);
+	    xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+	    xmlhttp.send('ime='+ime+'&prezime='+prezime+'&email='+email+
+	    	'&url='+url+'&poruka='+poruka);
+	}
+	else {
+		alert("Neispravni podaci");
+	}
 }
 
 ObrisiPolja();

@@ -9,7 +9,7 @@
 
 	<body class="body_vijesti">
 		<br>
-		<div id="cijela_vijest_detalji"></div>
+		<div id="cijela_vijest_detalji" class="cijelifrejm"></div>
 		<br><br>
 		<div class="frejm-text">
 			<form method="GET"></form><br>

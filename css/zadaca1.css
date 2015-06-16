@@ -1,13 +1,13 @@
 @import url('http://fonts.googleapis.com/css?family=Ubuntu');
 
-body {
-	background-color: rgb(243,253,172);
+html, body {
 	font-family: 'Ubuntu';
-	background-image: url("../photos/pozadina.jpg");
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: 0px 260px;
-	padding: 0;
+    background: url(../photos/pozadina.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    padding: 0;
 	margin: 0;
 }
 
@@ -134,7 +134,7 @@ a:hover {
 }
 
 .reklame {
-	color: rgb(64,128,128);
+	color: rgb(255,216,79);
 	width: 20%;
 	height: 50%;
 	float: left;
@@ -144,7 +144,7 @@ a:hover {
 .reklame-body {
 	margin-left: 15%;
 	width: 70%;
-	color: rgb(64,128,128);
+	color: rgb(255,216,79);
 	font-size: 20px;
 }
 
@@ -231,7 +231,10 @@ iframe.frejm {
 
 #frejm {
 	background-color: rgb(243,253,172);
-	background-image: none;
+}
+
+.cijelifrejm {
+	background-color: rgb(243,253,172);
 }
 
 .frejm-text {
@@ -251,6 +254,14 @@ div.frejm {
 	padding-left: 1%;
 	padding-right: 1%;
 	text-align: justify;
+	background-color: rgb(243,253,172);
+	background-image: none;
+}
+
+div.tempfrejm {
+	width: 100%;
+	padding: 0;
+	margin: 0;
 	background-color: rgb(243,253,172);
 	background-image: none;
 }

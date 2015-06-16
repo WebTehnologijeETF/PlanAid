@@ -1,4 +1,4 @@
-<form method="POST" action="kontakt_validacija.php">
+<form method="POST">
 	<h3>Imate neko pitanje? Kontaktirajte nas!</h3>
 	<div>
 		Ime:<br>
@@ -30,6 +30,6 @@
 		<img src="photos/exclamation_point.png" id="uzvicnik_poruka" class="uzvicnik_poruka_invisible" alt="uzvicnik">
 		<span id="tekst_poruka" class="tekst_poruka_invisible">Morate unijeti poruku</span>
 	</div><br>
-		<input type="submit" value="Pošalji" name="Posalji" id="Posalji" onclick="return ValidirajKontakt()" class="svi_buttoni">
+		<input type="button" value="Pošalji" name="Posalji" id="Posalji" onclick="PosaljiMail()" class="svi_buttoni">
 		<input type="button" value="Resetuj" name="Resetuj" id="Resetuj" onclick="ResetujKontakt()" class="svi_buttoni">
 </form>
