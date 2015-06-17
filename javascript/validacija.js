@@ -3,7 +3,7 @@ var prezime_v = false;
 var email_v = false;
 var url_v = false;
 var poruka_v = false;
-var validirano = false;
+var validiranok = false;
 
 function ValidirajIme() {
 	var ime = document.getElementById("ime").value;
@@ -86,10 +86,10 @@ function ValidirajPoruku() {
 
 function ValidirajKontakt() {
 	if(ime_v && prezime_v && email_v && url_v && poruka_v) {
-		validirano = true;
+		validiranok = true;
 	}
 	else {
-		validirano = false;
+		validiranok = false;
 	}
 }
 
@@ -143,76 +143,9 @@ function ValidirajSifruPonovo() {
 	}
 }
 
-var mjestoValidirano = false;
-//var stanje = 0;
-
-function ValidirajMjesto() {
-	var mjesto = document.getElementById("mjesto").value;
-	var opcina = document.getElementById("opcina");
-	var opcina_tekst = opcina.options[opcina.selectedIndex].text;
-	var rezultat;
-
-	var xmlhttp = new XMLHttpRequest();
-	//stanje = 1;    
-    xmlhttp.onreadystatechange = function() {
-        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            rezultat = xmlhttp.responseText;
-            if(rezultat.indexOf("greska") > -1) {
-				document.getElementById("uzvicnik_mjesto").className="uzvicnik";
-				document.getElementById("tekst_mjesto").className="tekst";
-				mjestoValidirano = false;
-				return false;
-			}
-			else {
-				document.getElementById("uzvicnik_mjesto").className="uzvicnik_invisible";
-				document.getElementById("tekst_mjesto").className="tekst_invisible";
-				mjestoValidirano = true;
-				return true;
-			}
-        }
-        //stanje = 2;
-    }
-    
-    xmlhttp.open('GET', 'http://zamger.etf.unsa.ba/wt/mjesto_opcina.php?opcina=' + opcina_tekst + '&mjesto=' + mjesto, true);
-    xmlhttp.send();
-}
-
 function ValidirajPrijavu() {
 	return (ValidirajKorisnickoIme() && ValidirajEmail() && ValidirajSifru()
 	 && ValidirajSifruPonovo());
-}
-
-function ValidirajImeDesavanja() {
-	var ime_desavanja = document.getElementById("ime_desavanja").value;
-	if(ime_desavanja.length < 5) {
-		document.getElementById("uzvicnik_ime_desavanja").className="uzvicnik";
-		document.getElementById("tekst_ime_desavanja").className="tekst";
-		return false;
-	}
-	else {
-		document.getElementById("uzvicnik_ime_desavanja").className="uzvicnik_invisible";
-		document.getElementById("tekst_ime_desavanja").className="tekst_invisible";
-		return true;
-	}
-}
-
-function ValidirajOpis() {
-	var opis = document.getElementById("opis").value;
-	var regex = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})+( \w+)+$/;
-	if(!regex.test(opis)) {
-		document.getElementById("uzvicnik_opis").className="uzvicnik_poruka";
-		document.getElementById("tekst_opis").className="tekst_poruka";
-		return false;
-	}
-	else {
-		document.getElementById("uzvicnik_opis").className="uzvicnik_poruka_invisible";
-		document.getElementById("tekst_opis").className="tekst_poruka_invisible";
-		return true;
-	}
-}
-
-function ValidirajDesavanje() {
-	return (ValidirajImeDesavanja() && ValidirajURL() && ValidirajOpis())
 }
 
 function ValidirajAdmin() {
@@ -284,7 +217,7 @@ function ObrisiPolja() {
 }
 
 function PosaljiMail() {
-	if(validirano) {
+	if(validiranok) {
 		var ime = document.getElementById("ime").value;
 		var prezime = document.getElementById("prezime").value;
 		var email = document.getElementById("email").value;

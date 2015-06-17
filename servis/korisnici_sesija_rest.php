@@ -9,7 +9,7 @@
     $sesija_username = "";
 	
 	function rest_get ($request, $data) {     
-        $korisnici = array();    
+        $korisnici = array(); 
         if(isset($_COOKIE['username']) && count($data) === 0) {
             $_SESSION['username'] = $_COOKIE['username'];
             $sesija_username = $_SESSION['username'];
@@ -75,10 +75,11 @@
 
 	function rest_post ($request, $data) { 
         if($sesija_username !== "") {
-            session_unset();
-            session_destroy();
+            $_SESSION = array();
             setcookie("username", "", time()-3600);
             setcookie("PHPSESSID","",time()-3600,"/");
+            session_unset();
+            session_destroy();
             return;
         }
 		if(!isset($data['username']) || !isset($data['sifra']) || !isset($data['email'])) {

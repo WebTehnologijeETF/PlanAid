@@ -1,10 +1,3 @@
-<?php
-	session_start();
-	if(isset($_SESSION['username'])) {
-		echo '<div id="sesija" class="nevidljivo">' . $_SESSION['username'] .'</div>';
-	}
-?>
-
 <!doctype html>
 <html>
 	<head>

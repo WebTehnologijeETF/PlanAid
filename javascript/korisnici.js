@@ -1,4 +1,11 @@
 var korisnici;
+var desavanja;
+var sesija_username;
+
+var naziv_v = false;
+var datum_v = false;
+var lokacija_v = false;
+var validiranod = false;
 
 function DodajRedKorisnici(username, email, indeks, ime_tabele) {
     var red = document.createElement('tr');
@@ -95,14 +102,13 @@ function EditujKorisnika() {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    PrikaziKorisnike();
                 }
             };
 
             xmlhttp.open('PUT', 'servis/korisnici_rest.php', true);
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             xmlhttp.send('id=' + id + '&username=' + novi_username + '&email=' + novi_email);
-            alert("Uspješno ste editovali korisnika");
-            PrikaziKorisnike();
         }
     }
 }
@@ -115,15 +121,13 @@ function ObrisiKorisnika() {
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    
+                    PrikaziKorisnike();
                 }
             };
 
             xmlhttp.open('DELETE', 'servis/korisnici_rest.php', true);
             xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
             xmlhttp.send('id=' + id);
-            alert("Uspješno ste obrisali korisnika");
-            PrikaziKorisnike();
         }
     }
 }
@@ -154,14 +158,13 @@ function DodajKorisnika() {
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            
+            PrikaziKorisnike();
         }
     };
 
     xmlhttp.open('POST', 'servis/korisnici_rest.php', true);
     xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
     xmlhttp.send('username=' + username + '&email=' + email + '&sifra=' + sifra);
-    alert("Uspješno ste dodali korisnika");
 }
 
 function PrikaziVijesti(loc) {
@@ -187,6 +190,9 @@ function PrikaziStranicu(stranica, detalji) {
                 if(stranica === "korisnici") {
                     PrikaziKorisnike();
                 }
+                else if(stranica === "moja_desavanja") {
+                    PrikaziDesavanjaTabela();
+                }
             }
         }
     };
@@ -205,5 +211,364 @@ function PrikaziStranicu(stranica, detalji) {
     if(document.getElementById("username_lijevo") != null && document.getElementById("sifra_lijevo") != null) {
         document.getElementById("username_lijevo").value = "";
         document.getElementById("sifra_lijevo").value = "";
+    }
+}
+
+function ValidirajNazivDesavanja() {
+    var naziv_desavanja = document.getElementById("naziv_desavanja").value;
+    if(naziv_desavanja.length < 5) {
+        document.getElementById("uzvicnik_naziv_desavanja").className="uzvicnik";
+        document.getElementById("tekst_naziv_desavanja").className="tekst";
+        naziv_v = false;
+        return false;
+    }
+    else {
+        document.getElementById("uzvicnik_naziv_desavanja").className="uzvicnik_invisible";
+        document.getElementById("tekst_naziv_desavanja").className="tekst_invisible";
+        naziv_v = true;
+        ValidirajDesavanje();
+        return true;
+    }
+}
+
+function ValidirajDatumDesavanja() {
+    var datum_desavanja = document.getElementById("datum_desavanja").value;
+    var regex = /^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])\s(?:2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/;
+    if(!regex.test(datum_desavanja)) {
+        document.getElementById("uzvicnik_datum_desavanja").className="uzvicnik";
+        document.getElementById("tekst_datum_desavanja").className="tekst";
+        datum_v = false;
+        return false;
+    }
+    if(datum_desavanja[5] === "0" && datum_desavanja[6] === "2") {
+        if(datum_desavanja[8] === "3") {
+            document.getElementById("uzvicnik_datum_desavanja").className="uzvicnik";
+            document.getElementById("tekst_datum_desavanja").className="tekst";
+            datum_v = false;
+            return false;
+        }
+    }
+    if(datum_desavanja[6] === "4" || datum_desavanja[6] === "6" ||
+        datum_desavanja[6] === "9" || (datum_desavanja[5] === "1" && datum_desavanja[6] === "1")) {
+        if(datum_desavanja[8] === "3" && datum_desavanja[9] === "1") {
+            document.getElementById("uzvicnik_datum_desavanja").className="uzvicnik";
+            document.getElementById("tekst_datum_desavanja").className="tekst";
+            datum_v = false;
+            return false;
+        }
+    }
+    document.getElementById("uzvicnik_datum_desavanja").className="uzvicnik_invisible";
+    document.getElementById("tekst_datum_desavanja").className="tekst_invisible";
+    datum_v = true;
+    ValidirajDesavanje();
+    return true;
+}
+
+function ValidirajLokacijaDesavanja() {
+    var lokacija_desavanja = document.getElementById("lokacija_desavanja").value;
+    if(lokacija_desavanja.length < 5) {
+        document.getElementById("uzvicnik_lokacija_desavanja").className="uzvicnik";
+        document.getElementById("tekst_lokacija_desavanja").className="tekst";
+        lokacija_v = false;
+        return false;
+    }
+    else {
+        document.getElementById("uzvicnik_lokacija_desavanja").className="uzvicnik_invisible";
+        document.getElementById("tekst_lokacija_desavanja").className="tekst_invisible";
+        lokacija_v = true;
+        ValidirajDesavanje();
+        return true;
+    }
+}
+
+function ValidirajDesavanje() {
+    if(naziv_v && datum_v && lokacija_v) {
+        validiranod = true;
+    }
+    else {
+        validiranod = false;
+    }
+}
+
+function DodajRedDesavanja(naziv, datum, lokacija, indeks, ime_tabele) {
+    var red = document.createElement('tr');
+    var radiotd = document.createElement('td');
+    radiotd.innerHTML = '<input type="radio" name="radio" value="' + indeks + '" ' + 'id="' + indeks + '">';
+    red.appendChild(radiotd);
+    var nazivtd = document.createElement('td');
+    nazivtd.innerHTML = naziv;
+    red.appendChild(nazivtd);
+    var datumtd = document.createElement('td');
+    datumtd.innerHTML = datum;
+    red.appendChild(datumtd);
+    var lokacijatd = document.createElement('td');
+    lokacijatd.innerHTML = lokacija;
+    red.appendChild(lokacijatd);
+    var tabela = document.getElementById(ime_tabele);
+    tabela.appendChild(red);
+}
+
+function DodajRedTextBoxDesavanja(naziv, datum, lokacija, indeks, ime_tabele) {
+    var red = document.createElement('tr');
+    var radiotd = document.createElement('td');
+    radiotd.innerHTML = '<input type="radio" name="radio3" value="' + indeks +'" ' + 'id="' + indeks + '">';
+    red.appendChild(radiotd);
+    var nazivtd = document.createElement('td');
+    var naziv_uzvicnik = document.createElement('img');
+    naziv_uzvicnik.src = "photos/exclamation_point.png";
+    naziv_uzvicnik.id = "uzvicnik_naziv_desavanja" + indeks;
+    naziv_uzvicnik.className = "uzvicnik_invisible";
+    naziv_uzvicnik.alt = "uzvicnik";
+    var nazivtextbox = document.createElement('input');
+    nazivtextbox.name = "nazivtextbox" + indeks;
+    nazivtextbox.value = naziv;
+    nazivtextbox.id = "naziv_desavanja" + indeks;
+    nazivtextbox.className = "textboxtabela";
+    var indeks_naziva = document.createElement('div');
+    indeks_naziva.id = "naziv_v"+indeks;
+    indeks_naziva.className = "nevidljivo";
+    nazivtextbox.onblur = function() {
+        var naziv_desavanja = document.getElementById("naziv_desavanja" + indeks).value;
+        if(naziv_desavanja.length < 5) {
+            document.getElementById("uzvicnik_naziv_desavanja"+indeks).className="uzvicnik";
+            indeks_naziva.innerHTML = "false";
+            return false;
+        }
+        else {
+            document.getElementById("uzvicnik_naziv_desavanja"+indeks).className="uzvicnik_invisible";
+            indeks_naziva.innerHTML = "true";
+            ValidirajDesavanje();
+            return true;
+        }
+    }
+    nazivtd.appendChild(indeks_naziva);
+    nazivtd.appendChild(nazivtextbox);
+    nazivtd.appendChild(naziv_uzvicnik);
+    red.appendChild(nazivtd);
+    var datumtd = document.createElement('td');
+    var datum_uzvicnik = document.createElement('img');
+    datum_uzvicnik.src = "photos/exclamation_point.png";
+    datum_uzvicnik.id = "uzvicnik_datum_desavanja" + indeks;
+    datum_uzvicnik.className = "uzvicnik_invisible";
+    datum_uzvicnik.alt = "uzvicnik";
+    var datumtextbox = document.createElement('input');
+    datumtextbox.name = "datumtextbox" + indeks;
+    datumtextbox.value = datum;
+    datumtextbox.id = "datum_desavanja" + indeks;
+    datumtextbox.className = "textboxtabela";
+    var indeks_datuma = document.createElement('div');
+    indeks_datuma.id = "datum_v"+indeks;
+    indeks_datuma.className = "nevidljivo";
+    datumtextbox.onblur = function() {        
+        var datum_desavanja = document.getElementById("datum_desavanja" + indeks).value;
+        var regex = /^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])\s(?:2[0-3]|[01][0-9]):[0-5][0-9]:[0-5][0-9]$/;
+        if(!regex.test(datum_desavanja)) {
+            document.getElementById("uzvicnik_datum_desavanja"+indeks).className="uzvicnik";
+            indeks_datuma.innerHTML = "false";
+            datum_v = false;
+            return false;
+        }
+        if(datum_desavanja[5] === "0" && datum_desavanja[6] === "2") {
+            if(datum_desavanja[8] === "3") {
+                document.getElementById("uzvicnik_datum_desavanja"+indeks).className="uzvicnik";
+                indeks_datuma.innerHTML = "false";
+                datum_v = false;
+                return false;
+            }
+        }
+        if(datum_desavanja[6] === "4" || datum_desavanja[6] === "6" ||
+            datum_desavanja[6] === "9" || (datum_desavanja[5] === "1" && datum_desavanja[6] === "1")) {
+            if(datum_desavanja[8] === "3" && datum_desavanja[9] === "1") {
+                document.getElementById("uzvicnik_datum_desavanja"+indeks).className="uzvicnik";
+                indeks_datuma.innerHTML = "false";
+                datum_v = false;
+                return false;
+            }
+        }
+        document.getElementById("uzvicnik_datum_desavanja"+indeks).className="uzvicnik_invisible";
+        indeks_datuma.innerHTML = "true";
+        datum_v = true;
+        ValidirajDesavanje();
+        return true;
+    }
+    datumtd.appendChild(indeks_datuma);
+    datumtd.appendChild(datumtextbox);
+    datumtd.appendChild(datum_uzvicnik);
+    red.appendChild(datumtd);
+    var lokacijatd = document.createElement('td');
+    var lokacija_uzvicnik = document.createElement('img');
+    lokacija_uzvicnik.src = "photos/exclamation_point.png";
+    lokacija_uzvicnik.id = "uzvicnik_lokacija_desavanja" + indeks;
+    lokacija_uzvicnik.className = "uzvicnik_invisible";
+    lokacija_uzvicnik.alt = "uzvicnik";
+    var lokacijatextbox = document.createElement('input');
+    lokacijatextbox.name = "lokacijatextbox" + indeks;
+    lokacijatextbox.value = lokacija;
+    lokacijatextbox.id = "lokacija_desavanja" + indeks;
+    lokacijatextbox.className = "textboxtabela";
+    var indeks_lokacije = document.createElement('div');
+    indeks_lokacije.id = "lokacija_v"+indeks;
+    indeks_lokacije.className = "nevidljivo";
+    lokacijatextbox.onblur = function() {
+        var lokacija_desavanja = document.getElementById("lokacija_desavanja" + indeks).value;
+        if(lokacija_desavanja.length < 5) {
+            document.getElementById("uzvicnik_lokacija_desavanja"+indeks).className="uzvicnik";
+            indeks_lokacije.innerHTML = "false";
+            lokacija_v = false;
+            return false;
+        }
+        else {
+            document.getElementById("uzvicnik_lokacija_desavanja"+indeks).className="uzvicnik_invisible";
+            indeks_lokacije.innerHTML = "true";
+            lokacija_v = true;
+            ValidirajDesavanje();
+            return true;
+        }
+    }
+    lokacijatd.appendChild(indeks_lokacije);
+    lokacijatd.appendChild(lokacijatextbox);
+    lokacijatd.appendChild(lokacija_uzvicnik);
+    red.appendChild(lokacijatd);
+    var tabela = document.getElementById(ime_tabele);
+    tabela.appendChild(red);
+}
+
+function PopuniTabeluDesavanja(ime_tabele, textbox) {
+    for(var i = 0; i < desavanja.length; i++) {
+        if(textbox === 1) {
+            DodajRedTextBoxDesavanja(desavanja[i]['naziv'], desavanja[i]['datum'], desavanja[i]['lokacija'], desavanja[i]['id'], ime_tabele);
+        }
+        else {
+            DodajRedDesavanja(desavanja[i]['naziv'], desavanja[i]['datum'], desavanja[i]['lokacija'], desavanja[i]['id'], ime_tabele);
+        }
+    }
+}
+
+function IsprazniTabeluDesavanja(ime_tabele) {
+    var elmtTable = document.getElementById(ime_tabele);
+    var tableRows = elmtTable.getElementsByTagName('tr');
+    var rowCount = tableRows.length;
+
+    for (var i = rowCount - 1; i > 0; i--) {
+       elmtTable.removeChild(tableRows[i]);
+    }
+}
+
+function PrikaziDesavanjaTabela() {
+    if(document.getElementById("editovanje_desavanja") == null) {
+        return;
+    }
+    if(document.getElementById("sesija") == null) {
+        alert("Istekla je sesija. Logujte se ponovo");
+        return;
+    }
+    else {
+        sesija_username = document.getElementById("sesija").innerHTML;
+    }
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            desavanja = JSON.parse(xmlhttp.responseText);
+            if(document.getElementById('editovanje_desavanja') !== null
+                && document.getElementById('brisanje_desavanja') !== null) {
+                IsprazniTabeluDesavanja("editovanje_desavanja");
+                IsprazniTabeluDesavanja("brisanje_desavanja");
+                PopuniTabeluDesavanja("editovanje_desavanja", 1);
+                PopuniTabeluDesavanja("brisanje_desavanja");
+            }
+        }
+    };
+
+    xmlhttp.open('GET', 'servis/desavanja_rest.php?username='+sesija_username, true);
+    xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xmlhttp.send();
+}
+
+function DodajDesavanje() {
+    if(document.getElementById("naziv_desavanja") == null) {
+        return;
+    }
+    if(document.getElementById("sesija") == null) {
+        alert("Istekla je sesija. Logujte se ponovo");
+        return;
+    }
+    else {
+        sesija_username = document.getElementById("sesija").innerHTML;
+    }
+    if(!validiranod) {
+        alert("Niste unijeli ispravne podatke");
+        return;
+    }
+
+    var naziv = document.getElementById("naziv_desavanja").value;
+    var datum = document.getElementById("datum_desavanja").value;
+    var lokacija = document.getElementById("lokacija_desavanja").value;
+
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            PrikaziStranicu("moja_desavanja");
+        }
+    };
+
+    xmlhttp.open('POST', 'servis/desavanja_rest.php', true);
+    xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+    xmlhttp.send('naziv='+naziv+'&datum='+datum+'&lokacija='+lokacija+'&username='+sesija_username);
+}
+
+function EditujDesavanje() {
+    if(document.getElementById("editovanje_desavanja") == null) {
+        return;
+    }
+    if(document.getElementById("sesija") == null) {
+        alert("Istekla je sesija. Logujte se ponovo");
+        return;
+    }
+    else {
+        sesija_username = document.getElementById("sesija").innerHTML;
+    }
+    var radios = document.getElementsByName('radio3');
+    for (var i = 0; i < radios.length; i++) {
+        if (radios[i].type === 'radio' && radios[i].checked) {
+            var id = radios[i].value;
+            if(document.getElementById("naziv_v"+id).innerHTML === "false"
+                || document.getElementById("datum_v"+id).innerHTML === "false"
+                || document.getElementById("lokacija_v"+id).innerHTML === "false") {
+                alert("Niste unijeli ispravne podatke");
+                return;
+            }
+            var novi_naziv = document.getElementsByName('nazivtextbox' + id)[0].value;
+            var novi_datum = document.getElementsByName('datumtextbox' + id)[0].value;
+            var nova_lokacija = document.getElementsByName('lokacijatextbox' + id)[0].value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    PrikaziDesavanjaTabela();
+                }
+            };
+
+            xmlhttp.open('PUT', 'servis/desavanja_rest.php', true);
+            xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+            xmlhttp.send('id='+id+'&naziv='+novi_naziv+'&datum='+novi_datum+'&lokacija='+nova_lokacija+'&username='+sesija_username);
+        }
+    }
+}
+
+function ObrisiDesavanje() {
+    var radios = document.getElementsByName('radio');
+    for (var i = 0; i < radios.length; i++) {
+        if (radios[i].type === 'radio' && radios[i].checked) {
+            var id = radios[i].value;
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    PrikaziDesavanjaTabela();
+                }
+            };
+
+            xmlhttp.open('DELETE', 'servis/desavanja_rest.php', true);
+            xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+            xmlhttp.send('id=' + id);
+        }
     }
 }

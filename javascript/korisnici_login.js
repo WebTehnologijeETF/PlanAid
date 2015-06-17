@@ -18,10 +18,14 @@ function JelAdmin() {
                 admini = JSON.parse(xmlhttp.responseText);
                 if(admini.length === 1) {
                     admin = true;
+                    return true;
+                }
+                else {
+                    admin = false;
+                    return false;
                 }
             }
         };
-
         xmlhttp.open('GET', 'servis/korisnici_sesija_rest.php?username='+sesija_username, true);
         xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
         xmlhttp.send();
@@ -139,6 +143,7 @@ function ProvjeriPodatke() {
             korisnici = JSON.parse(xmlhttp.responseText);
             if(korisnici.length === 1) {
                 sesija_username = korisnici[0]['username'];
+                document.getElementById("sesija").innerHTML = sesija_username;
                 if(korisnici[0]['admin'] === "1") {
                     document.getElementById("adminmenu").className="admin_visible";
                     OtvoriAdminPanel();
@@ -183,6 +188,7 @@ function Odjava() {
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             PrikaziPocetnu();
+            document.getElementById("sesija").innerHTML = "";
         }
     };
 

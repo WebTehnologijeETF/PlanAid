@@ -1,9 +1,30 @@
 <?php
 	session_start();
+	echo '<div id="sesija" class="nevidljivo"></div>';
 	if(isset($_SESSION['username'])) {
-		echo '<div id="sesija" class="nevidljivo">' . $_SESSION['username'] .'</div>';
+		echo '<div id="sesija2" class="nevidljivo">' . $_SESSION['username'] . '</div>';
 	}
+	if (!isset($_SESSION['CREATED'])) {
+	    $_SESSION['CREATED'] = time();
+	}
+	else if (time() - $_SESSION['CREATED'] > 1800) {
+	    echo '<div id="logoutsesija" class="nevidljivo"></div>';
+	    $_SESSION = array();
+        session_unset();
+        session_destroy();
+	}
+	$_SESSION['CREATED'] = time();
 ?>
+
+<script>
+	if(document.getElementById("sesija2") != null) {
+		var temp = document.getElementById("sesija2").innerHTML
+		document.getElementById("sesija").innerHTML = temp;
+	}
+	if(document.getElementById("logoutsesija") != null) {
+		document.getElementById("sesija").innerHTML = "";
+	}
+</script>
 
 <!doctype html>
 <html>

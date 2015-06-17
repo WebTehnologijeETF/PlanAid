@@ -73,4 +73,5 @@
 		</form>
 	</body>
 	<script src="javascript/vijesti_admin.js"></script>
+	<script src="javascript/korisnici_login.js"></script>
 </html>
