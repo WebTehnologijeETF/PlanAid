@@ -193,6 +193,9 @@ function PrikaziStranicu(stranica, detalji) {
                 else if(stranica === "moja_desavanja") {
                     PrikaziDesavanjaTabela();
                 }
+                else if(stranica === "kalendar") {
+                    PokreniKalendar();
+                }
             }
         }
     };
@@ -571,4 +574,75 @@ function ObrisiDesavanje() {
             xmlhttp.send('id=' + id);
         }
     }
+}
+
+/***********************************************
+* Basic Calendar-By Brian Gosselin at http://scriptasylum.com/bgaudiodr/
+* Script featured on Dynamic Drive (http://www.dynamicdrive.com)
+* This notice must stay intact for use
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+var themonths=['Januar','Februar','Mart','April','Maj','Juni',
+'Juli','August','Septembar','Oktobar','Novembar','Decembar'];
+
+var todaydate=new Date();
+var curmonth=todaydate.getMonth()+1; //get current month (1-12)
+var curyear=todaydate.getFullYear(); //get current year
+
+function updatecalendar(theselection){
+    var themonth=parseInt(theselection[theselection.selectedIndex].value)+1;
+    var calendarstr=buildCal(themonth, curyear, "main", "month", "daysofweek", "days", 0);
+    if (document.getElementById)
+        document.getElementById("calendarspace").innerHTML=calendarstr;
+    }
+
+function buildCal(m, y, cM, cH, cDW, cD, brdr){
+    var mn=['Januar','Februar','Mart','April','Maj','Juni','Juli','August','Septembar','Oktobar','Novembar','Decembar'];
+    var dim=[31,0,31,30,31,30,31,31,30,31,30,31];
+
+    var oD = new Date(y, m-1, 1); //DD replaced line to fix date bug when current day is 31st
+    oD.od=oD.getDay()+1; //DD replaced line to fix date bug when current day is 31st
+
+    var todaydate=new Date(); //DD added
+    var scanfortoday=(y==todaydate.getFullYear() && m==todaydate.getMonth()+1)? todaydate.getDate() : 0 //DD added
+
+    dim[1]=(((oD.getFullYear()%100!=0)&&(oD.getFullYear()%4==0))||(oD.getFullYear()%400==0))?29:28;
+    var t='<div class="'+cM+'"><table class="'+cM+'" cols="7" cellpadding="0" border="'+brdr+'" cellspacing="0"><tr align="center">';
+    t+='<td colspan="7" align="center" class="'+cH+'">'+mn[m-1]+' - '+y+'</td></tr><tr align="center">';
+    for(s=0;s<7;s++)t+='<td class="'+cDW+'">'+"NPUSČPS".substr(s,1)+'</td>';
+    t+='</tr><tr align="center">';
+    for(i=1;i<=42;i++){
+    var x=((i-oD.od>=0)&&(i-oD.od<dim[m-1]))? i-oD.od+1 : '&nbsp;';
+    if (x==scanfortoday) //DD added
+    x='<span id="today">'+x+'</span>' //DD added
+    t+='<td class="'+cD+'">'+x+'</td>';
+    if(((i)%7==0)&&(i<36))t+='</tr><tr align="center">';
+    }
+    return t+='</tr></table></div>';
+}
+
+function DodajOpcije() {
+    var opcija1 = document.createElement('option');
+    opcija1.value = i;
+    opcija1.innerHTML = themonths[i]+' '+curyear;
+    opcija1.className = "opcije";
+    comboboxkalendar.appendChild(opcija1);
+}
+
+function PokreniKalendar() {
+    var opcija = document.createElement('option');
+    opcija.value = (curmonth-1);
+    opcija.selected = "yes";
+    opcija.innerHTML = "Trenutni Mjesec";
+    opcija.className = "opcije";
+    var space = document.createElement('div');
+    space.innerHTML = '<br>';
+    var comboboxkalendar = document.getElementById("comboboxkalendar");
+    comboboxkalendar.appendChild(opcija);
+    comboboxkalendar.appendChild(space);
+    for(i = 0; i < 12; i++) {
+        DodajOpcije();
+    }
+    document.getElementById("calendarspace").innerHTML = buildCal(curmonth, curyear, "main", "month", "daysofweek", "days", 0);
 }

@@ -406,3 +406,42 @@ span.tekst_poruka_invisible {
 .textboxtabela {
 	width: 85%;
 }
+
+.main {
+	border: 2px solid black;
+	border-style: ridge;
+	border-color: rgb(181,230,29);
+}
+
+.month {
+	font-size: 25px;
+	background-color: rgb(181,230,29);
+	color: white;
+}
+
+.daysofweek {
+	font-size: 25px;
+	background-color: rgb(181,230,29);
+	color: white;
+}
+
+.days {
+	color: rgb(64,128,128);
+	background-color: rgb(248,218,129);
+	font-size: 20px;
+}
+
+.days #today{
+font-weight: bold;
+color: #d01500;
+}
+
+.opcije {
+	font-family: 'Ubuntu';
+	font-size: 18px;
+	background-color: rgb(243,253,172);
+	color: rgb(64,128,128);
+	border: 2px solid black;
+	border-style: ridge;
+	border-color: rgb(181,230,29);
+}
