@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 11, 2015 at 11:51 PM
+-- Generation Time: Jun 17, 2015 at 11:17 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -23,6 +23,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `desavanja`
+--
+
+CREATE TABLE IF NOT EXISTS `desavanja` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `naziv` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
+  `datum` datetime NOT NULL,
+  `lokacija` varchar(255) COLLATE utf8_slovenian_ci NOT NULL,
+  `autor` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `autor` (`autor`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `desavanja`
+--
+
+INSERT INTO `desavanja` (`id`, `naziv`, `datum`, `lokacija`, `autor`) VALUES
+(1, 'Umekkkk', '2015-06-25 23:00:00', 'Skenderija', 2),
+(2, 'Naziv', '2015-07-15 20:00:00', 'Lokacija', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `komentari`
 --
 
@@ -36,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `komentari` (
   PRIMARY KEY (`id`),
   KEY `vijest` (`vijest`),
   KEY `autor` (`autor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_slovenian_ci AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `komentari`
@@ -48,13 +72,7 @@ INSERT INTO `komentari` (`id`, `datum`, `autor`, `email`, `tekst`, `vijest`) VAL
 (9, '2015-06-09 00:51:12', 0, '', 'ovo je neki komentar', 4),
 (10, '2015-06-09 00:57:21', 0, '', 'i ovdje jedan komentar', 10),
 (11, '2015-06-10 12:01:22', 0, '', 'test test', 6),
-(12, '2015-06-11 23:06:37', 0, '', 'testiram 1 2 3', 3),
-(13, '2015-06-11 23:15:41', 0, '', 'teeeestttttt', 3),
-(14, '2015-06-11 23:17:51', 0, '', 'još jedan komm', 3),
-(15, '2015-06-11 23:18:25', 0, '', 'komentariši', 4),
-(16, '2015-06-11 23:37:32', 2, '', 'sssssssss', 4),
-(17, '2015-06-11 23:44:28', 2, '', 'komkomkom', 3),
-(18, '2015-06-11 23:50:37', 2, '', 'k o m e n t a r', 3);
+(14, '2015-06-11 23:17:51', 0, '', 'još jedan komm', 3);
 
 -- --------------------------------------------------------
 
@@ -119,6 +137,12 @@ INSERT INTO `novosti` (`id`, `datum`, `autor`, `naslov`, `slika`, `tekst`, `deta
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `desavanja`
+--
+ALTER TABLE `desavanja`
+  ADD CONSTRAINT `desavanja_ibfk_1` FOREIGN KEY (`autor`) REFERENCES `korisnici` (`id`);
 
 --
 -- Constraints for table `komentari`
