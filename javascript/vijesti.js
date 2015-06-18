@@ -2,6 +2,7 @@ var vijesti;
 var ids = [];
 var brojac = 0;
 var idvijest;
+var sesija_username;
 
 function DodajSliku(slika) {
 	var imgdiv = document.createElement('div');
@@ -214,11 +215,12 @@ function PrikaziDetalje(id) {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             vijesti = JSON.parse(xmlhttp.responseText);
             for(var i = 0; i < ids.length; i++) {
-            	if(vijesti[i]['detaljnije'] == null) return;
-            	if(ids[i] === id) {
-            		DodajDivD(vijesti[i]['id'], vijesti[i]['datum'], vijesti[i]['autor'], vijesti[i]['slika'],
-            		vijesti[i]['naslov'], vijesti[i]['tekst'], vijesti[i]['detaljnije'], vijesti[i]['vrsta_novosti']);
-            		break;
+            	if(vijesti[i]['detaljnije'] != null) {
+            		if(ids[i] === id) {
+	            		DodajDivD(vijesti[i]['id'], vijesti[i]['datum'], vijesti[i]['autor'], vijesti[i]['slika'],
+	            		vijesti[i]['naslov'], vijesti[i]['tekst'], vijesti[i]['detaljnije'], vijesti[i]['vrsta_novosti']);
+	            		break;
+	            	}
             	}
             }
         }

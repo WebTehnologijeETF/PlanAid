@@ -91,36 +91,36 @@
 	    $datum = $datetime->format('Y.m.d H:i:s');
 	    $vijest = htmlspecialchars($data['vijest'], ENT_QUOTES, 'UTF-8');
 	    $tekst = htmlspecialchars($data['tekst'], ENT_QUOTES, 'UTF-8');
+	   
+
+	    if(isset($_COOKIE['username'])) {
+	    	$sesija_username = $_COOKIE['username'];
+	    	$upit1 = 'SELECT id
+                    FROM korisnici
+			    	WHERE username = :username';
+			$statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+			$statement1->execute(array(':username' => $sesija_username));
+			$autori = $statement1->fetchAll();
+	    	$autor = $autori[0]['id'];
+	    }
+	    else {
+	    	$autor = 0;
+	    }
+
+	    if(isset($data['email'])) {
+	    	$email = htmlspecialchars($data['email'], ENT_QUOTES, 'UTF-8');
+	    }
+	    else {
+	    	$email = "";
+	    }
 
 	    $upit = $konekcija->prepare("INSERT INTO komentari (datum, autor, email, vijest, tekst) 
 	    VALUES (:datum, :autor, :email, :vijest, :tekst)");
 	    $upit->bindParam(':datum', $datum);
 	    $upit->bindParam(':vijest', $vijest);
-	    $upit->bindParam(':tekst', $tekst);    
-	    
-	    if(isset($_COOKIE['username'])) {
-            $sesija_username = $_COOKIE['username'];
-	    	$upit1 = 'SELECT kom.autor
-                    FROM komentari kom
-                    JOIN korisnici kor ON kom.autor = kor.id
-			    	WHERE kor.username = :username';
-			$statement1 = $konekcija->prepare($upit1, array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
-			$statement1->execute(array(':username' => $sesija_username));
-			$autori = $statement1->fetchAll();
-	    	$upit->bindParam(':autor', $autori[0]['autor']);
-	    }
-	    else {
-	    	$autor = 0;
-	    	$upit->bindParam(':autor', $autor);
-	    }
-	    if(isset($data['email'])) {
-	    	$email = htmlspecialchars($data['email'], ENT_QUOTES, 'UTF-8');
-	    	$upit->bindParam(':email', $email);
-	    }
-	    else {
-	    	$email = "";
-	    	$upit->bindParam(':email', $email);
-	    }
+	    $upit->bindParam(':tekst', $tekst);   
+	    $upit->bindParam(':autor', $autor);
+	    $upit->bindParam(':email', $email);
 	    $upit->execute();
 	}
 

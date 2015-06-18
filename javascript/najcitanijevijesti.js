@@ -1,7 +1,7 @@
 var vijesti;
 var ids = [];
 var brojac = 0;
-var sesija_username = document.getElementById("sesija").innerHTML;
+var sesija_username;
 var idvijest;
 
 function DodajSliku(slika) {
